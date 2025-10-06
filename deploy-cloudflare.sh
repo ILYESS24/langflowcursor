@@ -2,19 +2,22 @@
 echo "🚀 Déploiement sur Cloudflare Pages..."
 echo "====================================="
 
-# Se connecter à Cloudflare
-echo "[1/4] Connexion à Cloudflare..."
+# Vérifier que wrangler est installé
+if ! command -v wrangler &> /dev/null; then
+    echo "Installation de Wrangler CLI..."
+    npm install -g wrangler
+fi
+
+# Se connecter à Cloudflare (nécessite interaction manuelle)
+echo "Connexion à Cloudflare..."
+echo "Une fenêtre de navigateur va s'ouvrir"
 wrangler login
 
 # Déployer le frontend
-echo "[2/4] Déploiement du frontend..."
+echo "Déploiement du frontend..."
 cd src/frontend
 wrangler pages deploy build --project-name langflow-frontend
 
-# Déployer le backend (Workers)
-echo "[3/4] Déploiement du backend..."
-cd ../..
-wrangler deploy
-
-echo "[4/4] ✅ Déploiement terminé !"
-echo "🌐 Votre application est maintenant en ligne sur Cloudflare !"
+echo "✅ Déploiement terminé !"
+echo "🌐 Votre application est accessible sur :"
+echo "   https://langflow-frontend.pages.dev"
