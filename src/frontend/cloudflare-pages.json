@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "build",
+  "rootDirectory": "src/frontend",
+  "framework": "vite",
+  "environmentVariables": {
+    "VITE_PROXY_TARGET": "https://langflow-backend.workers.dev",
+    "BACKEND_URL": "https://langflow-backend.workers.dev"
+  }
+}
