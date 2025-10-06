@@ -1,24 +1,66 @@
 services:
-  # A Docker web service
+  # Backend service (Python FastAPI)
   - type: web
-    name: langflow
+    name: langflow-backend
     runtime: docker
     dockerfilePath: ./docker/render.Dockerfile
     repo: https://github.com/langflow-ai/langflow
     branch: main
-    plan: standard
+    plan: starter
     healthCheckPath: /health_check
-    autoDeploy: false
+    autoDeploy: true
     envVars:
       - key: LANGFLOW_DATABASE_URL
-        value: sqlite:////app/data/.cache/langflow/langflow.db
+        value: postgresql://langflow_user:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/langflow_db
       - key: LANGFLOW_HOST
         value: 0.0.0.0
       - key: LANGFLOW_PORT
-        # default render port https://docs.render.com/web-services#port-binding
         value: 10000
       - key: LANGFLOW_LOG_LEVEL
         value: INFO
+      - key: LANGFLOW_CORS_ORIGINS
+        value: https://${SERVICE_NAME}.onrender.com
+      - key: LANGFLOW_SUPERUSER
+        value: admin
+      - key: LANGFLOW_SUPERUSER_PASSWORD
+        generateValue: true
     disk:
       name: langflow-data
       mountPath: /app/data
+      sizeGB: 1
+
+  # Frontend service (React)
+  - type: web
+    name: langflow-frontend
+    runtime: docker
+    dockerfilePath: ./src/frontend/Dockerfile
+    repo: https://github.com/langflow-ai/langflow
+    branch: main
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: BACKEND_URL
+        value: https://${BACKEND_SERVICE_NAME}.onrender.com
+      - key: VITE_PROXY_TARGET
+        value: https://${BACKEND_SERVICE_NAME}.onrender.com
+    buildCommand: |
+      cd src/frontend
+      npm install
+      npm run build
+    staticPublishPath: ./src/frontend/build
+
+  # Database service
+  - type: pserv
+    name: langflow-db
+    plan: starter
+    disk:
+      name: langflow-db-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+    envVars:
+      - key: POSTGRES_DB
+        value: langflow_db
+      - key: POSTGRES_USER
+        value: langflow_user
+      - key: POSTGRES_PASSWORD
+        generateValue: true
