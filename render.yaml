@@ -2,10 +2,12 @@ services:
   - type: web
     name: all-ai-backend
     env: python
-    buildCommand: pip install -e .
+    buildCommand: poetry install --no-dev
     startCommand: uvicorn allai.main:create_app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.6
       - key: ALL_AI_SECRET_KEY
         value: your-secret-key-change-in-production-12345
       - key: ALL_AI_SUPERUSER
@@ -14,6 +16,10 @@ services:
         value: admin123
       - key: ALL_AI_CORS_ORIGINS
         value: https://68eee78a.all-ai-frontend.pages.dev,https://all-ai-frontend.pages.dev
+      - key: DATABASE_URL
+        fromDatabase:
+          name: all-ai-database
+          property: connectionString
       - key: ALL_AI_LOG_LEVEL
         value: INFO
       - key: ALL_AI_HOST
@@ -25,7 +31,4 @@ databases:
   - name: all-ai-database
     databaseName: allai
     user: allai
-    plan: free
-
-  - name: all-ai-redis
     plan: free
