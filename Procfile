@@ -1,1 +1,1 @@
-web: uvicorn allai.main:create_app --host 0.0.0.0 --port $PORT
+web: uvicorn langflow.main:create_app --host 0.0.0.0 --port $PORT
