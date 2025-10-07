@@ -199,7 +199,7 @@ members = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/backend/all-ai"]
+packages = ["src/backend/base/langflow", "src/backend/allai"]
 
 [project.urls]
 Repository = "https://github.com/all-ai-ai/all-ai"
@@ -253,7 +253,7 @@ override-dependencies = [
 ]
 
 [project.scripts]
-all-ai = "all-ai.all-ai_launcher:main"
+all-ai = "langflow.langflow_launcher:main"
 
 [tool.codespell]
 skip = '.git,*.pdf,*.svg,*.pdf,*.yaml,*.ipynb,poetry.lock,*.min.js,*.css,package-lock.json,*.trig.,**/node_modules/**,./stuff/*,*.csv'
@@ -290,7 +290,7 @@ command_line = """
     --cov --cov-report=term --cov-report=html
     --instafail -ra -n auto -m "not api_key_required"
 """
-source = ["src/backend/base/all-ai/"]
+source = ["src/backend/base/langflow/"]
 omit = ["*/alembic/*", "tests/*", "*/__init__.py"]
 
 
@@ -306,7 +306,7 @@ directory = "coverage"
 
 
 [tool.ruff]
-exclude = ["src/backend/base/all-ai/alembic/*", "src/frontend/tests/assets/*"]
+exclude = ["src/backend/base/langflow/alembic/*", "src/frontend/tests/assets/*"]
 line-length = 120
 
 [tool.ruff.lint]
@@ -337,7 +337,7 @@ external = ["RUF027"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/*" = ["D1", "INP", "T201"]
-"src/backend/base/all-ai/alembic/versions/*" = ["INP001", "D415", "PGH003"]
+"src/backend/base/langflow/alembic/versions/*" = ["INP001", "D415", "PGH003"]
 "src/backend/tests/*" = [
     "D1",
     "PLR2004",
@@ -354,7 +354,7 @@ plugins = ["pydantic.mypy"]
 follow_imports = "skip"
 disable_error_code = ["type-var"]
 namespace_packages = true
-mypy_path = "all-ai"
+mypy_path = "langflow"
 ignore_missing_imports = true
 
 [build-system]
