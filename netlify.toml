@@ -1,0 +1,41 @@
+[build]
+  # Répertoire de build
+  publish = "src/frontend/build"
+  
+  # Commande de build (frontend seulement)
+  command = "cd src/frontend && npm install && npm run build"
+
+[build.environment]
+  # Version de Node.js
+  NODE_VERSION = "18"
+  
+  # Version de Python (compatible avec Netlify)
+  PYTHON_VERSION = "3.9"
+  
+  # Variables d'environnement
+  NPM_FLAGS = "--production=false"
+
+# Redirections pour SPA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de sécurité
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache pour les assets statiques
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Configuration pour les fonctions Netlify (si nécessaire)
+[functions]
+  directory = "netlify/functions"

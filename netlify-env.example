@@ -1,0 +1,14 @@
+# Variables d'environnement pour Netlify
+# Copiez ce fichier et renommez-le en .env dans Netlify
+
+# URL du backend
+VITE_PROXY_TARGET=https://langflowcursor-15.onrender.com
+BACKEND_URL=https://langflowcursor-15.onrender.com
+
+# Configuration Langflow
+LANGFLOW_AUTO_LOGIN=true
+LANGFLOW_MCP_COMPOSER_ENABLED=true
+
+# Configuration de build
+NODE_VERSION=18
+NPM_FLAGS=--production=false
