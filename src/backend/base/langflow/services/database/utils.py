@@ -10,12 +10,12 @@ from sqlmodel import text
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 if TYPE_CHECKING:
-    from langflow.services.database.service import DatabaseService
+    from all-ai.services.database.service import DatabaseService
 
 
 async def initialize_database(*, fix_migration: bool = False) -> None:
     await logger.adebug("Initializing database")
-    from langflow.services.deps import get_db_service
+    from all-ai.services.deps import get_db_service
 
     database_service: DatabaseService = get_db_service()
     try:

@@ -5,10 +5,10 @@ from uuid import UUID, uuid4
 from pydantic import ValidationInfo, field_validator
 from sqlmodel import JSON, Column, DateTime, Field, Relationship, SQLModel, func
 
-from langflow.services.variable.constants import CREDENTIAL_TYPE
+from all-ai.services.variable.constants import CREDENTIAL_TYPE
 
 if TYPE_CHECKING:
-    from langflow.services.database.models.user.model import User
+    from all-ai.services.database.models.user.model import User
 
 
 def utc_now():

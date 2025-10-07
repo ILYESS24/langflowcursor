@@ -24,16 +24,16 @@ from openai import OpenAI
 from sqlalchemy import select
 from starlette.websockets import WebSocket, WebSocketDisconnect
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.api.v1.chat import build_flow_and_stream
-from langflow.memory import aadd_messagetables
-from langflow.schema.properties import Properties
-from langflow.services.auth.utils import get_current_user_for_websocket
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.database.models.message.model import MessageTable
-from langflow.services.database.models.user.model import User
-from langflow.services.deps import get_variable_service, session_scope
-from langflow.utils.voice_utils import BYTES_PER_24K_FRAME, VAD_SAMPLE_RATE_16K, resample_24k_to_16k
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.api.v1.chat import build_flow_and_stream
+from all-ai.memory import aadd_messagetables
+from all-ai.schema.properties import Properties
+from all-ai.services.auth.utils import get_current_user_for_websocket
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.database.models.message.model import MessageTable
+from all-ai.services.database.models.user.model import User
+from all-ai.services.deps import get_variable_service, session_scope
+from all-ai.utils.voice_utils import BYTES_PER_24K_FRAME, VAD_SAMPLE_RATE_16K, resample_24k_to_16k
 
 router = APIRouter(prefix="/voice", tags=["Voice"])
 
@@ -95,8 +95,8 @@ async def authenticate_and_get_openai_key(session: DbSession, user: User, websoc
         await websocket.send_json(
             {
                 "type": "error",
-                "code": "langflow_auth",
-                "message": "You must pass a valid Langflow token or cookie.",
+                "code": "all_ai_auth",
+                "message": "You must pass a valid ALL AI token or cookie.",
             }
         )
         return None, None
@@ -949,11 +949,11 @@ async def flow_as_tool_websocket(
                             if num_audio_samples > AUDIO_SAMPLE_THRESHOLD:
                                 msg_handler.openai_send(msg)
                                 num_audio_samples = 0
-                        elif msg.get("type") == "langflow.voice_mode.config":
-                            await logger.ainfo(f"langflow.voice_mode.config {msg}")
+                        elif msg.get("type") == "all-ai.voice_mode.config":
+                            await logger.ainfo(f"all-ai.voice_mode.config {msg}")
                             voice_config.progress_enabled = msg.get("progress_enabled", True)
-                        elif msg.get("type") == "langflow.elevenlabs.config":
-                            await logger.ainfo(f"langflow.elevenlabs.config {msg}")
+                        elif msg.get("type") == "all-ai.elevenlabs.config":
+                            await logger.ainfo(f"all-ai.elevenlabs.config {msg}")
                             voice_config.use_elevenlabs = msg["enabled"]
                             voice_config.elevenlabs_voice = msg.get("voice_id", voice_config.elevenlabs_voice)
 
@@ -1227,8 +1227,8 @@ async def flow_tts_websocket(
                             openai_send(out_event)
                         elif event.get("type") == "input_audio_buffer.commit":
                             openai_send(event)
-                        elif event.get("type") == "langflow.elevenlabs.config":
-                            await logger.ainfo(f"langflow.elevenlabs.config {event}")
+                        elif event.get("type") == "all-ai.elevenlabs.config":
+                            await logger.ainfo(f"all-ai.elevenlabs.config {event}")
                             tts_config.use_elevenlabs = event["enabled"]
                             tts_config.elevenlabs_voice = event.get("voice_id", tts_config.elevenlabs_voice)
                         elif event.get("type") == "voice.settings":

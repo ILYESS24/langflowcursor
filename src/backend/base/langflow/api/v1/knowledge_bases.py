@@ -9,8 +9,8 @@ from langchain_chroma import Chroma
 from lfx.log import logger
 from pydantic import BaseModel
 
-from langflow.api.utils import CurrentActiveUser
-from langflow.services.deps import get_settings_service
+from all-ai.api.utils import CurrentActiveUser
+from all-ai.services.deps import get_settings_service
 
 router = APIRouter(tags=["Knowledge Bases"], prefix="/knowledge_bases")
 

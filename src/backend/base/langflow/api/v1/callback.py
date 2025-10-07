@@ -9,8 +9,8 @@ from lfx.log.logger import logger
 from lfx.utils.util import remove_ansi_escape_codes
 from typing_extensions import override
 
-from langflow.api.v1.schemas import ChatResponse, PromptResponse
-from langflow.services.deps import get_chat_service
+from all-ai.api.v1.schemas import ChatResponse, PromptResponse
+from all-ai.services.deps import get_chat_service
 
 
 # https://github.com/hwchase17/chat-langchain/blob/master/callback.py

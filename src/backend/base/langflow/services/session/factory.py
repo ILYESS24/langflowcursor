@@ -2,11 +2,11 @@ from typing import TYPE_CHECKING
 
 from typing_extensions import override
 
-from langflow.services.factory import ServiceFactory
-from langflow.services.session.service import SessionService
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.session.service import SessionService
 
 if TYPE_CHECKING:
-    from langflow.services.cache.service import CacheService
+    from all-ai.services.cache.service import CacheService
 
 
 class SessionServiceFactory(ServiceFactory):

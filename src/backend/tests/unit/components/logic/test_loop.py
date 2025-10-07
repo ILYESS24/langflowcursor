@@ -5,8 +5,8 @@ from uuid import UUID
 import orjson
 import pytest
 from httpx import AsyncClient
-from langflow.memory import aget_messages
-from langflow.services.database.models.flow import FlowCreate
+from all-ai.memory import aget_messages
+from all-ai.services.database.models.flow import FlowCreate
 from lfx.components.data.url import URLComponent
 from lfx.components.input_output import ChatOutput
 from lfx.components.logic import LoopComponent
@@ -134,7 +134,7 @@ def loop_flow():
     """Complete loop flow that processes multiple URLs through a loop."""
     # Create URL component to fetch content from multiple sources
     url_component = URLComponent()
-    url_component.set(urls=["https://docs.langflow.org/"])
+    url_component.set(urls=["https://docs.allai.org/"])
 
     # Create SplitText component to chunk the content
     split_text_component = SplitTextComponent()

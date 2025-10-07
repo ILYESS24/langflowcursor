@@ -8,7 +8,7 @@ from langchain_core.documents import Document
 from lfx.schema.data import Data
 from lfx.schema.dataframe import DataFrame
 
-from langflow.schema.message import Message
+from all-ai.schema.message import Message
 
 
 def docs_to_data(documents: list[Document]) -> list[Data]:

@@ -10,7 +10,7 @@ from lfx.log.logger import logger
 class KubernetesSecretManager:
     """A class for managing Kubernetes secrets."""
 
-    def __init__(self, namespace: str = "langflow"):
+    def __init__(self, namespace: str = "ALL AI"):
         """Initialize the KubernetesSecretManager class.
 
         Args:

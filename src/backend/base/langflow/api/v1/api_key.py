@@ -2,14 +2,14 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.api.v1.schemas import ApiKeyCreateRequest, ApiKeysResponse
-from langflow.services.auth import utils as auth_utils
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.api.v1.schemas import ApiKeyCreateRequest, ApiKeysResponse
+from all-ai.services.auth import utils as auth_utils
 
 # Assuming you have these methods in your service layer
-from langflow.services.database.models.api_key.crud import create_api_key, delete_api_key, get_api_keys
-from langflow.services.database.models.api_key.model import ApiKeyCreate, UnmaskedApiKeyRead
-from langflow.services.deps import get_settings_service
+from all-ai.services.database.models.api_key.crud import create_api_key, delete_api_key, get_api_keys
+from all-ai.services.database.models.api_key.model import ApiKeyCreate, UnmaskedApiKeyRead
+from all-ai.services.deps import get_settings_service
 
 router = APIRouter(tags=["APIKey"], prefix="/api_key")
 

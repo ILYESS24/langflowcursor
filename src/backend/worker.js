@@ -1,4 +1,4 @@
-// Backend Langflow pour Cloudflare Workers
+// Backend ALL AI pour Cloudflare Workers
 // Version simplifiée pour accès libre
 
 export default {
@@ -24,7 +24,7 @@ export default {
     if (url.pathname === '/health' || url.pathname === '/health_check') {
       return new Response(JSON.stringify({ 
         status: 'ok', 
-        message: 'Langflow Backend is running',
+        message: 'ALL AI Backend is running',
         version: '1.6.0'
       }), {
         status: 200,
@@ -38,7 +38,7 @@ export default {
     // Route API de base
     if (url.pathname.startsWith('/api/v1/')) {
       return new Response(JSON.stringify({ 
-        message: 'Langflow API is running',
+        message: 'ALL AI API is running',
         endpoints: [
           '/api/v1/flows',
           '/api/v1/components',
@@ -55,12 +55,12 @@ export default {
 
     // Route par défaut
     return new Response(JSON.stringify({ 
-      message: 'Langflow Backend',
+      message: 'ALL AI Backend',
       status: 'running',
       endpoints: {
         health: '/health',
         api: '/api/v1/',
-        docs: 'https://docs.langflow.org'
+        docs: 'https://docs.ALL AI.org'
       }
     }), {
       status: 200,

@@ -1,4 +1,4 @@
-from langflow.utils.version import get_version_info
+from all-ai.utils.version import get_version_info
 
 from .model import Flow
 

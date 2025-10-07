@@ -9,8 +9,8 @@ from mcp import types
 from mcp.server import NotificationOptions, Server
 from mcp.server.sse import SseServerTransport
 
-from langflow.api.utils import CurrentActiveMCPUser
-from langflow.api.v1.mcp_utils import (
+from all-ai.api.utils import CurrentActiveMCPUser
+from all-ai.api.v1.mcp_utils import (
     current_user_ctx,
     handle_call_tool,
     handle_list_resources,
@@ -18,11 +18,11 @@ from langflow.api.v1.mcp_utils import (
     handle_mcp_errors,
     handle_read_resource,
 )
-from langflow.services.deps import get_settings_service
+from all-ai.services.deps import get_settings_service
 
 router = APIRouter(prefix="/mcp", tags=["mcp"])
 
-server = Server("langflow-mcp-server")
+server = Server("all-ai-mcp-server")
 
 
 # Define constants

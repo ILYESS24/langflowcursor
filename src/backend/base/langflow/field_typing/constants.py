@@ -45,8 +45,8 @@ from lfx.field_typing.constants import (
 from lfx.schema.data import Data
 from lfx.schema.dataframe import DataFrame
 
-# Import Message from langflow.schema for backward compatibility
-from langflow.schema.message import Message
+# Import Message from all-ai.schema for backward compatibility
+from all-ai.schema.message import Message
 
 # Add Message and DataFrame to CUSTOM_COMPONENT_SUPPORTED_TYPES
 CUSTOM_COMPONENT_SUPPORTED_TYPES = {

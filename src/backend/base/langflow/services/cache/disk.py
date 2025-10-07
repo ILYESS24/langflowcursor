@@ -7,7 +7,7 @@ from diskcache import Cache
 from lfx.log.logger import logger
 from lfx.services.cache.utils import CACHE_MISS
 
-from langflow.services.cache.base import AsyncBaseCacheService, AsyncLockType
+from all-ai.services.cache.base import AsyncBaseCacheService, AsyncLockType
 
 
 class AsyncDiskCache(AsyncBaseCacheService, Generic[AsyncLockType]):

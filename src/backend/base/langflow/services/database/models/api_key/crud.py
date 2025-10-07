@@ -7,9 +7,9 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.database.models.api_key.model import ApiKey, ApiKeyCreate, ApiKeyRead, UnmaskedApiKeyRead
-from langflow.services.database.models.user.model import User
-from langflow.services.deps import get_settings_service, session_scope
+from all-ai.services.database.models.api_key.model import ApiKey, ApiKeyCreate, ApiKeyRead, UnmaskedApiKeyRead
+from all-ai.services.database.models.user.model import User
+from all-ai.services.deps import get_settings_service, session_scope
 
 if TYPE_CHECKING:
     from sqlmodel.sql.expression import SelectOfScalar

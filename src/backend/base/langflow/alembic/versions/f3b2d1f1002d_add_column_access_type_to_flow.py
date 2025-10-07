@@ -11,7 +11,7 @@ from collections.abc import Sequence
 import sqlalchemy as sa
 from alembic import op
 
-from langflow.utils import migration
+from all-ai.utils import migration
 
 # revision identifiers, used by Alembic.
 revision: str = "f3b2d1f1002d"

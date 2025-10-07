@@ -5,8 +5,8 @@ from typing import get_type_hints
 from cachetools import LRUCache, cached
 from lfx.log.logger import logger
 
-from langflow.services.base import Service
-from langflow.services.schema import ServiceType
+from all-ai.services.base import Service
+from all-ai.services.schema import ServiceType
 
 
 class ServiceFactory:
@@ -65,11 +65,11 @@ def infer_service_types(factory: ServiceFactory, available_services=None) -> lis
 
 @cached(cache=LRUCache(maxsize=1))
 def import_all_services_into_a_dict():
-    # Services are all in langflow.services.{service_name}.service
+    # Services are all in all-ai.services.{service_name}.service
     # and are subclass of Service
     # We want to import all of them and put them in a dict
     # to use as globals
-    from langflow.services.base import Service
+    from all-ai.services.base import Service
 
     services = {}
     for service_type in ServiceType:
@@ -80,7 +80,7 @@ def import_all_services_into_a_dict():
             if service_name == "mcp_composer":
                 module_name = f"lfx.services.{service_name}.service"
             else:
-                module_name = f"langflow.services.{service_name}.service"
+                module_name = f"all-ai.services.{service_name}.service"
 
             module = importlib.import_module(module_name)
             services.update(

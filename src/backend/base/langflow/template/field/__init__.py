@@ -1,3 +1,3 @@
-"""Backwards compatibility module for langflow.template.field."""
+"""Backwards compatibility module for all-ai.template.field."""
 
 from lfx.template.field import *  # noqa: F403

@@ -7,17 +7,17 @@ from sqlalchemy.exc import IntegrityError
 from sqlmodel import select
 from sqlmodel.sql.expression import SelectOfScalar
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.api.v1.schemas import UsersResponse
-from langflow.initial_setup.setup import get_or_create_default_folder
-from langflow.services.auth.utils import (
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.api.v1.schemas import UsersResponse
+from all-ai.initial_setup.setup import get_or_create_default_folder
+from all-ai.services.auth.utils import (
     get_current_active_superuser,
     get_password_hash,
     verify_password,
 )
-from langflow.services.database.models.user.crud import get_user_by_id, update_user
-from langflow.services.database.models.user.model import User, UserCreate, UserRead, UserUpdate
-from langflow.services.deps import get_settings_service
+from all-ai.services.database.models.user.crud import get_user_by_id, update_user
+from all-ai.services.database.models.user.model import User, UserCreate, UserRead, UserUpdate
+from all-ai.services.deps import get_settings_service
 
 router = APIRouter(tags=["Users"], prefix="/users")
 

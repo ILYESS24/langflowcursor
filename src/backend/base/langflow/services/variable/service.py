@@ -8,11 +8,11 @@ from lfx.log.logger import logger
 from sqlmodel import select
 from typing_extensions import override
 
-from langflow.services.auth import utils as auth_utils
-from langflow.services.base import Service
-from langflow.services.database.models.variable.model import Variable, VariableCreate, VariableRead, VariableUpdate
-from langflow.services.variable.base import VariableService
-from langflow.services.variable.constants import CREDENTIAL_TYPE, GENERIC_TYPE
+from all-ai.services.auth import utils as auth_utils
+from all-ai.services.base import Service
+from all-ai.services.database.models.variable.model import Variable, VariableCreate, VariableRead, VariableUpdate
+from all-ai.services.variable.base import VariableService
+from all-ai.services.variable.constants import CREDENTIAL_TYPE, GENERIC_TYPE
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

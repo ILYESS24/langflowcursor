@@ -7,8 +7,8 @@ import nanoid
 from lfx.log.logger import logger
 from typing_extensions import override
 
-from langflow.schema.data import Data
-from langflow.services.tracing.base import BaseTracer
+from all-ai.schema.data import Data
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from langwatch.tracer import ContextSpan
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 class LangWatchTracer(BaseTracer):

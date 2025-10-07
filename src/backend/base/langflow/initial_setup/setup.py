@@ -34,16 +34,16 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import col, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.initial_setup.constants import STARTER_FOLDER_DESCRIPTION, STARTER_FOLDER_NAME
-from langflow.services.auth.utils import create_super_user
-from langflow.services.database.models.flow.model import Flow, FlowCreate
-from langflow.services.database.models.folder.constants import (
+from all-ai.initial_setup.constants import STARTER_FOLDER_DESCRIPTION, STARTER_FOLDER_NAME
+from all-ai.services.auth.utils import create_super_user
+from all-ai.services.database.models.flow.model import Flow, FlowCreate
+from all-ai.services.database.models.folder.constants import (
     DEFAULT_FOLDER_DESCRIPTION,
     DEFAULT_FOLDER_NAME,
     LEGACY_FOLDER_NAMES,
 )
-from langflow.services.database.models.folder.model import Folder, FolderCreate, FolderRead
-from langflow.services.deps import get_settings_service, get_storage_service, get_variable_service, session_scope
+from all-ai.services.database.models.folder.model import Folder, FolderCreate, FolderRead
+from all-ai.services.deps import get_settings_service, get_storage_service, get_variable_service, session_scope
 
 # In the folder ./starter_projects we have a few JSON files that represent
 # starter projects. We want to load these into the database so that users
@@ -727,7 +727,7 @@ def _is_valid_uuid(val):
 
 
 async def load_flows_from_directory() -> None:
-    """On langflow startup, this loads all flows from the directory specified in the settings.
+    """On ALL AI startup, this loads all flows from the directory specified in the settings.
 
     All flows are uploaded into the default folder for the superuser.
     """
@@ -738,7 +738,7 @@ async def load_flows_from_directory() -> None:
 
     async with session_scope() as session:
         # Find superuser by role instead of username to avoid issues with credential reset
-        from langflow.services.database.models.user.model import User
+        from all-ai.services.database.models.user.model import User
 
         stmt = select(User).where(User.is_superuser == True)  # noqa: E712
         result = await session.exec(stmt)
@@ -800,7 +800,7 @@ async def load_bundles_from_urls() -> tuple[list[TemporaryDirectory], list[str]]
 
     async with session_scope() as session:
         # Find superuser by role instead of username to avoid issues with credential reset
-        from langflow.services.database.models.user.model import User
+        from all-ai.services.database.models.user.model import User
 
         stmt = select(User).where(User.is_superuser == True)  # noqa: E712
         result = await session.exec(stmt)

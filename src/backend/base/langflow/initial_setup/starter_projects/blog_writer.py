@@ -20,13 +20,13 @@ def blog_writer_graph(template: str | None = None):
 Blog:
 """)
     url_component = URLComponent()
-    url_component.set(urls=["https://langflow.org/", "https://docs.langflow.org/"])
+    url_component.set(urls=["https://allai.org/", "https://docs.allai.org/"])
     parse_data_component = ParserComponent()
     parse_data_component.set(input_data=url_component.fetch_content)
 
     text_input = TextInputComponent(_display_name="Instructions")
     text_input.set(
-        input_value="Use the references above for style to write a new blog/tutorial about Langflow and AI. "
+        input_value="Use the references above for style to write a new blog/tutorial about ALL AI and AI. "
         "Suggest non-covered topics."
     )
 

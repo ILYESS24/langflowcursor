@@ -3,8 +3,8 @@ from typing import TYPE_CHECKING, Any
 
 from celery.result import AsyncResult
 
-from langflow.services.task.backends.base import TaskBackend
-from langflow.worker import celery_app
+from all-ai.services.task.backends.base import TaskBackend
+from all-ai.worker import celery_app
 
 if TYPE_CHECKING:
     from celery import Task

@@ -1,0 +1,7 @@
+name = "all-ai-backend"
+main = "src/backend/all-ai-worker.js"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+[env.production]
+name = "all-ai-backend-prod"

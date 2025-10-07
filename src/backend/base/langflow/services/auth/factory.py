@@ -1,7 +1,7 @@
 from typing_extensions import override
 
-from langflow.services.auth.service import AuthService
-from langflow.services.factory import ServiceFactory
+from all-ai.services.auth.service import AuthService
+from all-ai.services.factory import ServiceFactory
 
 
 class AuthServiceFactory(ServiceFactory):

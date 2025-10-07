@@ -3,7 +3,7 @@ from uuid import UUID, uuid4
 
 from sqlmodel import Field, SQLModel, UniqueConstraint
 
-from langflow.schema.serialize import UUIDstr
+from all-ai.schema.serialize import UUIDstr
 
 
 class File(SQLModel, table=True):  # type: ignore[call-arg]

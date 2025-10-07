@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from langflow.services.database.service import DatabaseService
-from langflow.services.factory import ServiceFactory
+from all-ai.services.database.service import DatabaseService
+from all-ai.services.factory import ServiceFactory
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService

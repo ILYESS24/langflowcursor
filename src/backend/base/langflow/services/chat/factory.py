@@ -1,5 +1,5 @@
-from langflow.services.chat.service import ChatService
-from langflow.services.factory import ServiceFactory
+from all-ai.services.chat.service import ChatService
+from all-ai.services.factory import ServiceFactory
 
 
 class ChatServiceFactory(ServiceFactory):

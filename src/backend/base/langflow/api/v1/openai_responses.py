@@ -10,24 +10,24 @@ from fastapi.responses import StreamingResponse
 from lfx.log.logger import logger
 from lfx.schema.openai_responses_schemas import create_openai_error
 
-from langflow.api.utils import extract_global_variables_from_headers
-from langflow.api.v1.endpoints import consume_and_yield, run_flow_generator, simple_run_flow
-from langflow.api.v1.schemas import SimplifiedAPIRequest
-from langflow.events.event_manager import create_stream_tokens_event_manager
-from langflow.helpers.flow import get_flow_by_id_or_endpoint_name
-from langflow.schema import (
+from all-ai.api.utils import extract_global_variables_from_headers
+from all-ai.api.v1.endpoints import consume_and_yield, run_flow_generator, simple_run_flow
+from all-ai.api.v1.schemas import SimplifiedAPIRequest
+from all-ai.events.event_manager import create_stream_tokens_event_manager
+from all-ai.helpers.flow import get_flow_by_id_or_endpoint_name
+from all-ai.schema import (
     OpenAIErrorResponse,
     OpenAIResponsesRequest,
     OpenAIResponsesResponse,
     OpenAIResponsesStreamChunk,
 )
-from langflow.schema.content_types import ToolContent
-from langflow.services.auth.utils import api_key_security
-from langflow.services.database.models.flow.model import FlowRead
-from langflow.services.database.models.user.model import UserRead
-from langflow.services.deps import get_telemetry_service
-from langflow.services.telemetry.schema import RunPayload
-from langflow.services.telemetry.service import TelemetryService
+from all-ai.schema.content_types import ToolContent
+from all-ai.services.auth.utils import api_key_security
+from all-ai.services.database.models.flow.model import FlowRead
+from all-ai.services.database.models.user.model import UserRead
+from all-ai.services.deps import get_telemetry_service
+from all-ai.services.telemetry.schema import RunPayload
+from all-ai.services.telemetry.service import TelemetryService
 
 router = APIRouter(tags=["OpenAI Responses API"])
 
@@ -101,7 +101,7 @@ async def run_flow_for_openai_responses(
         event_manager = create_stream_tokens_event_manager(queue=asyncio_queue)
 
         async def openai_stream_generator() -> AsyncGenerator[str, None]:
-            """Convert Langflow events to OpenAI Responses API streaming format."""
+            """Convert ALL AI events to OpenAI Responses API streaming format."""
             main_task = asyncio.create_task(
                 run_flow_generator(
                     flow=flow,
@@ -505,7 +505,7 @@ async def create_response(
     """Create a response using OpenAI Responses API format.
 
     This endpoint accepts a flow_id in the model parameter and processes
-    the input through the specified Langflow flow.
+    the input through the specified ALL AI flow.
 
     Args:
         request: OpenAI Responses API request with model (flow_id) and input
@@ -522,7 +522,7 @@ async def create_response(
     """
     start_time = time.perf_counter()
 
-    # Extract global variables from X-LANGFLOW-GLOBAL-VAR-* headers
+    # Extract global variables from X-ALL AI-GLOBAL-VAR-* headers
     variables = extract_global_variables_from_headers(http_request.headers)
 
     await logger.adebug(f"All headers received: {list(http_request.headers.keys())}")

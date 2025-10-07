@@ -4,8 +4,8 @@ import httpx
 from lfx.log.logger import logger
 
 if TYPE_CHECKING:
-    from langflow.services.store.schema import ListComponentResponse
-    from langflow.services.store.service import StoreService
+    from all-ai.services.store.schema import ListComponentResponse
+    from all-ai.services.store.service import StoreService
 
 
 def process_tags_for_post(component_dict):
@@ -40,16 +40,16 @@ async def update_components_with_user_data(
     return components
 
 
-# Get the latest released version of langflow (https://pypi.org/project/langflow/)
+# Get the latest released version of ALL AI (https://pypi.org/project/ALL AI/)
 async def get_lf_version_from_pypi():
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get("https://pypi.org/pypi/langflow/json")
+            response = await client.get("https://pypi.org/pypi/ALL AI/json")
         if response.status_code != httpx.codes.OK:
             return None
         return response.json()["info"]["version"]
     except Exception:  # noqa: BLE001
-        logger.debug("Error getting the latest version of langflow from PyPI", exc_info=True)
+        logger.debug("Error getting the latest version of ALL AI from PyPI", exc_info=True)
         return None
 
 

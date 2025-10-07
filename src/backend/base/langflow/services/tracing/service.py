@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any
 
 from lfx.log.logger import logger
 
-from langflow.services.base import Service
+from all-ai.services.base import Service
 
 if TYPE_CHECKING:
     from uuid import UUID
@@ -19,42 +19,42 @@ if TYPE_CHECKING:
     from lfx.graph.vertex.base import Vertex
     from lfx.services.settings.service import SettingsService
 
-    from langflow.services.tracing.base import BaseTracer
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.base import BaseTracer
+    from all-ai.services.tracing.schema import Log
 
 
 def _get_langsmith_tracer():
-    from langflow.services.tracing.langsmith import LangSmithTracer
+    from all-ai.services.tracing.langsmith import LangSmithTracer
 
     return LangSmithTracer
 
 
 def _get_langwatch_tracer():
-    from langflow.services.tracing.langwatch import LangWatchTracer
+    from all-ai.services.tracing.langwatch import LangWatchTracer
 
     return LangWatchTracer
 
 
 def _get_langfuse_tracer():
-    from langflow.services.tracing.langfuse import LangFuseTracer
+    from all-ai.services.tracing.langfuse import LangFuseTracer
 
     return LangFuseTracer
 
 
 def _get_arize_phoenix_tracer():
-    from langflow.services.tracing.arize_phoenix import ArizePhoenixTracer
+    from all-ai.services.tracing.arize_phoenix import ArizePhoenixTracer
 
     return ArizePhoenixTracer
 
 
 def _get_opik_tracer():
-    from langflow.services.tracing.opik import OpikTracer
+    from all-ai.services.tracing.opik import OpikTracer
 
     return OpikTracer
 
 
 def _get_traceloop_tracer():
-    from langflow.services.tracing.traceloop import TraceloopTracer
+    from all-ai.services.tracing.traceloop import TraceloopTracer
 
     return TraceloopTracer
 
@@ -237,7 +237,7 @@ class TracingService(Service):
         if self.deactivated:
             return
         try:
-            project_name = project_name or os.getenv("LANGCHAIN_PROJECT", "Langflow")
+            project_name = project_name or os.getenv("LANGCHAIN_PROJECT", "ALL AI")
             trace_context = TraceContext(run_id, run_name, project_name, user_id, session_id)
             trace_context_var.set(trace_context)
             await self._start(trace_context)
@@ -400,7 +400,7 @@ class TracingService(Service):
     @property
     def project_name(self):
         if self.deactivated:
-            return os.getenv("LANGCHAIN_PROJECT", "Langflow")
+            return os.getenv("LANGCHAIN_PROJECT", "ALL AI")
         trace_context = trace_context_var.get()
         if trace_context is None:
             msg = "called project_name but no trace context found"

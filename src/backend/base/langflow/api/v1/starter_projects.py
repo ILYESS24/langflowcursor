@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from langflow.services.auth.utils import get_current_active_user
+from all-ai.services.auth.utils import get_current_active_user
 
 router = APIRouter(prefix="/starter-projects", tags=["Flows"])
 
@@ -44,7 +44,7 @@ class GraphDumpResponse(BaseModel):
 @router.get("/", dependencies=[Depends(get_current_active_user)], status_code=200)
 async def get_starter_projects() -> list[GraphDumpResponse]:
     """Get a list of starter projects."""
-    from langflow.initial_setup.load import get_starter_projects_dump
+    from all-ai.initial_setup.load import get_starter_projects_dump
 
     try:
         # Get the raw data from lfx GraphDump

@@ -3,12 +3,12 @@ from typing import TYPE_CHECKING
 
 from lfx.services.cache.utils import CacheMiss
 
-from langflow.services.base import Service
-from langflow.services.cache.base import AsyncBaseCacheService
-from langflow.services.session.utils import compute_dict_hash, session_id_generator
+from all-ai.services.base import Service
+from all-ai.services.cache.base import AsyncBaseCacheService
+from all-ai.services.session.utils import compute_dict_hash, session_id_generator
 
 if TYPE_CHECKING:
-    from langflow.services.cache.base import CacheService
+    from all-ai.services.cache.base import CacheService
 
 
 class SessionService(Service):

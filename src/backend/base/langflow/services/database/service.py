@@ -23,14 +23,14 @@ from sqlmodel import SQLModel, select, text
 from sqlmodel.ext.asyncio.session import AsyncSession
 from tenacity import retry, stop_after_attempt, wait_fixed
 
-from langflow.initial_setup.constants import STARTER_FOLDER_NAME
-from langflow.services.base import Service
-from langflow.services.database import models
-from langflow.services.database.models.user.crud import get_user_by_username
-from langflow.services.database.session import NoopSession
-from langflow.services.database.utils import Result, TableResults
-from langflow.services.deps import get_settings_service
-from langflow.services.utils import teardown_superuser
+from all-ai.initial_setup.constants import STARTER_FOLDER_NAME
+from all-ai.services.base import Service
+from all-ai.services.database import models
+from all-ai.services.database.models.user.crud import get_user_by_username
+from all-ai.services.database.session import NoopSession
+from all-ai.services.database.utils import Result, TableResults
+from all-ai.services.deps import get_settings_service
+from all-ai.services.utils import teardown_superuser
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
@@ -48,11 +48,11 @@ class DatabaseService(Service):
         self.database_url: str = settings_service.settings.database_url
         self._sanitize_database_url()
 
-        # This file is in langflow.services.database.manager.py
-        # the ini is in langflow
-        langflow_dir = Path(__file__).parent.parent.parent
-        self.script_location = langflow_dir / "alembic"
-        self.alembic_cfg_path = langflow_dir / "alembic.ini"
+        # This file is in all-ai.services.database.manager.py
+        # the ini is in ALL AI
+        all_ai_dir = Path(__file__).parent.parent.parent
+        self.script_location = all_ai_dir / "alembic"
+        self.alembic_cfg_path = all_ai_dir / "alembic.ini"
 
         # register the event listener for sqlite as part of this class.
         # Using decorator will make the method not able to use self
@@ -67,7 +67,7 @@ class DatabaseService(Service):
         if Path(alembic_log_file).is_absolute():
             self.alembic_log_path = Path(alembic_log_file)
         else:
-            self.alembic_log_path = Path(langflow_dir) / alembic_log_file
+            self.alembic_log_path = Path(all_ai_dir) / alembic_log_file
 
     async def initialize_alembic_log_file(self):
         # Ensure the directory and file for the alembic log file exists

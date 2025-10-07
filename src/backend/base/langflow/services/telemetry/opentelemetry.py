@@ -12,7 +12,7 @@ from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.resources import Resource
 
 # a default OpenTelemetry meter name
-langflow_meter_name = "langflow"
+all_ai_meter_name = "ALL AI"
 
 """
 If the measurement values are non-additive, use an Asynchronous Gauge.
@@ -44,7 +44,7 @@ class ObservableGaugeWrapper:
 
     def __init__(self, name: str, description: str, unit: str):
         self._values: dict[tuple[tuple[str, str], ...], float] = {}
-        self._meter = metrics.get_meter(langflow_meter_name)
+        self._meter = metrics.get_meter(all_ai_meter_name)
         self._gauge = self._meter.create_observable_gauge(
             name=name, description=description, unit=unit, callbacks=[self._callback]
         )
@@ -158,7 +158,7 @@ class OpenTelemetry(metaclass=ThreadSafeSingletonMetaUsingWeakref):
             if hasattr(existing_provider, "get_meter") and existing_provider.get_meter("http.server"):
                 self._meter_provider = existing_provider
             else:
-                resource = Resource.create({"service.name": "langflow"})
+                resource = Resource.create({"service.name": "ALL AI"})
                 metric_readers = []
                 if self.prometheus_enabled:
                     metric_readers.append(PrometheusMetricReader())
@@ -166,7 +166,7 @@ class OpenTelemetry(metaclass=ThreadSafeSingletonMetaUsingWeakref):
                 self._meter_provider = MeterProvider(resource=resource, metric_readers=metric_readers)
                 metrics.set_meter_provider(self._meter_provider)
 
-        self.meter = self._meter_provider.get_meter(langflow_meter_name)
+        self.meter = self._meter_provider.get_meter(all_ai_meter_name)
 
         for name, metric in self._metrics_registry.items():
             if name != metric.name:

@@ -5,16 +5,21 @@
   },
   "deploy": {
     "numReplicas": 1,
-    "startCommand": "uvicorn langflow.main:app --host 0.0.0.0 --port $PORT",
+    "startCommand": "uvicorn allai.main:create_app --host 0.0.0.0 --port $PORT",
     "healthcheckPath": "/health",
     "healthcheckTimeout": 300
   },
   "environment": {
-    "LANGFLOW_DATABASE_URL": "sqlite:///./langflow.db",
-    "LANGFLOW_HOST": "0.0.0.0",
-    "LANGFLOW_PORT": "8000",
-    "LANGFLOW_LOG_LEVEL": "INFO",
-    "PYTHON_VERSION": "3.11.6"
+    "ALL_AI_DATABASE_URL": "${{Postgres.DATABASE_URL}}",
+    "ALL_AI_REDIS_URL": "${{Redis.REDIS_URL}}",
+    "ALL_AI_HOST": "0.0.0.0",
+    "ALL_AI_PORT": "$PORT",
+    "ALL_AI_LOG_LEVEL": "INFO",
+    "PYTHON_VERSION": "3.11.6",
+    "ALL_AI_SECRET_KEY": "your-secret-key-change-in-production",
+    "ALL_AI_SUPERUSER": "admin",
+    "ALL_AI_SUPERUSER_PASSWORD": "admin123",
+    "ALL_AI_CORS_ORIGINS": "https://68eee78a.all-ai-frontend.pages.dev,https://all-ai-frontend.pages.dev"
   },
-  "name": "langflow-backend"
+  "name": "all-ai-backend"
 }

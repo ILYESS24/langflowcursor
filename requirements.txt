@@ -1,0 +1,39 @@
+# Requirements pour ALL AI Backend
+# Version Python compatible: 3.10-3.11
+
+# Core FastAPI
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+pydantic-settings>=2.2.0
+
+# Database
+sqlalchemy[aiosqlite]>=2.0.38
+alembic>=1.12.0
+
+# Authentication
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+
+# HTTP Client
+httpx>=0.25.0
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+click>=8.1.0
+typer>=0.9.0
+rich>=13.0.0
+
+# LangChain (sans rapidocr-onnxruntime)
+langchain>=0.3.23
+langchain-community>=0.3.21
+langchain-openai>=0.2.12
+langchain-anthropic>=0.3.14
+
+# Other dependencies
+beautifulsoup4>=4.12.0
+networkx>=3.4.0
+pyarrow>=19.0.0
+redis>=5.2.0

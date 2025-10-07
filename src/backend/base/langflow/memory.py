@@ -11,9 +11,9 @@ from sqlalchemy import delete
 from sqlmodel import col, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.schema.message import Message
-from langflow.services.database.models.message.model import MessageRead, MessageTable
-from langflow.services.deps import session_scope
+from all-ai.schema.message import Message
+from all-ai.services.database.models.message.model import MessageRead, MessageTable
+from all-ai.services.deps import session_scope
 
 
 def _get_variable_query(
@@ -112,9 +112,9 @@ async def aadd_messages(messages: Message | list[Message], flow_id: str | UUID |
     if not isinstance(messages, list):
         messages = [messages]
 
-    # Check if all messages are Message instances (either from langflow or lfx)
+    # Check if all messages are Message instances (either from ALL AI or lfx)
     for message in messages:
-        # Accept Message instances from both langflow and lfx packages
+        # Accept Message instances from both ALL AI and lfx packages
         is_valid_message = isinstance(message, Message) or (
             hasattr(message, "__class__") and message.__class__.__name__ in ["Message", "ErrorMessage"]
         )

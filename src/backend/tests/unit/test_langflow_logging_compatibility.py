@@ -1,27 +1,27 @@
-"""Test langflow.logging backwards compatibility and integration.
+"""Test all-ai.logging backwards compatibility and integration.
 
-This test ensures that langflow.logging works correctly and that there are no
+This test ensures that all-ai.logging works correctly and that there are no
 conflicts with the new lfx.logging backwards compatibility module.
 """
 
 import pytest
 
 
-def test_langflow_logging_imports():
-    """Test that langflow.logging can be imported and works correctly."""
+def test_all_ai_logging_imports():
+    """Test that all-ai.logging can be imported and works correctly."""
     try:
-        from langflow.logging import configure, logger
+        from all-ai.logging import configure, logger
 
         assert configure is not None
         assert logger is not None
         assert callable(configure)
     except ImportError as e:
-        pytest.fail(f"langflow.logging should be importable: {e}")
+        pytest.fail(f"all-ai.logging should be importable: {e}")
 
 
-def test_langflow_logging_functionality():
-    """Test that langflow.logging functions work correctly."""
-    from langflow.logging import configure, logger
+def test_all_ai_logging_functionality():
+    """Test that all-ai.logging functions work correctly."""
+    from all-ai.logging import configure, logger
 
     # Should be able to configure
     try:
@@ -31,29 +31,29 @@ def test_langflow_logging_functionality():
 
     # Should be able to log
     try:
-        logger.info("Test message from langflow.logging")
+        logger.info("Test message from all-ai.logging")
     except Exception as e:
         pytest.fail(f"logger should work: {e}")
 
 
-def test_langflow_logging_has_expected_exports():
-    """Test that langflow.logging has the expected exports."""
-    import langflow.logging
+def test_all_ai_logging_has_expected_exports():
+    """Test that all-ai.logging has the expected exports."""
+    import all-ai.logging
 
-    assert hasattr(langflow.logging, "configure")
-    assert hasattr(langflow.logging, "logger")
-    assert hasattr(langflow.logging, "disable_logging")
-    assert hasattr(langflow.logging, "enable_logging")
+    assert hasattr(all-ai.logging, "configure")
+    assert hasattr(all-ai.logging, "logger")
+    assert hasattr(all-ai.logging, "disable_logging")
+    assert hasattr(all-ai.logging, "enable_logging")
 
     # Check __all__
-    assert hasattr(langflow.logging, "__all__")
+    assert hasattr(all-ai.logging, "__all__")
     expected_exports = {"configure", "logger", "disable_logging", "enable_logging"}
-    assert set(langflow.logging.__all__) == expected_exports
+    assert set(all-ai.logging.__all__) == expected_exports
 
 
-def test_langflow_logging_specific_functions():
-    """Test langflow.logging specific functions (disable_logging, enable_logging)."""
-    from langflow.logging import disable_logging, enable_logging
+def test_all_ai_logging_specific_functions():
+    """Test all-ai.logging specific functions (disable_logging, enable_logging)."""
+    from all-ai.logging import disable_logging, enable_logging
 
     assert callable(disable_logging)
     assert callable(enable_logging)
@@ -65,14 +65,14 @@ def test_langflow_logging_specific_functions():
 
 
 def test_no_conflict_with_lfx_logging():
-    """Test that langflow.logging and lfx.logging don't conflict."""
+    """Test that all-ai.logging and lfx.logging don't conflict."""
     # Import both
-    from langflow.logging import configure as lf_configure
-    from langflow.logging import logger as lf_logger
+    from all-ai.logging import configure as lf_configure
+    from all-ai.logging import logger as lf_logger
     from lfx.logging import configure as lfx_configure
     from lfx.logging import logger as lfx_logger
 
-    # They should be the same underlying objects since langflow.logging imports from lfx.log.logger
+    # They should be the same underlying objects since all-ai.logging imports from lfx.log.logger
     # and lfx.logging re-exports from lfx.log.logger
     # Note: Due to import order and module initialization, object identity may vary,
     # but functionality should be equivalent
@@ -84,17 +84,17 @@ def test_no_conflict_with_lfx_logging():
     # Test that both work without conflicts
     lf_configure(log_level="INFO")
     lfx_configure(log_level="INFO")
-    lf_logger.info("Test from langflow.logging")
+    lf_logger.info("Test from all-ai.logging")
     lfx_logger.info("Test from lfx.logging")
 
 
-def test_langflow_logging_imports_from_lfx():
-    """Test that langflow.logging correctly imports from lfx."""
-    from langflow.logging import configure, logger
+def test_all_ai_logging_imports_from_lfx():
+    """Test that all-ai.logging correctly imports from lfx."""
+    from all-ai.logging import configure, logger
     from lfx.log.logger import configure as lfx_configure
     from lfx.log.logger import logger as lfx_logger
 
-    # langflow.logging should import equivalent objects from lfx.log.logger
+    # all-ai.logging should import equivalent objects from lfx.log.logger
     # Due to module initialization order, object identity may vary
     assert callable(configure)
     assert callable(lfx_configure)
@@ -103,7 +103,7 @@ def test_langflow_logging_imports_from_lfx():
 
     # Test functionality equivalence
     configure(log_level="DEBUG")
-    logger.debug("Test from langflow.logging")
+    logger.debug("Test from all-ai.logging")
     lfx_configure(log_level="DEBUG")
     lfx_logger.debug("Test from lfx.log.logger")
 
@@ -111,13 +111,13 @@ def test_langflow_logging_imports_from_lfx():
 def test_backwards_compatibility_scenario():
     """Test the complete backwards compatibility scenario."""
     # This tests the scenario where:
-    # 1. langflow.logging exists and imports from lfx.log.logger
+    # 1. all-ai.logging exists and imports from lfx.log.logger
     # 2. lfx.logging now exists (new) and re-exports from lfx.log.logger
     # 3. Both should work without conflicts
 
     # Import from all paths
-    from langflow.logging import configure as lf_configure
-    from langflow.logging import logger as lf_logger
+    from all-ai.logging import configure as lf_configure
+    from all-ai.logging import logger as lf_logger
     from lfx.log.logger import configure as orig_configure
     from lfx.log.logger import logger as orig_logger
     from lfx.logging import configure as lfx_configure
@@ -133,7 +133,7 @@ def test_backwards_compatibility_scenario():
 
     # All should work without conflicts
     lf_configure(log_level="ERROR")
-    lf_logger.error("Message from langflow.logging")
+    lf_logger.error("Message from all-ai.logging")
 
     lfx_configure(log_level="INFO")
     lfx_logger.info("Message from lfx.logging")
@@ -142,34 +142,34 @@ def test_backwards_compatibility_scenario():
     orig_logger.debug("Message from lfx.log.logger")
 
 
-def test_importing_langflow_logging_in_langflow():
-    """Test that langflow.logging can be imported and used in langflow context without errors.
+def test_importing_all_ai_logging_in_langflow():
+    """Test that all-ai.logging can be imported and used in ALL AI context without errors.
 
-    This is similar to test_importing_langflow_logging_in_lfx but tests the langflow side
-    using create_class to validate component creation with langflow.logging imports.
+    This is similar to test_importing_all_ai_logging_in_lfx but tests the ALL AI side
+    using create_class to validate component creation with all-ai.logging imports.
     """
     from textwrap import dedent
 
     from lfx.custom.validate import create_class
 
-    # Test that langflow.logging can be used in component code created via create_class
+    # Test that all-ai.logging can be used in component code created via create_class
     code = dedent("""
-from langflow.logging import logger, configure
-from langflow.logging.logger import logger
-from langflow.custom import Component
+from all-ai.logging import logger, configure
+from all-ai.logging.logger import logger
+from all-ai.custom import Component
 
 class TestLangflowLoggingComponent(Component):
     def some_method(self):
-        # Test that both logger and configure work in langflow context
+        # Test that both logger and configure work in ALL AI context
         configure(log_level="INFO")
-        logger.info("Test message from langflow component")
+        logger.info("Test message from ALL AI component")
 
         # Test different log levels
         logger.debug("Debug message")
         logger.warning("Warning message")
         logger.error("Error message")
 
-        return "langflow_logging_success"
+        return "all_ai_logging_success"
     """)
 
     result = create_class(code, "TestLangflowLoggingComponent")

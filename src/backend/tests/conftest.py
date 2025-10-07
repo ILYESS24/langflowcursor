@@ -17,17 +17,17 @@ from blockbuster import blockbuster_ctx
 from dotenv import load_dotenv
 from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
-from langflow.initial_setup.constants import STARTER_FOLDER_NAME
-from langflow.main import create_app
-from langflow.services.auth.utils import get_password_hash
-from langflow.services.database.models.api_key.model import ApiKey
-from langflow.services.database.models.flow.model import Flow, FlowCreate
-from langflow.services.database.models.folder.model import Folder
-from langflow.services.database.models.transactions.model import TransactionTable
-from langflow.services.database.models.user.model import User, UserCreate, UserRead
-from langflow.services.database.models.vertex_builds.crud import delete_vertex_builds_by_flow_id
-from langflow.services.database.utils import session_getter
-from langflow.services.deps import get_db_service, session_scope
+from all-ai.initial_setup.constants import STARTER_FOLDER_NAME
+from all-ai.main import create_app
+from all-ai.services.auth.utils import get_password_hash
+from all-ai.services.database.models.api_key.model import ApiKey
+from all-ai.services.database.models.flow.model import Flow, FlowCreate
+from all-ai.services.database.models.folder.model import Folder
+from all-ai.services.database.models.transactions.model import TransactionTable
+from all-ai.services.database.models.user.model import User, UserCreate, UserRead
+from all-ai.services.database.models.vertex_builds.crud import delete_vertex_builds_by_flow_id
+from all-ai.services.database.utils import session_getter
+from all-ai.services.deps import get_db_service, session_scope
 from lfx.components.input_output import ChatInput
 from lfx.graph import Graph
 from lfx.log.logger import logger
@@ -70,7 +70,7 @@ def blockbuster(request):
             (
                 bb.functions["os.stat"]
                 # TODO: make set_class_code async
-                .can_block_in("langflow/custom/custom_component/component.py", "set_class_code")
+                .can_block_in("ALL AI/custom/custom_component/component.py", "set_class_code")
                 # TODO: follow discussion in https://github.com/encode/httpx/discussions/3456
                 .can_block_in("httpx/_client.py", "_init_transport")
                 .can_block_in("rich/traceback.py", "_render_stack")
@@ -253,16 +253,16 @@ def distributed_client_fixture(
     distributed_env,  # noqa: ARG001
 ):
     # Here we load the .env from ../deploy/.env
-    from langflow.core import celery_app
+    from all-ai.core import celery_app
 
     db_dir = tempfile.mkdtemp()
     try:
         db_path = Path(db_dir) / "test.db"
         monkeypatch.setenv("LANGFLOW_DATABASE_URL", f"sqlite:///{db_path}")
         monkeypatch.setenv("LANGFLOW_AUTO_LOGIN", "false")
-        # monkeypatch langflow.services.task.manager.USE_CELERY to True
+        # monkeypatch all-ai.services.task.manager.USE_CELERY to True
         # monkeypatch.setattr(manager, "USE_CELERY", True)
-        monkeypatch.setattr(celery_app, "celery_app", celery_app.make_celery("langflow", Config))
+        monkeypatch.setattr(celery_app, "celery_app", celery_app.make_celery("ALL AI", Config))
 
         # def get_session_override():
         #     return session

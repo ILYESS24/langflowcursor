@@ -1,7 +1,7 @@
-from langflow.custom import Component
+from all-ai.custom import Component
 
 # Import all input types
-from langflow.io import (
+from all-ai.io import (
     BoolInput,
     DataFrameInput,
     DataInput,
@@ -26,8 +26,8 @@ from pydantic import BaseModel
 
 class AllInputsComponent(Component):
     display_name = "All Inputs Component"
-    description = "A component with all input types available in Langflow."
-    documentation: str = "http://docs.langflow.org/components/all_inputs"
+    description = "A component with all input types available in ALL AI."
+    documentation: str = "http://docs.allai.org/components/all_inputs"
     icon = "code"
     name = "AllInputsComponent"
 

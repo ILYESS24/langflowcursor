@@ -12,7 +12,7 @@ import sqlalchemy as sa
 import sqlmodel
 from alembic import op
 
-from langflow.utils import migration
+from all-ai.utils import migration
 
 # revision identifiers, used by Alembic.
 revision: str = "dd9e0804ebd1"

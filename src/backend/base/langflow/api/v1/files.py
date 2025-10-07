@@ -11,11 +11,11 @@ from fastapi.responses import StreamingResponse
 from lfx.services.settings.service import SettingsService
 from lfx.utils.helpers import build_content_type_from_extension
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.api.v1.schemas import UploadFileResponse
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.deps import get_settings_service, get_storage_service
-from langflow.services.storage.service import StorageService
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.api.v1.schemas import UploadFileResponse
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.deps import get_settings_service, get_storage_service
+from all-ai.services.storage.service import StorageService
 
 router = APIRouter(tags=["Files"], prefix="/files")
 

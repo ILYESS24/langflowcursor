@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile
 from lfx.base.agents.utils import safe_cache_get, safe_cache_set
 from lfx.base.mcp.util import update_tools
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.api.v2.files import (
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.api.v2.files import (
     MCP_SERVERS_FILE,
     delete_file,
     download_file,
@@ -16,8 +16,8 @@ from langflow.api.v2.files import (
     get_mcp_file,
     upload_user_file,
 )
-from langflow.logging import logger
-from langflow.services.deps import get_settings_service, get_shared_component_cache_service, get_storage_service
+from all-ai.logging import logger
+from all-ai.services.deps import get_settings_service, get_shared_component_cache_service, get_storage_service
 
 router = APIRouter(tags=["MCP"], prefix="/mcp")
 

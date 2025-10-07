@@ -11,9 +11,9 @@ from typing import TYPE_CHECKING
 import httpx
 from lfx.log.logger import logger
 
-from langflow.services.base import Service
-from langflow.services.telemetry.opentelemetry import OpenTelemetry
-from langflow.services.telemetry.schema import (
+from all-ai.services.base import Service
+from all-ai.services.telemetry.opentelemetry import OpenTelemetry
+from all-ai.services.telemetry.schema import (
     ComponentPayload,
     ExceptionPayload,
     PlaygroundPayload,
@@ -21,7 +21,7 @@ from langflow.services.telemetry.schema import (
     ShutdownPayload,
     VersionPayload,
 )
-from langflow.utils.version import get_version_info
+from all-ai.utils.version import get_version_info
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
@@ -98,12 +98,12 @@ class TelemetryService(Service):
             return
         await self.telemetry_queue.put(payload)
 
-    def _get_langflow_desktop(self) -> bool:
+    def _get_all_ai_desktop(self) -> bool:
         # Coerce to bool, could be 1, 0, True, False, "1", "0", "True", "False"
         return str(os.getenv("LANGFLOW_DESKTOP", "False")).lower() in {"1", "true"}
 
     def _get_client_type(self) -> str:
-        return "desktop" if self._get_langflow_desktop() else "oss"
+        return "desktop" if self._get_all_ai_desktop() else "oss"
 
     async def log_package_version(self) -> None:
         python_version = ".".join(platform.python_version().split(".")[:2])

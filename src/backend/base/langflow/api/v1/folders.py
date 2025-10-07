@@ -5,13 +5,13 @@ from fastapi import APIRouter, Depends, status
 from fastapi.responses import RedirectResponse
 from fastapi_pagination import Params
 
-from langflow.api.utils import custom_params
-from langflow.services.database.models.flow.model import FlowRead
-from langflow.services.database.models.folder.model import (
+from all-ai.api.utils import custom_params
+from all-ai.services.database.models.flow.model import FlowRead
+from all-ai.services.database.models.folder.model import (
     FolderRead,
     FolderReadWithFlows,
 )
-from langflow.services.database.models.folder.pagination_model import FolderWithPaginatedFlows
+from all-ai.services.database.models.folder.pagination_model import FolderWithPaginatedFlows
 
 router = APIRouter(prefix="/folders", tags=["Folders"])
 

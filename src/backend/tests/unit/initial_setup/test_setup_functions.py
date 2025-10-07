@@ -2,9 +2,9 @@ import asyncio
 from uuid import uuid4
 
 import pytest
-from langflow.initial_setup.setup import get_or_create_default_folder, session_scope
-from langflow.services.database.models.folder.constants import DEFAULT_FOLDER_NAME
-from langflow.services.database.models.folder.model import FolderRead
+from all-ai.initial_setup.setup import get_or_create_default_folder, session_scope
+from all-ai.services.database.models.folder.constants import DEFAULT_FOLDER_NAME
+from all-ai.services.database.models.folder.model import FolderRead
 
 
 @pytest.mark.usefixtures("client")

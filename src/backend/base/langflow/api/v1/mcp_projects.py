@@ -27,10 +27,10 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.api.utils import CurrentActiveMCPUser, extract_global_variables_from_headers
-from langflow.api.utils.mcp import auto_configure_starter_projects_mcp, get_project_sse_url, get_url_by_os
-from langflow.api.v1.auth_helpers import handle_auth_settings_update
-from langflow.api.v1.mcp_utils import (
+from all-ai.api.utils import CurrentActiveMCPUser, extract_global_variables_from_headers
+from all-ai.api.utils.mcp import auto_configure_starter_projects_mcp, get_project_sse_url, get_url_by_os
+from all-ai.api.v1.auth_helpers import handle_auth_settings_update
+from all-ai.api.v1.mcp_utils import (
     current_request_variables_ctx,
     current_user_ctx,
     handle_call_tool,
@@ -39,21 +39,21 @@ from langflow.api.v1.mcp_utils import (
     handle_mcp_errors,
     handle_read_resource,
 )
-from langflow.api.v1.schemas import (
+from all-ai.api.v1.schemas import (
     AuthSettings,
     MCPInstallRequest,
     MCPProjectResponse,
     MCPProjectUpdateRequest,
     MCPSettings,
 )
-from langflow.services.auth.mcp_encryption import decrypt_auth_settings, encrypt_auth_settings
-from langflow.services.auth.utils import AUTO_LOGIN_WARNING
-from langflow.services.database.models import Flow, Folder
-from langflow.services.database.models.api_key.crud import check_key, create_api_key
-from langflow.services.database.models.api_key.model import ApiKey, ApiKeyCreate
-from langflow.services.database.models.user.crud import get_user_by_username
-from langflow.services.database.models.user.model import User
-from langflow.services.deps import get_service
+from all-ai.services.auth.mcp_encryption import decrypt_auth_settings, encrypt_auth_settings
+from all-ai.services.auth.utils import AUTO_LOGIN_WARNING
+from all-ai.services.database.models import Flow, Folder
+from all-ai.services.database.models.api_key.crud import check_key, create_api_key
+from all-ai.services.database.models.api_key.model import ApiKey, ApiKeyCreate
+from all-ai.services.database.models.user.crud import get_user_by_username
+from all-ai.services.database.models.user.model import User
+from all-ai.services.deps import get_service
 
 # Constants
 ALL_INTERFACES_HOST = "0.0.0.0"  # noqa: S104
@@ -160,7 +160,7 @@ async def verify_project_auth_conditional(
 
         # For all other cases, use standard MCP authentication (allows JWT + API keys)
         # Call the MCP auth function directly
-        from langflow.services.auth.utils import get_current_user_mcp
+        from all-ai.services.auth.utils import get_current_user_mcp
 
         user = await get_current_user_mcp(
             token=token or "", query_param=api_key_query_value, header_param=api_key_header_value, db=session
@@ -307,7 +307,7 @@ async def handle_project_sse(
     # Set context variables
     user_token = current_user_ctx.set(current_user)
     project_token = current_project_ctx.set(project_id)
-    # Extract request-level variables from headers with prefix X-LANGFLOW-GLOBAL-VAR-*
+    # Extract request-level variables from headers with prefix X-ALL AI-GLOBAL-VAR-*
     variables = extract_global_variables_from_headers(request.headers)
     req_vars_token = current_request_variables_ctx.set(variables or None)
 
@@ -351,7 +351,7 @@ async def handle_project_messages(
     # Set context variables
     user_token = current_user_ctx.set(current_user)
     project_token = current_project_ctx.set(project_id)
-    # Extract request-level variables from headers with prefix X-LANGFLOW-GLOBAL-VAR-*
+    # Extract request-level variables from headers with prefix X-ALL AI-GLOBAL-VAR-*
     variables = extract_global_variables_from_headers(request.headers)
     req_vars_token = current_request_variables_ctx.set(variables or None)
 
@@ -645,18 +645,18 @@ async def install_mcp_config(
             sse_url = await get_project_sse_url(project_id)
             command = "uvx"
             args = ["mcp-proxy"]
-            # Check if we need to add Langflow API key headers
+            # Check if we need to add ALL AI API key headers
             # Necessary only when Project API Key Authentication is enabled
 
-            # Generate a Langflow API key for auto-install if needed
+            # Generate a ALL AI API key for auto-install if needed
             # Only add API key headers for projects with "apikey" auth type (not "none" or OAuth)
 
             if should_generate_api_key:
                 async with session_scope() as api_key_session:
                     api_key_create = ApiKeyCreate(name=f"MCP Server {project.name}")
                     api_key_response = await create_api_key(api_key_session, api_key_create, current_user.id)
-                    langflow_api_key = api_key_response.api_key
-                    args.extend(["--headers", "x-api-key", langflow_api_key])
+                    all_ai_api_key = api_key_response.api_key
+                    args.extend(["--headers", "x-api-key", all_ai_api_key])
 
             # Add the SSE URL for mcp-proxy
             args.append(sse_url)
@@ -1011,7 +1011,7 @@ async def _get_mcp_composer_auth_config(project) -> dict:
 class ProjectMCPServer:
     def __init__(self, project_id: UUID):
         self.project_id = project_id
-        self.server = Server(f"langflow-mcp-project-{project_id}")
+        self.server = Server(f"all-ai-mcp-project-{project_id}")
 
         # Register handlers that filter by project
         @self.server.list_tools()
@@ -1072,7 +1072,7 @@ async def register_project_with_composer(project: Folder):
 
         settings = get_settings_service().settings
         if not settings.host or not settings.port:
-            error_msg = "Langflow host and port must be set in settings to register project with MCP Composer"
+            error_msg = "ALL AI host and port must be set in settings to register project with MCP Composer"
             raise ValueError(error_msg)
 
         if not project.id:
@@ -1207,7 +1207,7 @@ async def get_or_start_mcp_composer(auth_config: dict, project_name: str, projec
     # Prepare current auth config for comparison
     settings = get_settings_service().settings
     if not settings.host or not settings.port:
-        error_msg = "Langflow host and port must be set in settings to register project with MCP Composer"
+        error_msg = "ALL AI host and port must be set in settings to register project with MCP Composer"
         raise ValueError(error_msg)
 
     sse_url = await get_project_sse_url(project_id)

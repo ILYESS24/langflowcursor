@@ -16,7 +16,7 @@ from traceloop.sdk import Traceloop
 from traceloop.sdk.instruments import Instruments
 from typing_extensions import override
 
-from langflow.services.tracing.base import BaseTracer
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -26,12 +26,12 @@ if TYPE_CHECKING:
     from opentelemetry.propagators.textmap import CarrierT
     from opentelemetry.trace import Span
 
-    from langflow.graph.vertex.base import Vertex
-    from langflow.services.tracing.schema import Log
+    from all-ai.graph.vertex.base import Vertex
+    from all-ai.services.tracing.schema import Log
 
 
 class TraceloopTracer(BaseTracer):
-    """Traceloop tracer for Langflow."""
+    """Traceloop tracer for ALL AI."""
 
     def __init__(
         self,
@@ -64,7 +64,7 @@ class TraceloopTracer(BaseTracer):
                 api_endpoint=os.getenv("TRACELOOP_BASE_URL", "https://api.traceloop.com"),
             )
             self._ready = True
-            self._tracer = trace.get_tracer("langflow")
+            self._tracer = trace.get_tracer("ALL AI")
             self.propagator = TraceContextTextMapPropagator()
             self.carrier: CarrierT = {}
 
@@ -101,7 +101,7 @@ class TraceloopTracer(BaseTracer):
         """Recursively converts a value to a Traceloop compatible type."""
         from langchain.schema import BaseMessage, Document, HumanMessage, SystemMessage
 
-        from langflow.schema.message import Message
+        from all-ai.schema.message import Message
 
         try:
             if isinstance(value, dict):

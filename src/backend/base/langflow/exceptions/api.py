@@ -1,9 +1,9 @@
 from fastapi import HTTPException
 from pydantic import BaseModel
 
-from langflow.api.utils import get_suggestion_message
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.database.models.flow.utils import get_outdated_components
+from all-ai.api.utils import get_suggestion_message
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.database.models.flow.utils import get_outdated_components
 
 
 class InvalidChatInputError(Exception):

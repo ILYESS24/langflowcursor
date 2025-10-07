@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from langchain.callbacks.base import BaseCallbackHandler
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 class BaseTracer(ABC):

@@ -11,14 +11,14 @@ from lfx.log import logger
 from lfx.services.deps import get_settings_service
 from sqlmodel import select
 
-from langflow.api.v2.mcp import get_server_list, update_server
-from langflow.services.auth.mcp_encryption import encrypt_auth_settings
-from langflow.services.database.models import Flow, Folder
-from langflow.services.database.models.api_key.crud import create_api_key
-from langflow.services.database.models.api_key.model import ApiKeyCreate
-from langflow.services.database.models.folder.constants import DEFAULT_FOLDER_NAME
-from langflow.services.database.models.user.model import User
-from langflow.services.deps import get_storage_service
+from all-ai.api.v2.mcp import get_server_list, update_server
+from all-ai.services.auth.mcp_encryption import encrypt_auth_settings
+from all-ai.services.database.models import Flow, Folder
+from all-ai.services.database.models.api_key.crud import create_api_key
+from all-ai.services.database.models.api_key.model import ApiKeyCreate
+from all-ai.services.database.models.folder.constants import DEFAULT_FOLDER_NAME
+from all-ai.services.database.models.user.model import User
+from all-ai.services.deps import get_storage_service
 
 ALL_INTERFACES_HOST = "0.0.0.0"  # noqa: S104
 

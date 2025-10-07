@@ -7,12 +7,12 @@ from pydantic import ConfigDict, field_serializer, field_validator
 from sqlalchemy import Text
 from sqlmodel import JSON, Column, Field, SQLModel
 
-from langflow.schema.content_block import ContentBlock
-from langflow.schema.properties import Properties
-from langflow.schema.validators import str_to_timestamp_validator
+from all-ai.schema.content_block import ContentBlock
+from all-ai.schema.properties import Properties
+from all-ai.schema.validators import str_to_timestamp_validator
 
 if TYPE_CHECKING:
-    from langflow.schema.message import Message
+    from all-ai.schema.message import Message
 
 
 class MessageBase(SQLModel):

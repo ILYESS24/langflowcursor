@@ -1,4 +1,4 @@
-from langflow.services.cache.service import AsyncInMemoryCache, CacheService, RedisCache, ThreadingInMemoryCache
+from all-ai.services.cache.service import AsyncInMemoryCache, CacheService, RedisCache, ThreadingInMemoryCache
 
 from . import factory, service
 

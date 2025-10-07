@@ -24,19 +24,19 @@ from pydantic import PydanticDeprecatedSince20
 from pydantic_core import PydanticSerializationError
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
-from langflow.api import health_check_router, log_router, router
-from langflow.api.v1.mcp_projects import init_mcp_servers
-from langflow.initial_setup.setup import (
+from all-ai.api import health_check_router, log_router, router
+from all-ai.api.v1.mcp_projects import init_mcp_servers
+from all-ai.initial_setup.setup import (
     create_or_update_starter_projects,
     initialize_auto_login_default_superuser,
     load_bundles_from_urls,
     load_flows_from_directory,
     sync_flows_from_fs,
 )
-from langflow.middleware import ContentSizeLimitMiddleware
-from langflow.services.deps import get_queue_service, get_service, get_settings_service, get_telemetry_service
-from langflow.services.schema import ServiceType
-from langflow.services.utils import initialize_services, initialize_settings_service, teardown_services
+from all-ai.middleware import ContentSizeLimitMiddleware
+from all-ai.services.deps import get_queue_service, get_service, get_settings_service, get_telemetry_service
+from all-ai.services.schema import ServiceType
+from all-ai.services.utils import initialize_services, initialize_settings_service, teardown_services
 
 if TYPE_CHECKING:
     from tempfile import TemporaryDirectory
@@ -150,9 +150,9 @@ def get_lifespan(*, fix_migration=False, version=None):
 
         # Startup message
         if version:
-            await logger.adebug(f"Starting Langflow v{version}...")
+            await logger.adebug(f"Starting ALL AI v{version}...")
         else:
-            await logger.adebug("Starting Langflow...")
+            await logger.adebug("Starting ALL AI...")
 
         temp_dirs: list[TemporaryDirectory] = []
         sync_flows_from_fs_task = None
@@ -203,7 +203,7 @@ def get_lifespan(*, fix_migration=False, version=None):
 
             from filelock import FileLock
 
-            lock_file = Path(tempfile.gettempdir()) / "langflow_starter_projects.lock"
+            lock_file = Path(tempfile.gettempdir()) / "all_ai_starter_projects.lock"
             lock = FileLock(lock_file, timeout=1)
             try:
                 with lock:
@@ -273,7 +273,7 @@ def get_lifespan(*, fix_migration=False, version=None):
         except asyncio.CancelledError:
             await logger.adebug("Lifespan received cancellation signal")
         except Exception as exc:
-            if "langflow migration --fix" not in str(exc):
+            if "ALL AI migration --fix" not in str(exc):
                 logger.exception(exc)
 
                 await log_exception_to_telemetry(exc, "lifespan")
@@ -281,12 +281,12 @@ def get_lifespan(*, fix_migration=False, version=None):
         finally:
             # Clean shutdown with progress indicator
             # Create shutdown progress (show verbose timing if log level is DEBUG)
-            from langflow.__main__ import get_number_of_workers
-            from langflow.cli.progress import create_langflow_shutdown_progress
+            from all-ai.__main__ import get_number_of_workers
+            from all-ai.cli.progress import create_all_ai_shutdown_progress
 
             log_level = os.getenv("LANGFLOW_LOG_LEVEL", "info").lower()
             num_workers = get_number_of_workers(get_settings_service().settings.workers)
-            shutdown_progress = create_langflow_shutdown_progress(
+            shutdown_progress = create_all_ai_shutdown_progress(
                 verbose=log_level == "debug", multiple_workers=num_workers > 1
             )
 
@@ -331,7 +331,7 @@ def get_lifespan(*, fix_migration=False, version=None):
 
                 # Step 4: Finalizing Shutdown
                 with shutdown_progress.step(4):
-                    await logger.adebug("Langflow shutdown complete")
+                    await logger.adebug("ALL AI shutdown complete")
 
                 # Show completion summary and farewell
                 shutdown_progress.print_shutdown_summary()
@@ -351,13 +351,13 @@ def get_lifespan(*, fix_migration=False, version=None):
 
 def create_app():
     """Create the FastAPI app and include the router."""
-    from langflow.utils.version import get_version_info
+    from all-ai.utils.version import get_version_info
 
     __version__ = get_version_info()["version"]
     configure()
     lifespan = get_lifespan(version=__version__)
     app = FastAPI(
-        title="Langflow",
+        title="ALL AI",
         version=__version__,
         lifespan=lifespan,
     )
@@ -449,7 +449,7 @@ def create_app():
         start_http_server(settings.prometheus_port)
 
     if settings.mcp_server_enabled:
-        from langflow.api.v1 import mcp_router
+        from all-ai.api.v1 import mcp_router
 
         router.include_router(mcp_router)
 
@@ -519,7 +519,7 @@ def setup_static_files(app: FastAPI, static_files_dir: Path) -> None:
 
 
 def get_static_files_dir():
-    """Get the static files directory relative to Langflow's main.py file."""
+    """Get the static files directory relative to ALL AI's main.py file."""
     frontend_path = Path(__file__).parent
     return frontend_path / "frontend"
 
@@ -543,11 +543,11 @@ def setup_app(static_files_dir: Path | None = None, *, backend_only: bool = Fals
 if __name__ == "__main__":
     import uvicorn
 
-    from langflow.__main__ import get_number_of_workers
+    from all-ai.__main__ import get_number_of_workers
 
     configure()
     uvicorn.run(
-        "langflow.main:create_app",
+        "all-ai.main:create_app",
         host="localhost",
         port=7860,
         workers=get_number_of_workers(),

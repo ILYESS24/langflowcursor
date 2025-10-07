@@ -5,11 +5,11 @@ from fastapi.encoders import jsonable_encoder
 from lfx.log.logger import logger
 from pydantic import BaseModel
 
-from langflow.schema.data import Data
-from langflow.schema.dataframe import DataFrame
-from langflow.schema.encoders import CUSTOM_ENCODERS
-from langflow.schema.message import Message
-from langflow.serialization.serialization import serialize
+from all-ai.schema.data import Data
+from all-ai.schema.dataframe import DataFrame
+from all-ai.schema.encoders import CUSTOM_ENCODERS
+from all-ai.schema.message import Message
+from all-ai.serialization.serialization import serialize
 
 
 class ArtifactType(str, Enum):

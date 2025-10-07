@@ -2,8 +2,8 @@ from typing import Any
 
 from pydantic import SecretStr
 
-from langflow.services.auth.mcp_encryption import decrypt_auth_settings, encrypt_auth_settings
-from langflow.services.database.models.folder.model import Folder
+from all-ai.services.auth.mcp_encryption import decrypt_auth_settings, encrypt_auth_settings
+from all-ai.services.database.models.folder.model import Folder
 
 
 def handle_auth_settings_update(

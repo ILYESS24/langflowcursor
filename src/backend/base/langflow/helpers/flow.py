@@ -8,9 +8,9 @@ from lfx.log.logger import logger
 from pydantic.v1 import BaseModel, Field, create_model
 from sqlmodel import select
 
-from langflow.schema.schema import INPUT_FIELD_NAME
-from langflow.services.database.models.flow.model import Flow, FlowRead
-from langflow.services.deps import get_settings_service, session_scope
+from all-ai.schema.schema import INPUT_FIELD_NAME
+from all-ai.services.database.models.flow.model import Flow, FlowRead
+from all-ai.services.deps import get_settings_service, session_scope
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from lfx.graph.schema import RunOutputs
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.schema.data import Data
+    from all-ai.schema.data import Data
 
 INPUT_TYPE_MAP = {
     "ChatInput": {"type_hint": "Optional[str]", "default": '""'},
@@ -49,7 +49,7 @@ async def load_flow(
 ) -> Graph:
     from lfx.graph.graph.base import Graph
 
-    from langflow.processing.process import process_tweaks
+    from all-ai.processing.process import process_tweaks
 
     if not flow_id and not flow_name:
         msg = "Flow ID or Flow Name is required"
@@ -180,7 +180,7 @@ def generate_function_for_flow(
 from typing import Optional
 async def flow_function({func_args}):
     tweaks = {{ {arg_mappings} }}
-    from langflow.helpers.flow import run_flow
+    from all-ai.helpers.flow import run_flow
     from langchain_core.tools import ToolException
     from lfx.base.flow_processing.utils import build_data_from_result_data, format_flow_output_data
     try:

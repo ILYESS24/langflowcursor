@@ -1,3 +1,3 @@
-"""Backwards compatibility module for langflow.base.io.text."""
+"""Backwards compatibility module for all-ai.base.io.text."""
 
 from lfx.base.io.text import *  # noqa: F403

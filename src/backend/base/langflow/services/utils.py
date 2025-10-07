@@ -9,13 +9,13 @@ from sqlalchemy import delete
 from sqlalchemy import exc as sqlalchemy_exc
 from sqlmodel import col, select
 
-from langflow.services.auth.utils import create_super_user, verify_password
-from langflow.services.cache.base import ExternalAsyncBaseCacheService
-from langflow.services.cache.factory import CacheServiceFactory
-from langflow.services.database.models.transactions.model import TransactionTable
-from langflow.services.database.models.vertex_builds.model import VertexBuildTable
-from langflow.services.database.utils import initialize_database
-from langflow.services.schema import ServiceType
+from all-ai.services.auth.utils import create_super_user, verify_password
+from all-ai.services.cache.base import ExternalAsyncBaseCacheService
+from all-ai.services.cache.factory import CacheServiceFactory
+from all-ai.services.database.models.transactions.model import TransactionTable
+from all-ai.services.database.models.vertex_builds.model import VertexBuildTable
+from all-ai.services.database.utils import initialize_database
+from all-ai.services.schema import ServiceType
 
 from .deps import get_db_service, get_service, get_settings_service, session_scope
 
@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
 
 async def get_or_create_super_user(session: AsyncSession, username, password, is_default):
-    from langflow.services.database.models.user.model import User
+    from all-ai.services.database.models.user.model import User
 
     stmt = select(User).where(User.username == username)
     result = await session.exec(stmt)
@@ -110,7 +110,7 @@ async def teardown_superuser(settings_service, session: AsyncSession) -> None:
         try:
             await logger.adebug("AUTO_LOGIN is set to False. Removing default superuser if exists.")
             username = DEFAULT_SUPERUSER
-            from langflow.services.database.models.user.model import User
+            from all-ai.services.database.models.user.model import User
 
             stmt = select(User).where(User.username == username)
             result = await session.exec(stmt)
@@ -149,8 +149,8 @@ def initialize_settings_service() -> None:
 
 def initialize_session_service() -> None:
     """Initialize the session manager."""
-    from langflow.services.cache import factory as cache_factory
-    from langflow.services.session import factory as session_service_factory
+    from all-ai.services.cache import factory as cache_factory
+    from all-ai.services.session import factory as session_service_factory
 
     initialize_settings_service()
 
@@ -232,20 +232,20 @@ def register_all_service_factories() -> None:
     from lfx.services.mcp_composer import factory as mcp_composer_factory
     from lfx.services.settings import factory as settings_factory
 
-    from langflow.services.auth import factory as auth_factory
-    from langflow.services.cache import factory as cache_factory
-    from langflow.services.chat import factory as chat_factory
-    from langflow.services.database import factory as database_factory
-    from langflow.services.job_queue import factory as job_queue_factory
-    from langflow.services.session import factory as session_factory
-    from langflow.services.shared_component_cache import factory as shared_component_cache_factory
-    from langflow.services.state import factory as state_factory
-    from langflow.services.storage import factory as storage_factory
-    from langflow.services.store import factory as store_factory
-    from langflow.services.task import factory as task_factory
-    from langflow.services.telemetry import factory as telemetry_factory
-    from langflow.services.tracing import factory as tracing_factory
-    from langflow.services.variable import factory as variable_factory
+    from all-ai.services.auth import factory as auth_factory
+    from all-ai.services.cache import factory as cache_factory
+    from all-ai.services.chat import factory as chat_factory
+    from all-ai.services.database import factory as database_factory
+    from all-ai.services.job_queue import factory as job_queue_factory
+    from all-ai.services.session import factory as session_factory
+    from all-ai.services.shared_component_cache import factory as shared_component_cache_factory
+    from all-ai.services.state import factory as state_factory
+    from all-ai.services.storage import factory as storage_factory
+    from all-ai.services.store import factory as store_factory
+    from all-ai.services.task import factory as task_factory
+    from all-ai.services.telemetry import factory as telemetry_factory
+    from all-ai.services.tracing import factory as tracing_factory
+    from all-ai.services.variable import factory as variable_factory
 
     # Register all factories
     service_manager.register_factory(settings_factory.SettingsServiceFactory())

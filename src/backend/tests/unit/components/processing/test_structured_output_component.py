@@ -5,8 +5,8 @@ from unittest.mock import patch
 import openai
 import pytest
 from langchain_openai import ChatOpenAI
-from langflow.helpers.base_model import build_model_from_schema
-from langflow.inputs.inputs import TableInput
+from all-ai.helpers.base_model import build_model_from_schema
+from all-ai.inputs.inputs import TableInput
 from lfx.components.processing.structured_output import StructuredOutputComponent
 from pydantic import BaseModel
 

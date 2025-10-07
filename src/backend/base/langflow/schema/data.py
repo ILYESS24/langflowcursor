@@ -1,4 +1,4 @@
-"""Data class for langflow - imports from lfx.
+"""Data class for ALL AI - imports from lfx.
 
 This maintains backward compatibility while using the lfx implementation.
 """

@@ -5,12 +5,12 @@ from typing import TYPE_CHECKING
 
 import anyio
 
-from langflow.services.base import Service
+from all-ai.services.base import Service
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
 
-    from langflow.services.session.service import SessionService
+    from all-ai.services.session.service import SessionService
 
 
 class StorageService(Service):

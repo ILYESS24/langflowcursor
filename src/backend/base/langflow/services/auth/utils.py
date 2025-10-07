@@ -16,13 +16,13 @@ from sqlalchemy.exc import IntegrityError
 from sqlmodel.ext.asyncio.session import AsyncSession
 from starlette.websockets import WebSocket
 
-from langflow.services.database.models.api_key.crud import check_key
-from langflow.services.database.models.user.crud import get_user_by_id, get_user_by_username, update_user_last_login_at
-from langflow.services.database.models.user.model import User, UserRead
-from langflow.services.deps import get_db_service, get_session, get_settings_service, session_scope
+from all-ai.services.database.models.api_key.crud import check_key
+from all-ai.services.database.models.user.crud import get_user_by_id, get_user_by_username, update_user_last_login_at
+from all-ai.services.database.models.user.model import User, UserRead
+from all-ai.services.deps import get_db_service, get_session, get_settings_service, session_scope
 
 if TYPE_CHECKING:
-    from langflow.services.database.models.api_key.model import ApiKey
+    from all-ai.services.database.models.api_key.model import ApiKey
 
 oauth2_login = OAuth2PasswordBearer(tokenUrl="api/v1/login", auto_error=False)
 
@@ -275,7 +275,7 @@ async def get_webhook_user(flow_id: str, request: Request) -> UserRead:
     Raises:
         HTTPException: If authentication fails or user doesn't have permission
     """
-    from langflow.helpers.user import get_user_by_flow_id_or_endpoint_name
+    from all-ai.helpers.user import get_user_by_flow_id_or_endpoint_name
 
     settings_service = get_settings_service()
 
@@ -404,7 +404,7 @@ async def create_user_longterm_token(db: AsyncSession) -> tuple[UUID, dict]:
     username = settings_service.auth_settings.SUPERUSER
     super_user = await get_user_by_username(db, username)
     if not super_user:
-        from langflow.services.database.models.user.crud import get_all_superusers
+        from all-ai.services.database.models.user.crud import get_all_superusers
 
         superusers = await get_all_superusers(db)
         super_user = superusers[0] if superusers else None

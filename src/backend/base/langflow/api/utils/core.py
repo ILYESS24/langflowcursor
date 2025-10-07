@@ -13,19 +13,19 @@ from lfx.log.logger import logger
 from sqlalchemy import delete
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.auth.utils import get_current_active_user, get_current_active_user_mcp
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.database.models.message.model import MessageTable
-from langflow.services.database.models.transactions.model import TransactionTable
-from langflow.services.database.models.user.model import User
-from langflow.services.database.models.vertex_builds.model import VertexBuildTable
-from langflow.services.deps import get_session, session_scope
-from langflow.services.store.utils import get_lf_version_from_pypi
-from langflow.utils.constants import LANGFLOW_GLOBAL_VAR_HEADER_PREFIX
+from all-ai.services.auth.utils import get_current_active_user, get_current_active_user_mcp
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.database.models.message.model import MessageTable
+from all-ai.services.database.models.transactions.model import TransactionTable
+from all-ai.services.database.models.user.model import User
+from all-ai.services.database.models.vertex_builds.model import VertexBuildTable
+from all-ai.services.deps import get_session, session_scope
+from all-ai.services.store.utils import get_lf_version_from_pypi
+from all-ai.utils.constants import LANGFLOW_GLOBAL_VAR_HEADER_PREFIX
 
 if TYPE_CHECKING:
-    from langflow.services.chat.service import ChatService
-    from langflow.services.store.schema import StoreComponentCreate
+    from all-ai.services.chat.service import ChatService
+    from all-ai.services.store.schema import StoreComponentCreate
 
 
 API_WORDS = ["api", "key", "token"]
@@ -108,21 +108,21 @@ def get_is_component_from_data(data: dict):
     return data.get("is_component")
 
 
-async def check_langflow_version(component: StoreComponentCreate) -> None:
-    from langflow.utils.version import get_version_info
+async def check_all_ai_version(component: StoreComponentCreate) -> None:
+    from all-ai.utils.version import get_version_info
 
     __version__ = get_version_info()["version"]
 
     if not component.last_tested_version:
         component.last_tested_version = __version__
 
-    langflow_version = await get_lf_version_from_pypi()
-    if langflow_version is None:
-        raise HTTPException(status_code=500, detail="Unable to verify the latest version of Langflow")
-    if langflow_version != component.last_tested_version:
+    all_ai_version = await get_lf_version_from_pypi()
+    if all_ai_version is None:
+        raise HTTPException(status_code=500, detail="Unable to verify the latest version of ALL AI")
+    if all_ai_version != component.last_tested_version:
         await logger.awarning(
-            f"Your version of Langflow ({component.last_tested_version}) is outdated. "
-            f"Please update to the latest version ({langflow_version}) and try again."
+            f"Your version of ALL AI ({component.last_tested_version}) is outdated. "
+            f"Please update to the latest version ({all_ai_version}) and try again."
         )
 
 
@@ -355,7 +355,7 @@ async def verify_public_flow_and_get_user(flow_id: uuid.UUID, client_id: str | N
     async with session_scope() as session:
         from sqlmodel import select
 
-        from langflow.services.database.models.flow.model import AccessTypeEnum, Flow
+        from all-ai.services.database.models.flow.model import AccessTypeEnum, Flow
 
         flow = (await session.exec(select(Flow).where(Flow.id == flow_id))).first()
         if not flow or flow.access_type is not AccessTypeEnum.PUBLIC:
@@ -367,7 +367,7 @@ async def verify_public_flow_and_get_user(flow_id: uuid.UUID, client_id: str | N
 
     # Get the user associated with the flow
     try:
-        from langflow.helpers.user import get_user_by_flow_id_or_endpoint_name
+        from all-ai.helpers.user import get_user_by_flow_id_or_endpoint_name
 
         user = await get_user_by_flow_id_or_endpoint_name(str(flow_id))
 
@@ -383,7 +383,7 @@ async def verify_public_flow_and_get_user(flow_id: uuid.UUID, client_id: str | N
 
 
 def extract_global_variables_from_headers(headers) -> dict[str, str]:
-    """Extract global variables from HTTP headers with prefix X-LANGFLOW-GLOBAL-VAR-*.
+    """Extract global variables from HTTP headers with prefix X-ALL AI-GLOBAL-VAR-*.
 
     Args:
         headers: HTTP headers object (e.g., from FastAPI Request.headers)
@@ -392,7 +392,7 @@ def extract_global_variables_from_headers(headers) -> dict[str, str]:
         Dictionary mapping variable names (uppercase) to their values
 
     Example:
-        headers = {"X-LANGFLOW-GLOBAL-VAR-API-KEY": "secret", "Content-Type": "application/json"}
+        headers = {"X-ALL AI-GLOBAL-VAR-API-KEY": "secret", "Content-Type": "application/json"}
         result = extract_global_variables_from_headers(headers)
         # Returns: {"API_KEY": "secret"}
     """

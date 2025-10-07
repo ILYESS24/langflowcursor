@@ -5,7 +5,7 @@ from threading import Lock
 from lfx.log.logger import logger
 from lfx.services.settings.service import SettingsService
 
-from langflow.services.base import Service
+from all-ai.services.base import Service
 
 
 class StateService(Service):
