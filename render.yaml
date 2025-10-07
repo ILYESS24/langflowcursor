@@ -1,47 +1,51 @@
 services:
   - type: web
-    name: all-ai-backend
+    name: langflow-backend
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python start_server_complete.py
+    buildCommand: pip install -e .
+    startCommand: python -m langflow run --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.6
-      - key: ALL_AI_SECRET_KEY
+      - key: LANGFLOW_SECRET_KEY
         value: your-secret-key-change-in-production-12345
-      - key: ALL_AI_SUPERUSER
+      - key: LANGFLOW_SUPERUSER
         value: admin
-      - key: ALL_AI_SUPERUSER_PASSWORD
+      - key: LANGFLOW_SUPERUSER_PASSWORD
         value: admin123
-      - key: ALL_AI_CORS_ORIGINS
-        value: https://all-ai-frontend.onrender.com
+      - key: LANGFLOW_CORS_ORIGINS
+        value: https://langflow-frontend.onrender.com
       - key: DATABASE_URL
         fromDatabase:
-          name: all-ai-database
+          name: langflow-database
           property: connectionString
-      - key: ALL_AI_LOG_LEVEL
+      - key: LANGFLOW_LOG_LEVEL
         value: INFO
-      - key: ALL_AI_HOST
+      - key: LANGFLOW_HOST
         value: 0.0.0.0
-      - key: ALL_AI_PORT
+      - key: LANGFLOW_PORT
         value: $PORT
+      - key: LANGFLOW_AUTO_LOGIN
+        value: "true"
+      - key: LANGFLOW_BACKEND_ONLY
+        value: "true"
 
   - type: web
-    name: all-ai-frontend
+    name: langflow-frontend
     env: static
     buildCommand: cd src/frontend && npm install && npm run build
     staticPublishPath: src/frontend/build
     routes:
       - type: rewrite
         source: /api/*
-        destination: https://all-ai-backend.onrender.com/api/$1
+        destination: https://langflow-backend.onrender.com/api/$1
       - type: rewrite
         source: /*
         destination: /index.html
 
 databases:
-  - name: all-ai-database
-    databaseName: allai
-    user: allai
+  - name: langflow-database
+    databaseName: langflow
+    user: langflow
     plan: free

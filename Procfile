@@ -1,1 +1,1 @@
-web: python start_server.py
+web: python -m langflow run --host 0.0.0.0 --port $PORT
