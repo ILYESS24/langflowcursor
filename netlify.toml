@@ -2,8 +2,8 @@
   # Répertoire de build (frontend)
   publish = "src/frontend/build"
   
-  # Commande de build complète (frontend + backend)
-  command = "cd src/frontend && npm install && npm run build && cd ../.. && pip install -r requirements.txt"
+  # Commande de build complète (frontend + backend + fonctions)
+  command = "cd src/frontend && npm install && npm run build && cd ../.. && pip install -r requirements.txt && cd netlify/functions && npm install"
 
 [build.environment]
   # Version de Node.js compatible avec Vite
