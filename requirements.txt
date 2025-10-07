@@ -24,4 +24,14 @@ click==8.3.0
 starlette==0.37.2
 pydantic==2.11.10
 sqlalchemy==2.0.43
+# Langflow specific dependencies
+all-ai-base==0.6.0
+# OpenTelemetry dependencies
+opentelemetry-api==1.24.0
+opentelemetry-sdk==1.24.0
+opentelemetry-instrumentation-fastapi==0.45b0
+opentelemetry-instrumentation-requests==0.45b0
+opentelemetry-instrumentation-sqlalchemy==0.45b0
+opentelemetry-exporter-jaeger==1.20.0
+opentelemetry-exporter-otlp==1.24.0
 # Add other core dependencies as needed, excluding problematic ones
