@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copier les fichiers de dépendances
+# Copier les fichiers de configuration
+COPY pyproject.toml .
 COPY requirements.txt .
 
 # Installer les dépendances Python
