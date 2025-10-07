@@ -1,15 +1,13 @@
 services:
   - type: web
-    name: all-ai-app
+    name: all-ai-backend
     env: python
-    buildCommand: chmod +x build.sh && ./build.sh
+    buildCommand: pip install -r requirements.txt
     startCommand: python start_server.py
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.6
-      - key: NODE_VERSION
-        value: 18
       - key: ALL_AI_SECRET_KEY
         value: your-secret-key-change-in-production-12345
       - key: ALL_AI_SUPERUSER
@@ -17,7 +15,7 @@ services:
       - key: ALL_AI_SUPERUSER_PASSWORD
         value: admin123
       - key: ALL_AI_CORS_ORIGINS
-        value: https://all-ai-app.onrender.com
+        value: https://all-ai-frontend.onrender.com
       - key: DATABASE_URL
         fromDatabase:
           name: all-ai-database
@@ -28,8 +26,19 @@ services:
         value: 0.0.0.0
       - key: ALL_AI_PORT
         value: $PORT
-      - key: ALL_AI_STATIC_FILES_PATH
-        value: src/frontend/build
+
+  - type: web
+    name: all-ai-frontend
+    env: static
+    buildCommand: cd src/frontend && npm install && npm run build
+    staticPublishPath: src/frontend/build
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://all-ai-backend.onrender.com/api/$1
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
 databases:
   - name: all-ai-database

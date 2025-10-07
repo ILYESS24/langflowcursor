@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
-        envAllAI.BACKEND_URL ?? "",
+        envAllAI.BACKEND_URL ?? "https://all-ai-backend.onrender.com",
       ),
       "process.env.ACCESS_TOKEN_EXPIRE_SECONDS": JSON.stringify(
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,
