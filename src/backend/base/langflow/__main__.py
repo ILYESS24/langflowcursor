@@ -29,14 +29,14 @@ from rich.panel import Panel
 from rich.table import Table
 from sqlmodel import select
 
-from all-ai.cli.progress import create_all_ai_progress
-from all-ai.initial_setup.setup import get_or_create_default_folder
-from all-ai.main import setup_app
-from all-ai.services.auth.utils import check_key, get_current_user_by_jwt
-from all-ai.services.deps import get_db_service, get_settings_service, session_scope
-from all-ai.services.utils import initialize_services
-from all-ai.utils.version import fetch_latest_version, get_version_info
-from all-ai.utils.version import is_pre_release as all_ai_is_pre_release
+from langflow.cli.progress import create_all_ai_progress
+from langflow.initial_setup.setup import get_or_create_default_folder
+from langflow.main import setup_app
+from langflow.services.auth.utils import check_key, get_current_user_by_jwt
+from langflow.services.deps import get_db_service, get_settings_service, session_scope
+from langflow.services.utils import initialize_services
+from langflow.utils.version import fetch_latest_version, get_version_info
+from langflow.utils.version import is_pre_release as all_ai_is_pre_release
 
 # Initialize console with Windows-safe settings
 console = Console(legacy_windows=True, emoji=False) if platform.system() == "Windows" else Console()
@@ -379,7 +379,7 @@ def run(
     else:
         with progress.step(6):
             # Use Gunicorn with LangflowUvicornWorker for non-Windows systems
-            from all-ai.server import LangflowApplication
+            from langflow.server import LangflowApplication
 
             options = {
                 "bind": f"{host}:{port}",
@@ -694,7 +694,7 @@ async def _create_superuser(username: str, password: str, auth_token: str | None
         if not password:
             password = typer.prompt("Password", hide_input=True)
 
-    from all-ai.services.database.models.user.crud import get_all_superusers
+    from langflow.services.database.models.user.crud import get_all_superusers
 
     existing_superusers = []
     async with session_scope() as session:
@@ -754,11 +754,11 @@ async def _create_superuser(username: str, password: str, auth_token: str | None
 
     # Auth complete, create the superuser
     async with session_scope() as session:
-        from all-ai.services.auth.utils import create_super_user
+        from langflow.services.auth.utils import create_super_user
 
         if await create_super_user(db=session, username=username, password=password):
             # Verify that the superuser was created
-            from all-ai.services.database.models.user.model import User
+            from langflow.services.database.models.user.model import User
 
             stmt = select(User).where(User.username == username)
             created_user: User = (await session.exec(stmt)).first()
@@ -870,7 +870,7 @@ def api_key(
             return None
 
         async with session_scope() as session:
-            from all-ai.services.database.models.user.model import User
+            from langflow.services.database.models.user.model import User
 
             stmt = select(User).where(User.username == DEFAULT_SUPERUSER)
             superuser = (await session.exec(stmt)).first()
@@ -879,8 +879,8 @@ def api_key(
                     "Default superuser not found. This command requires a superuser and AUTO_LOGIN to be enabled."
                 )
                 return None
-            from all-ai.services.database.models.api_key.crud import create_api_key, delete_api_key
-            from all-ai.services.database.models.api_key.model import ApiKey, ApiKeyCreate
+            from langflow.services.database.models.api_key.crud import create_api_key, delete_api_key
+            from langflow.services.database.models.api_key.model import ApiKey, ApiKeyCreate
 
             stmt = select(ApiKey).where(ApiKey.user_id == superuser.id)
             api_key = (await session.exec(stmt)).first()

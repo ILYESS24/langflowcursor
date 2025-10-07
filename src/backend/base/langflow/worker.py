@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 from asgiref.sync import async_to_sync
 from celery.exceptions import SoftTimeLimitExceeded
 
-from all-ai.core.celery_app import celery_app
+from langflow.core.celery_app import celery_app
 
 if TYPE_CHECKING:
     from lfx.graph.vertex.base import Vertex

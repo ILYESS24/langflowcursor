@@ -1,7 +1,7 @@
 from collections.abc import Callable
 from typing import Any
 
-from all-ai.schema.dotdict import dotdict
+from langflow.schema.dotdict import dotdict
 
 DEFAULT_FIELDS = ["code", "_type"]
 

@@ -24,19 +24,19 @@ from pydantic import PydanticDeprecatedSince20
 from pydantic_core import PydanticSerializationError
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
-from all-ai.api import health_check_router, log_router, router
-from all-ai.api.v1.mcp_projects import init_mcp_servers
-from all-ai.initial_setup.setup import (
+from langflow.api import health_check_router, log_router, router
+from langflow.api.v1.mcp_projects import init_mcp_servers
+from langflow.initial_setup.setup import (
     create_or_update_starter_projects,
     initialize_auto_login_default_superuser,
     load_bundles_from_urls,
     load_flows_from_directory,
     sync_flows_from_fs,
 )
-from all-ai.middleware import ContentSizeLimitMiddleware
-from all-ai.services.deps import get_queue_service, get_service, get_settings_service, get_telemetry_service
-from all-ai.services.schema import ServiceType
-from all-ai.services.utils import initialize_services, initialize_settings_service, teardown_services
+from langflow.middleware import ContentSizeLimitMiddleware
+from langflow.services.deps import get_queue_service, get_service, get_settings_service, get_telemetry_service
+from langflow.services.schema import ServiceType
+from langflow.services.utils import initialize_services, initialize_settings_service, teardown_services
 
 if TYPE_CHECKING:
     from tempfile import TemporaryDirectory
@@ -281,8 +281,8 @@ def get_lifespan(*, fix_migration=False, version=None):
         finally:
             # Clean shutdown with progress indicator
             # Create shutdown progress (show verbose timing if log level is DEBUG)
-            from all-ai.__main__ import get_number_of_workers
-            from all-ai.cli.progress import create_all_ai_shutdown_progress
+            from langflow.__main__ import get_number_of_workers
+            from langflow.cli.progress import create_all_ai_shutdown_progress
 
             log_level = os.getenv("LANGFLOW_LOG_LEVEL", "info").lower()
             num_workers = get_number_of_workers(get_settings_service().settings.workers)
@@ -351,7 +351,7 @@ def get_lifespan(*, fix_migration=False, version=None):
 
 def create_app():
     """Create the FastAPI app and include the router."""
-    from all-ai.utils.version import get_version_info
+    from langflow.utils.version import get_version_info
 
     __version__ = get_version_info()["version"]
     configure()
@@ -449,7 +449,7 @@ def create_app():
         start_http_server(settings.prometheus_port)
 
     if settings.mcp_server_enabled:
-        from all-ai.api.v1 import mcp_router
+        from langflow.api.v1 import mcp_router
 
         router.include_router(mcp_router)
 
@@ -543,11 +543,11 @@ def setup_app(static_files_dir: Path | None = None, *, backend_only: bool = Fals
 if __name__ == "__main__":
     import uvicorn
 
-    from all-ai.__main__ import get_number_of_workers
+    from langflow.__main__ import get_number_of_workers
 
     configure()
     uvicorn.run(
-        "all-ai.main:create_app",
+        "langflow.main:create_app",
         host="localhost",
         port=7860,
         workers=get_number_of_workers(),
