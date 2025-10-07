@@ -3,11 +3,11 @@
   publish = "src/frontend/build"
   
   # Commande de build complète (frontend + backend)
-  command = "cd src/frontend && npm install && npm run build && cd .. && pip install -r requirements.txt"
+  command = "cd src/frontend && npm install && npm run build && cd ../.. && pip install -r requirements.txt"
 
 [build.environment]
-  # Version de Node.js
-  NODE_VERSION = "18"
+  # Version de Node.js compatible avec Vite
+  NODE_VERSION = "20"
   
   # Version de Python
   PYTHON_VERSION = "3.11"
