@@ -172,7 +172,7 @@ if __name__ == "__main__":
             "message": "ALL AI Backend API is running!", 
             "status": "operational",
             "version": "1.0.0",
-            "frontend_url": "https://all-ai-frontend.onrender.com"
+            "frontend_url": "https://langflow-frontend.onrender.com"
         }
     
     @app.get("/health")
