@@ -2,14 +2,14 @@ services:
   - type: web
     name: all-ai-app
     env: python
-    buildCommand: |
-      pip install -r requirements.txt
-      cd src/frontend && npm install && npm run build
+    buildCommand: chmod +x build.sh && ./build.sh
     startCommand: python start_server.py
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.6
+      - key: NODE_VERSION
+        value: 18
       - key: ALL_AI_SECRET_KEY
         value: your-secret-key-change-in-production-12345
       - key: ALL_AI_SUPERUSER
