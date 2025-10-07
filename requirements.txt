@@ -1,6 +1,7 @@
 # Core dependencies for ALL AI backend
 uvicorn==0.29.0
 fastapi==0.111.0
+fastapi-pagination==0.12.21
 sqlmodel==0.0.18
 pydantic-settings==2.2.1
 python-dotenv==1.0.1
@@ -17,4 +18,10 @@ aiofiles==23.2.1
 websockets==12.0
 python-socketio==5.10.0
 eventlet==0.33.3
+typer==0.19.2
+rich==14.1.0
+click==8.3.0
+starlette==0.37.2
+pydantic==2.11.10
+sqlalchemy==2.0.43
 # Add other core dependencies as needed, excluding problematic ones
