@@ -44,14 +44,14 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
-        envAllAI.BACKEND_URL ?? "https://all-ai-backend.onrender.com",
+        envAllAI.BACKEND_URL ?? "http://localhost:7860",
       ),
       "process.env.ACCESS_TOKEN_EXPIRE_SECONDS": JSON.stringify(
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,
       ),
       "process.env.CI": JSON.stringify(envAllAI.CI ?? false),
             "process.env.ALL_AI_AUTO_LOGIN": JSON.stringify(
-              envAllAI.ALL_AI_AUTO_LOGIN ?? true,
+              envAllAI.ALL_AI_AUTO_LOGIN ?? "true",
             ),
       "process.env.ALL_AI_MCP_COMPOSER_ENABLED": JSON.stringify(
         envAllAI.ALL_AI_MCP_COMPOSER_ENABLED ?? "true",
