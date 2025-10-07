@@ -1,4 +1,4 @@
-"""Langflow ServiceManager that extends lfx's ServiceManager with enhanced features.
+"""ALL AI ServiceManager that extends lfx's ServiceManager with enhanced features.
 
 This maintains backward compatibility while using lfx as the foundation.
 """
@@ -6,7 +6,7 @@ This maintains backward compatibility while using lfx as the foundation.
 from __future__ import annotations
 
 # Import the enhanced manager that extends lfx
-from langflow.services.enhanced_manager import NoFactoryRegisteredError, ServiceManager
+from all-ai.services.enhanced_manager import NoFactoryRegisteredError, ServiceManager
 
 __all__ = ["NoFactoryRegisteredError", "ServiceManager"]
 
@@ -23,8 +23,8 @@ def initialize_session_service() -> None:
     """Initialize the session manager."""
     from lfx.services.manager import get_service_manager
 
-    from langflow.services.cache import factory as cache_factory
-    from langflow.services.session import factory as session_service_factory
+    from all-ai.services.cache import factory as cache_factory
+    from all-ai.services.session import factory as session_service_factory
 
     initialize_settings_service()
 

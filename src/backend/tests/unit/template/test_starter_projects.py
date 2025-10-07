@@ -14,8 +14,8 @@ from pathlib import Path
 
 import pytest
 
-# Import langflow validation utilities
-from langflow.utils.template_validation import (
+# Import ALL AI validation utilities
+from all-ai.utils.template_validation import (
     validate_flow_can_build,
     validate_flow_execution,
     validate_template_structure,
@@ -24,7 +24,7 @@ from langflow.utils.template_validation import (
 
 def get_starter_projects_path() -> Path:
     """Get path to starter projects directory."""
-    return Path("src/backend/base/langflow/initial_setup/starter_projects")
+    return Path("src/backend/base/ALL AI/initial_setup/starter_projects")
 
 
 def get_template_files():

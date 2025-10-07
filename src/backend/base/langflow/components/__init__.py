@@ -1,4 +1,4 @@
-"""LangFlow Components module."""
+"""ALL AI Components module."""
 
 from __future__ import annotations
 

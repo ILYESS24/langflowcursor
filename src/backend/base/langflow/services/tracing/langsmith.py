@@ -9,9 +9,9 @@ from typing import TYPE_CHECKING, Any
 from lfx.log.logger import logger
 from typing_extensions import override
 
-from langflow.schema.data import Data
-from langflow.serialization.serialization import serialize
-from langflow.services.tracing.base import BaseTracer
+from all-ai.schema.data import Data
+from all-ai.serialization.serialization import serialize
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from langsmith.run_trees import RunTree
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 class LangSmithTracer(BaseTracer):
@@ -124,7 +124,7 @@ class LangSmithTracer(BaseTracer):
         return converted
 
     def _convert_to_langchain_type(self, value):
-        from langflow.schema.message import Message
+        from all-ai.schema.message import Message
 
         if isinstance(value, dict):
             value = {key: self._convert_to_langchain_type(val) for key, val in value.items()}

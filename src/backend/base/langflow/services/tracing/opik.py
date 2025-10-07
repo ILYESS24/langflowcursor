@@ -9,9 +9,9 @@ from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from lfx.log.logger import logger
 from typing_extensions import override
 
-from langflow.schema.data import Data
-from langflow.schema.message import Message
-from langflow.services.tracing.base import BaseTracer
+from all-ai.schema.data import Data
+from all-ai.schema.message import Message
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from langchain.callbacks.base import BaseCallbackHandler
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 def get_distributed_trace_headers(trace_id, span_id):
@@ -72,12 +72,12 @@ class OpikTracer(BaseTracer):
             if not self._check_opik_auth(self._client):
                 return False
 
-            # Langflow Trace ID seems to always be random
+            # ALL AI Trace ID seems to always be random
             metadata = {
-                "langflow_trace_id": trace_id,
-                "langflow_trace_name": self.trace_name,
+                "all_ai_trace_id": trace_id,
+                "all_ai_trace_name": self.trace_name,
                 "user_id": self.user_id,
-                "created_from": "langflow",
+                "created_from": "ALL AI",
             }
             self.trace = TraceData(
                 name=self.flow_id,

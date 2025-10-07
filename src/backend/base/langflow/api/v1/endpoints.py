@@ -26,8 +26,8 @@ from lfx.schema.schema import InputValueRequest
 from lfx.services.settings.service import SettingsService
 from sqlmodel import select
 
-from langflow.api.utils import CurrentActiveUser, DbSession, extract_global_variables_from_headers, parse_value
-from langflow.api.v1.schemas import (
+from all-ai.api.utils import CurrentActiveUser, DbSession, extract_global_variables_from_headers, parse_value
+from all-ai.api.v1.schemas import (
     ConfigResponse,
     CustomComponentRequest,
     CustomComponentResponse,
@@ -37,25 +37,25 @@ from langflow.api.v1.schemas import (
     UpdateCustomComponentRequest,
     UploadFileResponse,
 )
-from langflow.events.event_manager import create_stream_tokens_event_manager
-from langflow.exceptions.api import APIException, InvalidChatInputError
-from langflow.exceptions.serialization import SerializationError
-from langflow.helpers.flow import get_flow_by_id_or_endpoint_name
-from langflow.interface.initialize.loading import update_params_with_load_from_db_fields
-from langflow.processing.process import process_tweaks, run_graph_internal
-from langflow.schema.graph import Tweaks
-from langflow.services.auth.utils import api_key_security, get_current_active_user, get_webhook_user
-from langflow.services.cache.utils import save_uploaded_file
-from langflow.services.database.models.flow.model import Flow, FlowRead
-from langflow.services.database.models.flow.utils import get_all_webhook_components_in_flow
-from langflow.services.database.models.user.model import User, UserRead
-from langflow.services.deps import get_session_service, get_settings_service, get_telemetry_service
-from langflow.services.telemetry.schema import RunPayload
-from langflow.utils.compression import compress_response
-from langflow.utils.version import get_version_info
+from all-ai.events.event_manager import create_stream_tokens_event_manager
+from all-ai.exceptions.api import APIException, InvalidChatInputError
+from all-ai.exceptions.serialization import SerializationError
+from all-ai.helpers.flow import get_flow_by_id_or_endpoint_name
+from all-ai.interface.initialize.loading import update_params_with_load_from_db_fields
+from all-ai.processing.process import process_tweaks, run_graph_internal
+from all-ai.schema.graph import Tweaks
+from all-ai.services.auth.utils import api_key_security, get_current_active_user, get_webhook_user
+from all-ai.services.cache.utils import save_uploaded_file
+from all-ai.services.database.models.flow.model import Flow, FlowRead
+from all-ai.services.database.models.flow.utils import get_all_webhook_components_in_flow
+from all-ai.services.database.models.user.model import User, UserRead
+from all-ai.services.deps import get_session_service, get_settings_service, get_telemetry_service
+from all-ai.services.telemetry.schema import RunPayload
+from all-ai.utils.compression import compress_response
+from all-ai.utils.version import get_version_info
 
 if TYPE_CHECKING:
-    from langflow.events.event_manager import EventManager
+    from all-ai.events.event_manager import EventManager
 
 router = APIRouter(tags=["Base"])
 
@@ -89,7 +89,7 @@ async def get_all():
 
     Returns a compressed response containing all available component types.
     """
-    from langflow.interface.components import get_and_cache_all_types_dict
+    from all-ai.interface.components import get_and_cache_all_types_dict
 
     try:
         all_types = await get_and_cache_all_types_dict(settings_service=get_settings_service())
@@ -337,7 +337,7 @@ async def simplified_run_flow(
         - Tracks execution time and success/failure via telemetry
         - Handles graceful client disconnection in streaming mode
         - Provides detailed error handling with appropriate HTTP status codes
-        - Extracts global variables from HTTP headers with prefix X-LANGFLOW-GLOBAL-VAR-*
+        - Extracts global variables from HTTP headers with prefix X-ALL AI-GLOBAL-VAR-*
         - Merges extracted variables with the context parameter as "request_variables"
         - In streaming mode, uses EventManager to handle events:
             - "add_message": New messages during execution
@@ -354,7 +354,7 @@ async def simplified_run_flow(
     if flow is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Flow not found")
 
-    # Extract request-level variables from headers with prefix X-LANGFLOW-GLOBAL-VAR-*
+    # Extract request-level variables from headers with prefix X-ALL AI-GLOBAL-VAR-*
     request_variables = extract_global_variables_from_headers(http_request.headers)
 
     # Merge request variables with existing context
@@ -700,7 +700,7 @@ async def create_upload_file(
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
-# get endpoint to return version of langflow
+# get endpoint to return version of ALL AI
 @router.get("/version")
 async def get_version():
     return get_version_info()

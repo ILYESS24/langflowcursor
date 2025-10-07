@@ -14,11 +14,11 @@ from fastapi.responses import StreamingResponse
 from lfx.log.logger import logger
 from sqlmodel import col, select
 
-from langflow.api.schemas import UploadFileResponse
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.services.database.models.file.model import File as UserFile
-from langflow.services.deps import get_settings_service, get_storage_service
-from langflow.services.storage.service import StorageService
+from all-ai.api.schemas import UploadFileResponse
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.services.database.models.file.model import File as UserFile
+from all-ai.services.deps import get_settings_service, get_storage_service
+from all-ai.services.storage.service import StorageService
 
 router = APIRouter(tags=["Files"], prefix="/files")
 
@@ -343,7 +343,7 @@ async def download_files_batch(
 
         # Generate the filename with the current datetime
         current_time = datetime.now(tz=ZoneInfo("UTC")).astimezone().strftime("%Y%m%d_%H%M%S")
-        filename = f"{current_time}_langflow_files.zip"
+        filename = f"{current_time}_all_ai_files.zip"
 
         return StreamingResponse(
             zip_stream,

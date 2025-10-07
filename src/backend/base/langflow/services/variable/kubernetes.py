@@ -7,12 +7,12 @@ from typing import TYPE_CHECKING
 from lfx.log.logger import logger
 from typing_extensions import override
 
-from langflow.services.auth import utils as auth_utils
-from langflow.services.base import Service
-from langflow.services.database.models.variable.model import Variable, VariableCreate, VariableRead
-from langflow.services.variable.base import VariableService
-from langflow.services.variable.constants import CREDENTIAL_TYPE, GENERIC_TYPE
-from langflow.services.variable.kubernetes_secrets import KubernetesSecretManager, encode_user_id
+from all-ai.services.auth import utils as auth_utils
+from all-ai.services.base import Service
+from all-ai.services.database.models.variable.model import Variable, VariableCreate, VariableRead
+from all-ai.services.variable.base import VariableService
+from all-ai.services.variable.constants import CREDENTIAL_TYPE, GENERIC_TYPE
+from all-ai.services.variable.kubernetes_secrets import KubernetesSecretManager, encode_user_id
 
 if TYPE_CHECKING:
     from uuid import UUID

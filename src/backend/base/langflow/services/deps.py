@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from lfx.log.logger import logger
 
-from langflow.services.schema import ServiceType
+from all-ai.services.schema import ServiceType
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -13,18 +13,18 @@ if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
     from sqlmodel.ext.asyncio.session import AsyncSession
 
-    from langflow.services.cache.service import AsyncBaseCacheService, CacheService
-    from langflow.services.chat.service import ChatService
-    from langflow.services.database.service import DatabaseService
-    from langflow.services.job_queue.service import JobQueueService
-    from langflow.services.session.service import SessionService
-    from langflow.services.state.service import StateService
-    from langflow.services.storage.service import StorageService
-    from langflow.services.store.service import StoreService
-    from langflow.services.task.service import TaskService
-    from langflow.services.telemetry.service import TelemetryService
-    from langflow.services.tracing.service import TracingService
-    from langflow.services.variable.service import VariableService
+    from all-ai.services.cache.service import AsyncBaseCacheService, CacheService
+    from all-ai.services.chat.service import ChatService
+    from all-ai.services.database.service import DatabaseService
+    from all-ai.services.job_queue.service import JobQueueService
+    from all-ai.services.session.service import SessionService
+    from all-ai.services.state.service import StateService
+    from all-ai.services.storage.service import StorageService
+    from all-ai.services.store.service import StoreService
+    from all-ai.services.task.service import TaskService
+    from all-ai.services.telemetry.service import TelemetryService
+    from all-ai.services.tracing.service import TracingService
+    from all-ai.services.variable.service import VariableService
 
 
 def get_service(service_type: ServiceType, default=None):
@@ -46,7 +46,7 @@ def get_service(service_type: ServiceType, default=None):
     if not service_manager.are_factories_registered():
         # ! This is a workaround to ensure that the service manager is initialized
         # ! Not optimal, but it works for now
-        from langflow.services.manager import ServiceManager
+        from all-ai.services.manager import ServiceManager
 
         service_manager.register_factories(ServiceManager.get_factories())
     return service_manager.get(service_type, default)
@@ -58,7 +58,7 @@ def get_telemetry_service() -> TelemetryService:
     Returns:
         TelemetryService: The TelemetryService instance.
     """
-    from langflow.services.telemetry.factory import TelemetryServiceFactory
+    from all-ai.services.telemetry.factory import TelemetryServiceFactory
 
     return get_service(ServiceType.TELEMETRY_SERVICE, TelemetryServiceFactory())
 
@@ -69,7 +69,7 @@ def get_tracing_service() -> TracingService:
     Returns:
         TracingService: The TracingService instance.
     """
-    from langflow.services.tracing.factory import TracingServiceFactory
+    from all-ai.services.tracing.factory import TracingServiceFactory
 
     return get_service(ServiceType.TRACING_SERVICE, TracingServiceFactory())
 
@@ -80,7 +80,7 @@ def get_state_service() -> StateService:
     Returns:
         The StateService instance.
     """
-    from langflow.services.state.factory import StateServiceFactory
+    from all-ai.services.state.factory import StateServiceFactory
 
     return get_service(ServiceType.STATE_SERVICE, StateServiceFactory())
 
@@ -91,7 +91,7 @@ def get_storage_service() -> StorageService:
     Returns:
         The storage service instance.
     """
-    from langflow.services.storage.factory import StorageServiceFactory
+    from all-ai.services.storage.factory import StorageServiceFactory
 
     return get_service(ServiceType.STORAGE_SERVICE, default=StorageServiceFactory())
 
@@ -103,7 +103,7 @@ def get_variable_service() -> VariableService:
         The VariableService instance.
 
     """
-    from langflow.services.variable.factory import VariableServiceFactory
+    from all-ai.services.variable.factory import VariableServiceFactory
 
     return get_service(ServiceType.VARIABLE_SERVICE, VariableServiceFactory())
 
@@ -131,7 +131,7 @@ def get_db_service() -> DatabaseService:
         The DatabaseService instance.
 
     """
-    from langflow.services.database.factory import DatabaseServiceFactory
+    from all-ai.services.database.factory import DatabaseServiceFactory
 
     return get_service(ServiceType.DATABASE_SERVICE, DatabaseServiceFactory())
 
@@ -179,7 +179,7 @@ def get_cache_service() -> CacheService | AsyncBaseCacheService:
     Returns:
         The cache service instance.
     """
-    from langflow.services.cache.factory import CacheServiceFactory
+    from all-ai.services.cache.factory import CacheServiceFactory
 
     return get_service(ServiceType.CACHE_SERVICE, CacheServiceFactory())
 
@@ -190,7 +190,7 @@ def get_shared_component_cache_service() -> CacheService:
     Returns:
         The cache service instance.
     """
-    from langflow.services.shared_component_cache.factory import SharedComponentCacheServiceFactory
+    from all-ai.services.shared_component_cache.factory import SharedComponentCacheServiceFactory
 
     return get_service(ServiceType.SHARED_COMPONENT_CACHE_SERVICE, SharedComponentCacheServiceFactory())
 
@@ -201,7 +201,7 @@ def get_session_service() -> SessionService:
     Returns:
         The session service instance.
     """
-    from langflow.services.session.factory import SessionServiceFactory
+    from all-ai.services.session.factory import SessionServiceFactory
 
     return get_service(ServiceType.SESSION_SERVICE, SessionServiceFactory())
 
@@ -213,7 +213,7 @@ def get_task_service() -> TaskService:
         The TaskService instance.
 
     """
-    from langflow.services.task.factory import TaskServiceFactory
+    from all-ai.services.task.factory import TaskServiceFactory
 
     return get_service(ServiceType.TASK_SERVICE, TaskServiceFactory())
 
@@ -238,6 +238,6 @@ def get_store_service() -> StoreService:
 
 def get_queue_service() -> JobQueueService:
     """Retrieves the QueueService instance from the service manager."""
-    from langflow.services.job_queue.factory import JobQueueServiceFactory
+    from all-ai.services.job_queue.factory import JobQueueServiceFactory
 
     return get_service(ServiceType.JOB_QUEUE_SERVICE, JobQueueServiceFactory())

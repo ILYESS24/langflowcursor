@@ -1,4 +1,4 @@
-"""Component module for langflow - imports from lfx.
+"""Component module for ALL AI - imports from lfx.
 
 This maintains backward compatibility while using the lfx implementation.
 """

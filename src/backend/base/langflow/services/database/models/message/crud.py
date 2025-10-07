@@ -2,8 +2,8 @@ from uuid import UUID
 
 from lfx.utils.async_helpers import run_until_complete
 
-from langflow.services.database.models.message.model import MessageTable, MessageUpdate
-from langflow.services.deps import session_scope
+from all-ai.services.database.models.message.model import MessageTable, MessageUpdate
+from all-ai.services.deps import session_scope
 
 
 async def _update_message(message_id: UUID | str, message: MessageUpdate | dict):

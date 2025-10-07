@@ -19,20 +19,20 @@ from lfx.utils.helpers import build_content_type_from_extension
 from mcp import types
 from sqlmodel import select
 
-from langflow.api.v1.endpoints import simple_run_flow
-from langflow.api.v1.schemas import SimplifiedAPIRequest
-from langflow.helpers.flow import json_schema_from_flow
-from langflow.schema.message import Message
-from langflow.services.database.models import Flow
-from langflow.services.database.models.user.model import User
-from langflow.services.deps import get_settings_service, get_storage_service, session_scope
+from all-ai.api.v1.endpoints import simple_run_flow
+from all-ai.api.v1.schemas import SimplifiedAPIRequest
+from all-ai.helpers.flow import json_schema_from_flow
+from all-ai.schema.message import Message
+from all-ai.services.database.models import Flow
+from all-ai.services.database.models.user.model import User
+from all-ai.services.deps import get_settings_service, get_storage_service, session_scope
 
 T = TypeVar("T")
 P = ParamSpec("P")
 
 # Create context variables
 current_user_ctx: ContextVar[User] = ContextVar("current_user_ctx")
-# Carries per-request variables injected via HTTP headers (e.g., X-Langflow-Global-Var-*)
+# Carries per-request variables injected via HTTP headers (e.g., X-ALL AI-Global-Var-*)
 current_request_variables_ctx: ContextVar[dict[str, str] | None] = ContextVar(
     "current_request_variables_ctx", default=None
 )

@@ -1,4 +1,4 @@
-//Langflow Desktop Base URL
+//ALL AI Desktop Base URL
 export const baseURL = "";
 
 export const customDefaultShotrcuts = [

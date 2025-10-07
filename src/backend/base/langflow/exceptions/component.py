@@ -1,6 +1,6 @@
 # Create an exception class that receives the message and the formatted traceback
 
-from langflow.schema.properties import Source
+from all-ai.schema.properties import Source
 
 
 class ComponentBuildError(Exception):

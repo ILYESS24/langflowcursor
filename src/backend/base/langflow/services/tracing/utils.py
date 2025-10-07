@@ -4,7 +4,7 @@ from lfx.schema.data import Data
 
 
 def convert_to_langchain_type(value):
-    from langflow.schema.message import Message
+    from all-ai.schema.message import Message
 
     if isinstance(value, dict):
         value = {key: convert_to_langchain_type(val) for key, val in value.items()}

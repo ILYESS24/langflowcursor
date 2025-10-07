@@ -3,11 +3,11 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException
 from sqlalchemy.exc import NoResultFound
 
-from langflow.api.utils import CurrentActiveUser, DbSession
-from langflow.services.database.models.variable.model import VariableCreate, VariableRead, VariableUpdate
-from langflow.services.deps import get_variable_service
-from langflow.services.variable.constants import CREDENTIAL_TYPE
-from langflow.services.variable.service import DatabaseVariableService
+from all-ai.api.utils import CurrentActiveUser, DbSession
+from all-ai.services.database.models.variable.model import VariableCreate, VariableRead, VariableUpdate
+from all-ai.services.deps import get_variable_service
+from all-ai.services.variable.constants import CREDENTIAL_TYPE
+from all-ai.services.variable.service import DatabaseVariableService
 
 router = APIRouter(prefix="/variables", tags=["Variables"])
 

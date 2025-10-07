@@ -13,8 +13,8 @@ from lfx.utils.constants import (
     REASONING_OPENAI_MODELS,
 )
 
-# Langflow-specific constants
-LANGFLOW_GLOBAL_VAR_HEADER_PREFIX = "x-langflow-global-var-"
+# ALL AI-specific constants
+LANGFLOW_GLOBAL_VAR_HEADER_PREFIX = "x-all-ai-global-var-"
 
 __all__ = [
     "ANTHROPIC_MODELS",

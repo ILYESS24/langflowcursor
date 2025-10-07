@@ -3,9 +3,9 @@ from uuid import UUID
 from fastapi import HTTPException
 from sqlmodel import select
 
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.database.models.user.model import User, UserRead
-from langflow.services.deps import session_scope
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.database.models.user.model import User, UserRead
+from all-ai.services.deps import session_scope
 
 
 async def get_user_by_flow_id_or_endpoint_name(flow_id_or_name: str) -> UserRead | None:

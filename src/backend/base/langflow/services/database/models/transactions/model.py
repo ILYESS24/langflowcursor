@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from pydantic import field_serializer, field_validator
 from sqlmodel import JSON, Column, Field, SQLModel
 
-from langflow.serialization.serialization import get_max_items_length, get_max_text_length, serialize
+from all-ai.serialization.serialization import get_max_items_length, get_max_text_length, serialize
 
 
 class TransactionBase(SQLModel):

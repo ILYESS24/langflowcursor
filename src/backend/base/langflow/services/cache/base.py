@@ -3,7 +3,7 @@ import asyncio
 import threading
 from typing import Generic, TypeVar
 
-from langflow.services.base import Service
+from all-ai.services.base import Service
 
 LockType = TypeVar("LockType", bound=threading.Lock)
 AsyncLockType = TypeVar("AsyncLockType", bound=asyncio.Lock)

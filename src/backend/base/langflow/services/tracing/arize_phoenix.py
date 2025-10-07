@@ -18,8 +18,8 @@ from opentelemetry.trace import Span, Status, StatusCode, use_span
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 from typing_extensions import override
 
-from langflow.schema.message import Message
-from langflow.services.tracing.base import BaseTracer
+from all-ai.schema.message import Message
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -30,7 +30,7 @@ if TYPE_CHECKING:
     from opentelemetry.propagators.textmap import CarrierT
     from opentelemetry.util.types import AttributeValue
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 class ArizePhoenixTracer(BaseTracer):
@@ -68,9 +68,9 @@ class ArizePhoenixTracer(BaseTracer):
             )
             self.root_span.set_attribute(SpanAttributes.SESSION_ID, self.session_id or self.flow_id)
             self.root_span.set_attribute(SpanAttributes.OPENINFERENCE_SPAN_KIND, self.trace_type)
-            self.root_span.set_attribute("langflow.project.name", self.project_name)
-            self.root_span.set_attribute("langflow.flow.name", self.flow_name)
-            self.root_span.set_attribute("langflow.flow.id", self.flow_id)
+            self.root_span.set_attribute("all-ai.project.name", self.project_name)
+            self.root_span.set_attribute("all-ai.flow.name", self.flow_name)
+            self.root_span.set_attribute("all-ai.flow.id", self.flow_id)
 
             with use_span(self.root_span, end_on_exit=False):
                 self.propagator.inject(carrier=self.carrier)

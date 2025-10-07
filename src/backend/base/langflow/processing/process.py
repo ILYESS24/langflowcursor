@@ -7,9 +7,9 @@ from lfx.log.logger import logger
 from lfx.processing.utils import validate_and_repair_json
 from pydantic import BaseModel
 
-from langflow.schema.graph import InputValue, Tweaks
-from langflow.schema.schema import INPUT_FIELD_NAME
-from langflow.services.deps import get_settings_service
+from all-ai.schema.graph import InputValue, Tweaks
+from all-ai.schema.schema import INPUT_FIELD_NAME
+from all-ai.services.deps import get_settings_service
 
 if TYPE_CHECKING:
     from lfx.events.event_manager import EventManager
@@ -73,7 +73,7 @@ async def run_graph(
     output_component: str | None = None,
     stream: bool = False,
 ) -> list[RunOutputs]:
-    """Runs the given Langflow Graph with the specified input and returns the outputs.
+    """Runs the given ALL AI Graph with the specified input and returns the outputs.
 
     Args:
         graph (Graph): The graph to be executed.

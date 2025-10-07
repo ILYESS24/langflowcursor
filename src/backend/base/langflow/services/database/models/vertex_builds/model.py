@@ -5,7 +5,7 @@ from pydantic import BaseModel, field_serializer, field_validator
 from sqlalchemy import Text
 from sqlmodel import JSON, Column, Field, SQLModel
 
-from langflow.serialization.serialization import get_max_items_length, get_max_text_length, serialize
+from all-ai.serialization.serialization import get_max_items_length, get_max_text_length, serialize
 
 
 class VertexBuildBase(SQLModel):

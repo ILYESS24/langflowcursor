@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from langflow.services.base import Service
+from all-ai.services.base import Service
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService

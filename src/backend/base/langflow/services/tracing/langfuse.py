@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Any
 from lfx.log.logger import logger
 from typing_extensions import override
 
-from langflow.serialization.serialization import serialize
-from langflow.services.tracing.base import BaseTracer
+from all-ai.serialization.serialization import serialize
+from all-ai.services.tracing.base import BaseTracer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from langchain.callbacks.base import BaseCallbackHandler
     from lfx.graph.vertex.base import Vertex
 
-    from langflow.services.tracing.schema import Log
+    from all-ai.services.tracing.schema import Log
 
 
 class LangFuseTracer(BaseTracer):
@@ -92,7 +92,7 @@ class LangFuseTracer(BaseTracer):
         if not self._ready:
             return
 
-        metadata_: dict = {"from_langflow_component": True, "component_id": trace_id}
+        metadata_: dict = {"from_all_ai_component": True, "component_id": trace_id}
         metadata_ |= {"trace_type": trace_type} if trace_type else {}
         metadata_ |= metadata or {}
 

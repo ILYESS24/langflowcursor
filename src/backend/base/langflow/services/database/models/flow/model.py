@@ -1,4 +1,4 @@
-# Path: src/backend/langflow/services/database/models/flow/model.py
+# Path: src/backend/ALL AI/services/database/models/flow/model.py
 
 import re
 from datetime import datetime, timezone
@@ -15,11 +15,11 @@ from sqlalchemy import Enum as SQLEnum
 from sqlalchemy import Text, UniqueConstraint, text
 from sqlmodel import JSON, Column, Field, Relationship, SQLModel
 
-from langflow.schema.data import Data
+from all-ai.schema.data import Data
 
 if TYPE_CHECKING:
-    from langflow.services.database.models.folder.model import Folder
-    from langflow.services.database.models.user.model import User
+    from all-ai.services.database.models.folder.model import Folder
+    from all-ai.services.database.models.user.model import User
 
 HEX_COLOR_LENGTH = 7
 

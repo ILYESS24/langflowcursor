@@ -41,8 +41,8 @@ jest.mock("@/components/common/genericIconComponent", () => ({
 jest.mock("@/constants/constants", () => ({
   __esModule: true,
   DATASTAX_DOCS_URL: "https://docs.datastax.com",
-  DOCS_URL: "https://docs.langflow.org",
-  DESKTOP_URL: "https://desktop.langflow.org",
+  DOCS_URL: "https://docs.allai.org",
+  DESKTOP_URL: "https://desktop.allai.org",
 }));
 
 jest.mock("@/customization/feature-flags", () => ({
@@ -100,7 +100,7 @@ describe("HelpDropdown", () => {
 
     fireEvent.click(screen.getByTestId("canvas_controls_dropdown_docs"));
     expect(window.open).toHaveBeenCalledWith(
-      "https://docs.langflow.org",
+      "https://docs.allai.org",
       "_blank",
     );
 
@@ -108,10 +108,10 @@ describe("HelpDropdown", () => {
     expect(mockNavigate).toHaveBeenCalledWith("/settings/shortcuts");
 
     fireEvent.click(
-      screen.getByTestId("canvas_controls_dropdown_get_langflow_desktop"),
+      screen.getByTestId("canvas_controls_dropdown_get_all_ai_desktop"),
     );
     expect(window.open).toHaveBeenCalledWith(
-      "https://desktop.langflow.org",
+      "https://desktop.allai.org",
       "_blank",
     );
   });

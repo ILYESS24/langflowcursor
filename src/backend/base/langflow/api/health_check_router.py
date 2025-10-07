@@ -5,9 +5,9 @@ from lfx.log.logger import logger
 from pydantic import BaseModel
 from sqlmodel import select
 
-from langflow.api.utils import DbSession
-from langflow.services.database.models.flow.model import Flow
-from langflow.services.deps import get_chat_service
+from all-ai.api.utils import DbSession
+from all-ai.services.database.models.flow.model import Flow
+from all-ai.services.deps import get_chat_service
 
 health_check_router = APIRouter(tags=["Health Check"])
 
@@ -26,8 +26,8 @@ class HealthResponse(BaseModel):
 
 
 # /health is also supported by uvicorn
-# it means uvicorn's /health serves first before the langflow instance is up
-# therefore it's not a reliable health check for a langflow instance
+# it means uvicorn's /health serves first before the ALL AI instance is up
+# therefore it's not a reliable health check for a ALL AI instance
 # we keep this for backward compatibility
 @health_check_router.get("/health")
 async def health():
@@ -35,7 +35,7 @@ async def health():
 
 
 # /health_check evaluates key services
-# It's a reliable health check for a langflow instance
+# It's a reliable health check for a ALL AI instance
 @health_check_router.get("/health_check")
 async def health_check(
     session: DbSession,

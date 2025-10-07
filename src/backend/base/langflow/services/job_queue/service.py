@@ -4,8 +4,8 @@ import asyncio
 
 from lfx.log.logger import logger
 
-from langflow.events.event_manager import EventManager
-from langflow.services.base import Service
+from all-ai.events.event_manager import EventManager
+from all-ai.services.base import Service
 
 
 class JobQueueNotFoundError(Exception):

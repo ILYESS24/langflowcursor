@@ -1,15 +1,15 @@
 import httpx
 from lfx.load.utils import UploadError, replace_tweaks_with_env, upload, upload_file
 
-from langflow.services.database.models.flow.model import FlowBase
+from all-ai.services.database.models.flow.model import FlowBase
 
 
 def get_flow(url: str, flow_id: str):
-    """Get the details of a flow from Langflow.
+    """Get the details of a flow from ALL AI.
 
     Args:
-        url (str): The host URL of Langflow.
-        port (int): The port number of Langflow.
+        url (str): The host URL of ALL AI.
+        port (int): The port number of ALL AI.
         flow_id (UUID): The ID of the flow to retrieve.
 
     Returns:

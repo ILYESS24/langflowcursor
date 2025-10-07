@@ -1,4 +1,4 @@
-"""API utilities for Langflow.
+"""API utilities for ALL AI.
 
 This module provides backward compatibility by re-exporting all utilities
 from the core module. This ensures existing imports continue to work while
@@ -6,7 +6,7 @@ allowing for better code organization.
 """
 
 # Re-export everything from core module to maintain backward compatibility
-from langflow.api.utils.core import (
+from all-ai.api.utils.core import (
     API_WORDS,
     MAX_PAGE_SIZE,
     MIN_PAGE_SIZE,
@@ -20,7 +20,7 @@ from langflow.api.utils.core import (
     build_graph_from_db_no_cache,
     build_input_keys_response,
     cascade_delete_flow,
-    check_langflow_version,
+    check_all_ai_version,
     custom_params,
     extract_global_variables_from_headers,
     format_elapsed_time,
@@ -56,7 +56,7 @@ __all__ = [
     "build_graph_from_db_no_cache",
     "build_input_keys_response",
     "cascade_delete_flow",
-    "check_langflow_version",
+    "check_all_ai_version",
     "custom_params",
     "extract_global_variables_from_headers",
     "format_elapsed_time",

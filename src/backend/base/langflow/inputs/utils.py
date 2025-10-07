@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from langflow.inputs.inputs import InputTypes, InputTypesMap
+    from all-ai.inputs.inputs import InputTypes, InputTypesMap
 else:
     InputTypes = Any
     InputTypesMap = Any
@@ -13,7 +13,7 @@ _InputTypesMap: dict[str, type["InputTypes"]] | None = None
 def get_input_types_map():
     global _InputTypesMap  # noqa: PLW0603
     if _InputTypesMap is None:
-        from langflow.inputs.inputs import InputTypesMap
+        from all-ai.inputs.inputs import InputTypesMap
 
         _InputTypesMap = InputTypesMap
     return _InputTypesMap

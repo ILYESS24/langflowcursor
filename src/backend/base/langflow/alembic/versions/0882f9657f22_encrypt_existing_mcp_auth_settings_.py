@@ -12,7 +12,7 @@ from alembic import op
 import sqlalchemy as sa
 import sqlmodel
 from sqlalchemy.engine.reflection import Inspector
-from langflow.utils import migration
+from all-ai.utils import migration
 
 
 # revision identifiers, used by Alembic.
@@ -28,8 +28,8 @@ def upgrade() -> None:
     
     # Import encryption utilities
     try:
-        from langflow.services.auth.mcp_encryption import encrypt_auth_settings
-        from langflow.services.deps import get_settings_service
+        from all-ai.services.auth.mcp_encryption import encrypt_auth_settings
+        from all-ai.services.deps import get_settings_service
         
         # Check if the folder table exists
         inspector = sa.inspect(conn)
@@ -78,8 +78,8 @@ def downgrade() -> None:
     
     # Import decryption utilities
     try:
-        from langflow.services.auth.mcp_encryption import decrypt_auth_settings
-        from langflow.services.deps import get_settings_service
+        from all-ai.services.auth.mcp_encryption import decrypt_auth_settings
+        from all-ai.services.deps import get_settings_service
         
         # Check if the folder table exists
         inspector = sa.inspect(conn)

@@ -4,7 +4,7 @@ import asyncio
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from langflow.services.telemetry.schema import (
+from all-ai.services.telemetry.schema import (
     ComponentPayload,
     ExceptionPayload,
     PlaygroundPayload,
@@ -12,7 +12,7 @@ from langflow.services.telemetry.schema import (
     ShutdownPayload,
     VersionPayload,
 )
-from langflow.services.telemetry.service import TelemetryService
+from all-ai.services.telemetry.service import TelemetryService
 
 
 class TestExceptionTelemetryIntegration:
@@ -245,7 +245,7 @@ class TestTelemetryPayloadValidation:
     def test_version_payload_creation_and_serialization(self):
         """Test VersionPayload creation and serialization."""
         payload = VersionPayload(
-            package="langflow",
+            package="ALL AI",
             version="1.5.0",
             platform="macOS-14.0-arm64",
             python="3.11",
@@ -256,7 +256,7 @@ class TestTelemetryPayloadValidation:
             client_type="oss",
         )
 
-        assert payload.package == "langflow"
+        assert payload.package == "ALL AI"
         assert payload.version == "1.5.0"
         assert payload.platform == "macOS-14.0-arm64"
         assert payload.python == "3.11"
@@ -267,7 +267,7 @@ class TestTelemetryPayloadValidation:
 
         serialized = payload.model_dump(by_alias=True)
         expected = {
-            "package": "langflow",
+            "package": "ALL AI",
             "version": "1.5.0",
             "platform": "macOS-14.0-arm64",
             "python": "3.11",

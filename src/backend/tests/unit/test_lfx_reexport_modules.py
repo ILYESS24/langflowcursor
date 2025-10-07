@@ -1,37 +1,37 @@
-"""Test to ensure all langflow modules that re-export lfx modules work correctly.
+"""Test to ensure all ALL AI modules that re-export lfx modules work correctly.
 
-This test validates that every langflow module that re-exports from lfx
+This test validates that every ALL AI module that re-exports from lfx
 can successfully import and access all expected symbols, maintaining
 backward compatibility and proper API exposure.
 
-Based on analysis, there are 24 langflow modules that re-export from lfx:
+Based on analysis, there are 24 ALL AI modules that re-export from lfx:
 
 Base Modules (11):
-- langflow.base (wildcard from lfx.base)
-- langflow.base.agents (from lfx.base.agents)
-- langflow.base.data (from lfx.base.data)
-- langflow.base.embeddings (from lfx.base.embeddings)
-- langflow.base.io (from lfx.base.io)
-- langflow.base.memory (from lfx.base.memory)
-- langflow.base.models (from lfx.base.models)
-- langflow.base.prompts (from lfx.base.prompts)
-- langflow.base.textsplitters (from lfx.base.textsplitters)
-- langflow.base.tools (from lfx.base.tools)
-- langflow.base.vectorstores (from lfx.base.vectorstores)
+- all-ai.base (wildcard from lfx.base)
+- all-ai.base.agents (from lfx.base.agents)
+- all-ai.base.data (from lfx.base.data)
+- all-ai.base.embeddings (from lfx.base.embeddings)
+- all-ai.base.io (from lfx.base.io)
+- all-ai.base.memory (from lfx.base.memory)
+- all-ai.base.models (from lfx.base.models)
+- all-ai.base.prompts (from lfx.base.prompts)
+- all-ai.base.textsplitters (from lfx.base.textsplitters)
+- all-ai.base.tools (from lfx.base.tools)
+- all-ai.base.vectorstores (from lfx.base.vectorstores)
 
 Core System Modules (13):
-- langflow.custom (from lfx.custom)
-- langflow.custom.custom_component (from lfx.custom.custom_component)
-- langflow.field_typing (from lfx.field_typing with __getattr__)
-- langflow.graph (from lfx.graph)
-- langflow.inputs (from lfx.inputs.inputs)
-- langflow.interface (from lfx.interface)
-- langflow.io (from lfx.io + lfx.template)
-- langflow.load (from lfx.load)
-- langflow.logging (from lfx.log.logger)
-- langflow.schema (from lfx.schema)
-- langflow.template (wildcard from lfx.template)
-- langflow.template.field (from lfx.template.field)
+- all-ai.custom (from lfx.custom)
+- all-ai.custom.custom_component (from lfx.custom.custom_component)
+- all-ai.field_typing (from lfx.field_typing with __getattr__)
+- all-ai.graph (from lfx.graph)
+- all-ai.inputs (from lfx.inputs.inputs)
+- all-ai.interface (from lfx.interface)
+- all-ai.io (from lfx.io + lfx.template)
+- all-ai.load (from lfx.load)
+- all-ai.logging (from lfx.log.logger)
+- all-ai.schema (from lfx.schema)
+- all-ai.template (wildcard from lfx.template)
+- all-ai.template.field (from lfx.template.field)
 """
 
 import importlib
@@ -48,38 +48,38 @@ def get_all_reexport_modules():
     """Get all known re-export modules for parametrized testing."""
     # Define the modules here so they can be accessed by parametrize
     direct_reexport_modules = {
-        "langflow.base.agents": "lfx.base.agents",
-        "langflow.base.data": "lfx.base.data",
-        "langflow.base.embeddings": "lfx.base.embeddings",
-        "langflow.base.io": "lfx.base.io",
-        "langflow.base.memory": "lfx.base.memory",
-        "langflow.base.models": "lfx.base.models",
-        "langflow.base.prompts": "lfx.base.prompts",
-        "langflow.base.textsplitters": "lfx.base.textsplitters",
-        "langflow.base.tools": "lfx.base.tools",
-        "langflow.base.vectorstores": "lfx.base.vectorstores",
-        "langflow.custom.custom_component": "lfx.custom.custom_component",
-        "langflow.graph": "lfx.graph",
-        "langflow.inputs": "lfx.inputs.inputs",
-        "langflow.interface": "lfx.interface",
-        "langflow.load": "lfx.load",
-        "langflow.logging": "lfx.log",
-        "langflow.schema": "lfx.schema",
-        "langflow.template.field": "lfx.template.field",
+        "all-ai.base.agents": "lfx.base.agents",
+        "all-ai.base.data": "lfx.base.data",
+        "all-ai.base.embeddings": "lfx.base.embeddings",
+        "all-ai.base.io": "lfx.base.io",
+        "all-ai.base.memory": "lfx.base.memory",
+        "all-ai.base.models": "lfx.base.models",
+        "all-ai.base.prompts": "lfx.base.prompts",
+        "all-ai.base.textsplitters": "lfx.base.textsplitters",
+        "all-ai.base.tools": "lfx.base.tools",
+        "all-ai.base.vectorstores": "lfx.base.vectorstores",
+        "all-ai.custom.custom_component": "lfx.custom.custom_component",
+        "all-ai.graph": "lfx.graph",
+        "all-ai.inputs": "lfx.inputs.inputs",
+        "all-ai.interface": "lfx.interface",
+        "all-ai.load": "lfx.load",
+        "all-ai.logging": "lfx.log",
+        "all-ai.schema": "lfx.schema",
+        "all-ai.template.field": "lfx.template.field",
     }
 
     wildcard_reexport_modules = {
-        "langflow.base": "lfx.base",
-        "langflow.template": "lfx.template",
+        "all-ai.base": "lfx.base",
+        "all-ai.template": "lfx.template",
     }
 
     complex_reexport_modules = {
-        "langflow.custom": ["lfx.custom", "lfx.custom.custom_component", "lfx.custom.utils"],
-        "langflow.io": ["lfx.io", "lfx.template"],
+        "all-ai.custom": ["lfx.custom", "lfx.custom.custom_component", "lfx.custom.utils"],
+        "all-ai.io": ["lfx.io", "lfx.template"],
     }
 
     dynamic_reexport_modules = {
-        "langflow.field_typing": "lfx.field_typing",
+        "all-ai.field_typing": "lfx.field_typing",
     }
 
     return list(
@@ -93,20 +93,20 @@ def get_all_reexport_modules():
 
 
 class TestLfxReexportModules:
-    """Test that all langflow modules that re-export from lfx work correctly."""
+    """Test that all ALL AI modules that re-export from lfx work correctly."""
 
     @classmethod
-    def _discover_langflow_modules(cls) -> list[str]:
-        """Dynamically discover all langflow modules."""
-        langflow_modules = []
+    def _discover_all_ai_modules(cls) -> list[str]:
+        """Dynamically discover all ALL AI modules."""
+        all_ai_modules = []
         try:
-            import langflow
+            import ALL AI
 
-            for _importer, modname, _ispkg in pkgutil.walk_packages(langflow.__path__, langflow.__name__ + "."):
-                langflow_modules.append(modname)
+            for _importer, modname, _ispkg in pkgutil.walk_packages(all-ai.__path__, all-ai.__name__ + "."):
+                all_ai_modules.append(modname)
         except ImportError:
             pass
-        return langflow_modules
+        return all_ai_modules
 
     @classmethod
     def _detect_reexport_pattern(cls, module_name: str) -> dict[str, str | None]:
@@ -164,53 +164,53 @@ class TestLfxReexportModules:
     # Define all the modules that re-export from lfx (kept for backward compatibility)
     DIRECT_REEXPORT_MODULES = {
         # Base modules with direct re-exports
-        "langflow.base.agents": "lfx.base.agents",
-        "langflow.base.data": "lfx.base.data",
-        "langflow.base.embeddings": "lfx.base.embeddings",
-        "langflow.base.io": "lfx.base.io",
-        "langflow.base.memory": "lfx.base.memory",
-        "langflow.base.models": "lfx.base.models",
-        "langflow.base.prompts": "lfx.base.prompts",
-        "langflow.base.textsplitters": "lfx.base.textsplitters",
-        "langflow.base.tools": "lfx.base.tools",
-        "langflow.base.vectorstores": "lfx.base.vectorstores",
+        "all-ai.base.agents": "lfx.base.agents",
+        "all-ai.base.data": "lfx.base.data",
+        "all-ai.base.embeddings": "lfx.base.embeddings",
+        "all-ai.base.io": "lfx.base.io",
+        "all-ai.base.memory": "lfx.base.memory",
+        "all-ai.base.models": "lfx.base.models",
+        "all-ai.base.prompts": "lfx.base.prompts",
+        "all-ai.base.textsplitters": "lfx.base.textsplitters",
+        "all-ai.base.tools": "lfx.base.tools",
+        "all-ai.base.vectorstores": "lfx.base.vectorstores",
         # Core system modules with direct re-exports
-        "langflow.custom.custom_component": "lfx.custom.custom_component",
-        "langflow.graph": "lfx.graph",
-        "langflow.inputs": "lfx.inputs.inputs",
-        "langflow.interface": "lfx.interface",
-        "langflow.load": "lfx.load",
-        "langflow.logging": "lfx.log",  # Note: imports from lfx.log.logger
-        "langflow.schema": "lfx.schema",
-        "langflow.template.field": "lfx.template.field",
+        "all-ai.custom.custom_component": "lfx.custom.custom_component",
+        "all-ai.graph": "lfx.graph",
+        "all-ai.inputs": "lfx.inputs.inputs",
+        "all-ai.interface": "lfx.interface",
+        "all-ai.load": "lfx.load",
+        "all-ai.logging": "lfx.log",  # Note: imports from lfx.log.logger
+        "all-ai.schema": "lfx.schema",
+        "all-ai.template.field": "lfx.template.field",
     }
 
     # Modules that use wildcard imports from lfx
     WILDCARD_REEXPORT_MODULES = {
-        "langflow.base": "lfx.base",
-        "langflow.template": "lfx.template",
+        "all-ai.base": "lfx.base",
+        "all-ai.template": "lfx.template",
     }
 
     # Modules with complex/mixed import patterns
     COMPLEX_REEXPORT_MODULES = {
-        "langflow.custom": ["lfx.custom", "lfx.custom.custom_component", "lfx.custom.utils"],
-        "langflow.io": ["lfx.io", "lfx.template"],  # Mixed imports
+        "all-ai.custom": ["lfx.custom", "lfx.custom.custom_component", "lfx.custom.utils"],
+        "all-ai.io": ["lfx.io", "lfx.template"],  # Mixed imports
     }
 
     # Modules with dynamic __getattr__ patterns
     DYNAMIC_REEXPORT_MODULES = {
-        "langflow.field_typing": "lfx.field_typing",
+        "all-ai.field_typing": "lfx.field_typing",
     }
 
     def test_direct_reexport_modules_importable(self):
         """Test that all direct re-export modules can be imported."""
         successful_imports = 0
 
-        for langflow_module, lfx_module in self.DIRECT_REEXPORT_MODULES.items():
+        for all_ai_module, lfx_module in self.DIRECT_REEXPORT_MODULES.items():
             try:
-                # Import the langflow module
-                lf_module = importlib.import_module(langflow_module)
-                assert lf_module is not None, f"Langflow module {langflow_module} is None"
+                # Import the ALL AI module
+                lf_module = importlib.import_module(all_ai_module)
+                assert lf_module is not None, f"ALL AI module {all_ai_module} is None"
 
                 # Import the corresponding lfx module to compare
 
@@ -220,17 +220,17 @@ class TestLfxReexportModules:
                 successful_imports += 1
 
             except Exception as e:
-                pytest.fail(f"Failed to import direct re-export module {langflow_module}: {e!s}")
+                pytest.fail(f"Failed to import direct re-export module {all_ai_module}: {e!s}")
 
     def test_wildcard_reexport_modules_importable(self):
         """Test that modules using wildcard imports work correctly."""
         successful_imports = 0
 
-        for langflow_module, lfx_module in self.WILDCARD_REEXPORT_MODULES.items():
+        for all_ai_module, lfx_module in self.WILDCARD_REEXPORT_MODULES.items():
             try:
-                # Import the langflow module
-                lf_module = importlib.import_module(langflow_module)
-                assert lf_module is not None, f"Langflow module {langflow_module} is None"
+                # Import the ALL AI module
+                lf_module = importlib.import_module(all_ai_module)
+                assert lf_module is not None, f"ALL AI module {all_ai_module} is None"
 
                 # Wildcard imports should expose most/all attributes from lfx module
                 lfx_mod = importlib.import_module(lfx_module)
@@ -240,56 +240,56 @@ class TestLfxReexportModules:
                     all_attrs = list(lfx_mod.__all__)  # Test all attributes
                     for attr in all_attrs:
                         if hasattr(lfx_mod, attr):
-                            assert hasattr(lf_module, attr), f"Attribute {attr} missing from {langflow_module}"
+                            assert hasattr(lf_module, attr), f"Attribute {attr} missing from {all_ai_module}"
 
                 successful_imports += 1
 
             except Exception as e:
-                pytest.fail(f"Failed to import wildcard re-export module {langflow_module}: {e!s}")
+                pytest.fail(f"Failed to import wildcard re-export module {all_ai_module}: {e!s}")
 
     def test_complex_reexport_modules_importable(self):
         """Test that modules with complex/mixed import patterns work correctly."""
         successful_imports = 0
 
-        for langflow_module in self.COMPLEX_REEXPORT_MODULES:
+        for all_ai_module in self.COMPLEX_REEXPORT_MODULES:
             try:
-                # Import the langflow module
-                lf_module = importlib.import_module(langflow_module)
-                assert lf_module is not None, f"Langflow module {langflow_module} is None"
+                # Import the ALL AI module
+                lf_module = importlib.import_module(all_ai_module)
+                assert lf_module is not None, f"ALL AI module {all_ai_module} is None"
 
                 # Verify it has __all__ attribute for complex modules
-                assert hasattr(lf_module, "__all__"), f"Complex module {langflow_module} missing __all__"
-                assert len(lf_module.__all__) > 0, f"Complex module {langflow_module} has empty __all__"
+                assert hasattr(lf_module, "__all__"), f"Complex module {all_ai_module} missing __all__"
+                assert len(lf_module.__all__) > 0, f"Complex module {all_ai_module} has empty __all__"
 
                 # Try to access all items from __all__
                 all_items = lf_module.__all__  # Test all items
                 for item in all_items:
                     try:
                         attr = getattr(lf_module, item)
-                        assert attr is not None, f"Attribute {item} is None in {langflow_module}"
+                        assert attr is not None, f"Attribute {item} is None in {all_ai_module}"
                     except AttributeError:
-                        pytest.fail(f"Complex module {langflow_module} missing expected attribute {item} from __all__")
+                        pytest.fail(f"Complex module {all_ai_module} missing expected attribute {item} from __all__")
 
                 successful_imports += 1
 
             except Exception as e:
-                pytest.fail(f"Failed to import complex re-export module {langflow_module}: {e!s}")
+                pytest.fail(f"Failed to import complex re-export module {all_ai_module}: {e!s}")
 
     def test_dynamic_reexport_modules_importable(self):
         """Test that modules with __getattr__ dynamic loading work correctly."""
         successful_imports = 0
 
-        for langflow_module in self.DYNAMIC_REEXPORT_MODULES:
+        for all_ai_module in self.DYNAMIC_REEXPORT_MODULES:
             try:
-                # Import the langflow module
-                lf_module = importlib.import_module(langflow_module)
-                assert lf_module is not None, f"Langflow module {langflow_module} is None"
+                # Import the ALL AI module
+                lf_module = importlib.import_module(all_ai_module)
+                assert lf_module is not None, f"ALL AI module {all_ai_module} is None"
 
                 # Dynamic modules should have __getattr__ method
-                assert hasattr(lf_module, "__getattr__"), f"Dynamic module {langflow_module} missing __getattr__"
+                assert hasattr(lf_module, "__getattr__"), f"Dynamic module {all_ai_module} missing __getattr__"
 
                 # Test accessing some known attributes dynamically
-                if langflow_module == "langflow.field_typing":
+                if all_ai_module == "all-ai.field_typing":
                     # Test some known field typing constants
                     test_attrs = ["Data", "Text", "LanguageModel"]
                     for attr in test_attrs:
@@ -297,12 +297,12 @@ class TestLfxReexportModules:
                             value = getattr(lf_module, attr)
                             assert value is not None, f"Dynamic attribute {attr} is None"
                         except AttributeError:
-                            pytest.fail(f"Dynamic module {langflow_module} missing expected attribute {attr}")
+                            pytest.fail(f"Dynamic module {all_ai_module} missing expected attribute {attr}")
 
                 successful_imports += 1
 
             except Exception as e:
-                pytest.fail(f"Failed to import dynamic re-export module {langflow_module}: {e!s}")
+                pytest.fail(f"Failed to import dynamic re-export module {all_ai_module}: {e!s}")
 
     def test_all_reexport_modules_have_required_structure(self):
         """Test that re-export modules have the expected structure."""
@@ -315,9 +315,9 @@ class TestLfxReexportModules:
         for lf_mod in self.COMPLEX_REEXPORT_MODULES:
             all_modules[lf_mod] = self.COMPLEX_REEXPORT_MODULES[lf_mod]
 
-        for langflow_module in all_modules:
+        for all_ai_module in all_modules:
             try:
-                lf_module = importlib.import_module(langflow_module)
+                lf_module = importlib.import_module(all_ai_module)
 
                 # All modules should be importable
                 assert lf_module is not None
@@ -329,21 +329,21 @@ class TestLfxReexportModules:
                 assert hasattr(lf_module, "__file__") or hasattr(lf_module, "__path__")
 
             except Exception as e:
-                pytest.fail(f"Module structure issue with {langflow_module}: {e!s}")
+                pytest.fail(f"Module structure issue with {all_ai_module}: {e!s}")
 
     def test_reexport_modules_backward_compatibility(self):
         """Test that common import patterns still work for backward compatibility."""
         # Test some key imports that should always work
         backward_compatible_imports = [
-            ("langflow.schema", "Data"),
-            ("langflow.inputs", "StrInput"),
-            ("langflow.inputs", "IntInput"),
-            ("langflow.custom", "Component"),  # Base component class
-            ("langflow.custom", "CustomComponent"),
-            ("langflow.field_typing", "Text"),  # Dynamic
-            ("langflow.field_typing", "Data"),  # Dynamic
-            ("langflow.load", "load_flow_from_json"),
-            ("langflow.logging", "logger"),
+            ("all-ai.schema", "Data"),
+            ("all-ai.inputs", "StrInput"),
+            ("all-ai.inputs", "IntInput"),
+            ("all-ai.custom", "Component"),  # Base component class
+            ("all-ai.custom", "CustomComponent"),
+            ("all-ai.field_typing", "Text"),  # Dynamic
+            ("all-ai.field_typing", "Data"),  # Dynamic
+            ("all-ai.load", "load_flow_from_json"),
+            ("all-ai.logging", "logger"),
         ]
 
         for module_name, symbol_name in backward_compatible_imports:
@@ -363,12 +363,12 @@ class TestLfxReexportModules:
         """Test that there are no circular import issues in re-export modules."""
         # Test importing modules in different orders to catch circular imports
         import_orders = [
-            ["langflow.schema", "langflow.inputs", "langflow.base"],
-            ["langflow.base", "langflow.schema", "langflow.inputs"],
-            ["langflow.inputs", "langflow.base", "langflow.schema"],
-            ["langflow.custom", "langflow.field_typing", "langflow.template"],
-            ["langflow.template", "langflow.custom", "langflow.field_typing"],
-            ["langflow.field_typing", "langflow.template", "langflow.custom"],
+            ["all-ai.schema", "all-ai.inputs", "all-ai.base"],
+            ["all-ai.base", "all-ai.schema", "all-ai.inputs"],
+            ["all-ai.inputs", "all-ai.base", "all-ai.schema"],
+            ["all-ai.custom", "all-ai.field_typing", "all-ai.template"],
+            ["all-ai.template", "all-ai.custom", "all-ai.field_typing"],
+            ["all-ai.field_typing", "all-ai.template", "all-ai.custom"],
         ]
 
         for order in import_orders:
@@ -392,11 +392,11 @@ class TestLfxReexportModules:
         """Test that re-export modules import efficiently."""
         # Test that basic imports are fast
         performance_critical_modules = [
-            "langflow.schema",
-            "langflow.inputs",
-            "langflow.field_typing",
-            "langflow.load",
-            "langflow.logging",
+            "all-ai.schema",
+            "all-ai.inputs",
+            "all-ai.field_typing",
+            "all-ai.load",
+            "all-ai.logging",
         ]
 
         slow_imports = []
@@ -435,12 +435,12 @@ class TestLfxReexportModules:
 
     # Dynamic test methods using the discovery functions
     def test_dynamic_module_discovery(self):
-        """Test that we can dynamically discover langflow modules."""
-        modules = self._discover_langflow_modules()
-        assert len(modules) > 0, "Should discover at least some langflow modules"
+        """Test that we can dynamically discover ALL AI modules."""
+        modules = self._discover_all_ai_modules()
+        assert len(modules) > 0, "Should discover at least some ALL AI modules"
 
         # Check that known modules are found
-        expected_modules = ["langflow.schema", "langflow.inputs", "langflow.custom"]
+        expected_modules = ["all-ai.schema", "all-ai.inputs", "all-ai.custom"]
         found_modules = [mod for mod in expected_modules if mod in modules]
         assert len(found_modules) > 0, f"Expected to find some of {expected_modules}, but found: {found_modules}"
 
@@ -465,7 +465,7 @@ class TestLfxReexportModules:
     def test_generate_backward_compatibility_imports(self):
         """Test generating backward compatibility imports dynamically."""
         # Test with a known module that has lfx imports
-        test_cases = [("langflow.schema", "lfx.schema"), ("langflow.custom", "lfx.custom")]
+        test_cases = [("all-ai.schema", "lfx.schema"), ("all-ai.custom", "lfx.custom")]
 
         for lf_module, _expected_lfx_source in test_cases:
             pattern_info = self._detect_reexport_pattern(lf_module)
@@ -473,7 +473,7 @@ class TestLfxReexportModules:
                 symbols = self._get_expected_symbols(pattern_info["source"])
                 assert len(symbols) > 0, f"Should find some symbols in {pattern_info['source']}"
 
-                # Test that at least some symbols are accessible in the langflow module
+                # Test that at least some symbols are accessible in the ALL AI module
                 module = importlib.import_module(lf_module)
                 available_symbols = [sym for sym in symbols[:3] if hasattr(module, sym)]  # Test first 3
                 assert len(available_symbols) > 0, (

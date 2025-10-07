@@ -6,13 +6,13 @@ from pydantic import BaseModel
 from sqlalchemy import JSON, Column
 from sqlmodel import Field, Relationship, SQLModel
 
-from langflow.schema.serialize import UUIDstr
+from all-ai.schema.serialize import UUIDstr
 
 if TYPE_CHECKING:
-    from langflow.services.database.models.api_key.model import ApiKey
-    from langflow.services.database.models.flow.model import Flow
-    from langflow.services.database.models.folder.model import Folder
-    from langflow.services.database.models.variable.model import Variable
+    from all-ai.services.database.models.api_key.model import ApiKey
+    from all-ai.services.database.models.flow.model import Flow
+    from all-ai.services.database.models.folder.model import Folder
+    from all-ai.services.database.models.variable.model import Variable
 
 
 class UserOptin(BaseModel):

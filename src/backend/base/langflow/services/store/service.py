@@ -8,16 +8,16 @@ import httpx
 from httpx import HTTPError, HTTPStatusError
 from lfx.log.logger import logger
 
-from langflow.services.base import Service
-from langflow.services.store.exceptions import APIKeyError, FilterError, ForbiddenError
-from langflow.services.store.schema import (
+from all-ai.services.base import Service
+from all-ai.services.store.exceptions import APIKeyError, FilterError, ForbiddenError
+from all-ai.services.store.schema import (
     CreateComponentResponse,
     DownloadComponentResponse,
     ListComponentResponse,
     ListComponentResponseModel,
     StoreComponentCreate,
 )
-from langflow.services.store.utils import (
+from all-ai.services.store.utils import (
     process_component_data,
     process_tags_for_post,
     update_components_with_user_data,
@@ -62,7 +62,7 @@ def get_id_from_search_string(search_string: str) -> str | None:
         Optional[str]: The extracted ID, or None if no ID is found.
     """
     possible_id: str | None = search_string
-    if "www.langflow.store/store/" in search_string:
+    if "www.all-ai.store/store/" in search_string:
         possible_id = search_string.split("/")[-1]
 
     try:
@@ -73,7 +73,7 @@ def get_id_from_search_string(search_string: str) -> str | None:
 
 
 class StoreService(Service):
-    """This is a service that integrates langflow with the store which is a Directus instance.
+    """This is a service that integrates ALL AI with the store which is a Directus instance.
 
     It allows to search, get and post components to the store.
     """

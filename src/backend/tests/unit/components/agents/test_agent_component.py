@@ -3,7 +3,7 @@ from typing import Any
 from uuid import uuid4
 
 import pytest
-from langflow.custom import Component
+from all-ai.custom import Component
 from lfx.base.models.anthropic_constants import ANTHROPIC_MODELS
 from lfx.base.models.model_input_constants import (
     MODEL_PROVIDERS,
@@ -234,7 +234,7 @@ class TestAgentComponent(ComponentTestBaseWithoutClient):
 
         result = await component.json_response()
 
-        from langflow.schema.data import Data
+        from all-ai.schema.data import Data
 
         assert isinstance(result, Data)
         assert result.data == {"name": "John", "age": 25}

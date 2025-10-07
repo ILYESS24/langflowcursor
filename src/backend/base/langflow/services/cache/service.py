@@ -10,7 +10,7 @@ from lfx.log.logger import logger
 from lfx.services.cache.utils import CACHE_MISS
 from typing_extensions import override
 
-from langflow.services.cache.base import (
+from all-ai.services.cache.base import (
     AsyncBaseCacheService,
     AsyncLockType,
     CacheService,

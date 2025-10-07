@@ -3,8 +3,8 @@ from uuid import UUID
 from sqlmodel import col, delete, func, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.database.models.vertex_builds.model import VertexBuildBase, VertexBuildTable
-from langflow.services.deps import get_settings_service
+from all-ai.services.database.models.vertex_builds.model import VertexBuildBase, VertexBuildTable
+from all-ai.services.deps import get_settings_service
 
 
 async def get_vertex_builds_by_flow_id(

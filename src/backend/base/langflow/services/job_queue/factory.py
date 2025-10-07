@@ -1,6 +1,6 @@
-from langflow.services.base import Service
-from langflow.services.factory import ServiceFactory
-from langflow.services.job_queue.service import JobQueueService
+from all-ai.services.base import Service
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.job_queue.service import JobQueueService
 
 
 class JobQueueServiceFactory(ServiceFactory):

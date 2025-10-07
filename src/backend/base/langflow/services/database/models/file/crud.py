@@ -3,7 +3,7 @@ from uuid import UUID
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.database.models.file.model import File
+from all-ai.services.database.models.file.model import File
 
 
 async def get_file_by_id(db: AsyncSession, file_id: UUID) -> File | None:

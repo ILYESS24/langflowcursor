@@ -9,13 +9,13 @@ from fastapi import UploadFile
 from platformdirs import user_cache_dir
 
 if TYPE_CHECKING:
-    from langflow.api.v1.schemas import BuildStatus
+    from all-ai.api.v1.schemas import BuildStatus
 
 CACHE: dict[str, Any] = {}
 
-CACHE_DIR = user_cache_dir("langflow", "langflow")
+CACHE_DIR = user_cache_dir("ALL AI", "ALL AI")
 
-PREFIX = "langflow_cache"
+PREFIX = "all_ai_cache"
 
 
 def create_cache_folder(func):

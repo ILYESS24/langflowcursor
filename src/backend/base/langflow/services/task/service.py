@@ -3,13 +3,13 @@ from __future__ import annotations
 from collections.abc import Callable, Coroutine
 from typing import TYPE_CHECKING, Any
 
-from langflow.services.base import Service
-from langflow.services.task.backends.anyio import AnyIOBackend
+from all-ai.services.base import Service
+from all-ai.services.task.backends.anyio import AnyIOBackend
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
 
-    from langflow.services.task.backends.base import TaskBackend
+    from all-ai.services.task.backends.base import TaskBackend
 
 
 class TaskService(Service):

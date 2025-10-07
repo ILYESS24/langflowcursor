@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING
 
 from typing_extensions import override
 
-from langflow.services.factory import ServiceFactory
-from langflow.services.store.service import StoreService
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.store.service import StoreService
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService

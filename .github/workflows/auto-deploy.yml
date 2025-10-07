@@ -1,0 +1,39 @@
+name: Auto Deploy Langflow
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install langflow
+        
+    - name: Create deployment package
+      run: |
+        mkdir -p deploy-package
+        cp -r src/backend/langflow deploy-package/
+        cp pyproject.toml deploy-package/
+        cp Procfile deploy-package/
+        cp runtime.txt deploy-package/
+        
+    - name: Deploy to Railway
+      uses: railway-deploy@v1
+      with:
+        railway-token: ${{ secrets.RAILWAY_TOKEN }}
+        service: langflow
+        working-directory: deploy-package

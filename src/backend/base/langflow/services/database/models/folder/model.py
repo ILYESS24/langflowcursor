@@ -4,8 +4,8 @@ from uuid import UUID, uuid4
 from sqlalchemy import Text, UniqueConstraint
 from sqlmodel import JSON, Column, Field, Relationship, SQLModel
 
-from langflow.services.database.models.flow.model import Flow, FlowRead
-from langflow.services.database.models.user.model import User
+from all-ai.services.database.models.flow.model import Flow, FlowRead
+from all-ai.services.database.models.user.model import User
 
 
 class FolderBase(SQLModel):

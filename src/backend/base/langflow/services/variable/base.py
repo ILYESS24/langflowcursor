@@ -3,8 +3,8 @@ from uuid import UUID
 
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.base import Service
-from langflow.services.database.models.variable.model import Variable, VariableRead
+from all-ai.services.base import Service
+from all-ai.services.database.models.variable.model import Variable, VariableRead
 
 
 class VariableService(Service):

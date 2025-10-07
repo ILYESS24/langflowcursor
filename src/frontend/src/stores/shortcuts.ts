@@ -41,8 +41,8 @@ export const useShortcutsStore = create<shortcutsStoreType>((set, get) => ({
     });
   },
   getShortcutsFromStorage: () => {
-    if (localStorage.getItem("langflow-shortcuts")) {
-      const savedShortcuts = localStorage.getItem("langflow-shortcuts");
+    if (localStorage.getItem("all-ai-shortcuts")) {
+      const savedShortcuts = localStorage.getItem("all-ai-shortcuts");
       const savedArr = JSON.parse(savedShortcuts!);
       savedArr.forEach(({ name, shortcut }) => {
         const shortcutName = toCamelCase(name);

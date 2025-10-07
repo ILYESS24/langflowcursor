@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING
 
 from typing_extensions import override
 
-from langflow.services.factory import ServiceFactory
-from langflow.services.variable.service import DatabaseVariableService, VariableService
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.variable.service import DatabaseVariableService, VariableService
 
 if TYPE_CHECKING:
     from lfx.services.settings.service import SettingsService
@@ -22,7 +22,7 @@ class VariableServiceFactory(ServiceFactory):
 
         if settings_service.settings.variable_store == "kubernetes":
             # Keep it here to avoid import errors
-            from langflow.services.variable.kubernetes import KubernetesSecretService
+            from all-ai.services.variable.kubernetes import KubernetesSecretService
 
             return KubernetesSecretService(settings_service)
         return DatabaseVariableService(settings_service)

@@ -75,8 +75,8 @@ export const HelpDropdownView = ({
         <Separator />
         <DropdownControlButton
           iconName="download"
-          testId="canvas_controls_dropdown_get_langflow_desktop"
-          label="Get Langflow Desktop"
+          testId="canvas_controls_dropdown_get_all_ai_desktop"
+          label="Get ALL AI Desktop"
           externalLink
           onClick={() => openLink(urls.desktop)}
         />

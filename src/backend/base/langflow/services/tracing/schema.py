@@ -1,8 +1,8 @@
 from pydantic import BaseModel, field_serializer
 from pydantic_core import PydanticSerializationError
 
-from langflow.schema.log import LoggableType
-from langflow.serialization.serialization import serialize
+from all-ai.schema.log import LoggableType
+from all-ai.serialization.serialization import serialize
 
 
 class Log(BaseModel):

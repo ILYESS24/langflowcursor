@@ -5,17 +5,17 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from langflow.api.utils import DbSession
-from langflow.api.v1.schemas import Token
-from langflow.initial_setup.setup import get_or_create_default_folder
-from langflow.services.auth.utils import (
+from all-ai.api.utils import DbSession
+from all-ai.api.v1.schemas import Token
+from all-ai.initial_setup.setup import get_or_create_default_folder
+from all-ai.services.auth.utils import (
     authenticate_user,
     create_refresh_token,
     create_user_longterm_token,
     create_user_tokens,
 )
-from langflow.services.database.models.user.crud import get_user_by_id
-from langflow.services.deps import get_settings_service, get_variable_service
+from all-ai.services.database.models.user.crud import get_user_by_id
+from all-ai.services.deps import get_settings_service, get_variable_service
 
 router = APIRouter(tags=["Login"])
 

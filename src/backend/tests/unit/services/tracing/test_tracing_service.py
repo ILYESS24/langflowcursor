@@ -3,8 +3,8 @@ import uuid
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from langflow.services.tracing.base import BaseTracer
-from langflow.services.tracing.service import (
+from all-ai.services.tracing.base import BaseTracer
+from all-ai.services.tracing.service import (
     TracingService,
     component_context_var,
     trace_context_var,
@@ -120,27 +120,27 @@ def mock_component():
 def mock_tracers():
     with (
         patch(
-            "langflow.services.tracing.service._get_langsmith_tracer",
+            "all-ai.services.tracing.service._get_langsmith_tracer",
             return_value=MockTracer,
         ),
         patch(
-            "langflow.services.tracing.service._get_langwatch_tracer",
+            "all-ai.services.tracing.service._get_langwatch_tracer",
             return_value=MockTracer,
         ),
         patch(
-            "langflow.services.tracing.service._get_langfuse_tracer",
+            "all-ai.services.tracing.service._get_langfuse_tracer",
             return_value=MockTracer,
         ),
         patch(
-            "langflow.services.tracing.service._get_arize_phoenix_tracer",
+            "all-ai.services.tracing.service._get_arize_phoenix_tracer",
             return_value=MockTracer,
         ),
         patch(
-            "langflow.services.tracing.service._get_opik_tracer",
+            "all-ai.services.tracing.service._get_opik_tracer",
             return_value=MockTracer,
         ),
         patch(
-            "langflow.services.tracing.service._get_traceloop_tracer",
+            "all-ai.services.tracing.service._get_traceloop_tracer",
             return_value=MockTracer,
         ),
     ):
@@ -388,7 +388,7 @@ async def test_start_tracers_with_exception(tracing_service):
             "_initialize_langsmith_tracer",
             side_effect=Exception("Mock exception"),
         ),
-        patch("langflow.services.tracing.service.logger") as mock_logger,
+        patch("all-ai.services.tracing.service.logger") as mock_logger,
     ):
         # Configure async mock method
         mock_logger.adebug = AsyncMock()
@@ -424,7 +424,7 @@ async def test_trace_worker_with_exception(tracing_service):
         msg = "Mock trace function exception"
         raise ValueError(msg)
 
-    with patch("langflow.services.tracing.service.logger") as mock_logger:
+    with patch("all-ai.services.tracing.service.logger") as mock_logger:
         # Configure async mock method
         mock_logger.aexception = AsyncMock()
 

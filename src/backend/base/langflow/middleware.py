@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from lfx.log.logger import logger
 
-from langflow.services.deps import get_settings_service
+from all-ai.services.deps import get_settings_service
 
 
 class MaxFileSizeException(HTTPException):

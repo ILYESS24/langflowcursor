@@ -55,7 +55,7 @@ class LangflowApplication(BaseApplication):
     def __init__(self, app, options=None) -> None:
         self.options = options or {}
 
-        self.options["worker_class"] = "langflow.server.LangflowUvicornWorker"
+        self.options["worker_class"] = "all-ai.server.LangflowUvicornWorker"
         self.options["logger_class"] = Logger
         self.application = app
         super().__init__()

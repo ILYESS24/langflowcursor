@@ -3,10 +3,10 @@ from typing import Any
 import socketio
 from lfx.log.logger import logger
 
-from langflow.services.base import Service
-from langflow.services.cache.base import AsyncBaseCacheService, CacheService
-from langflow.services.deps import get_chat_service
-from langflow.services.socket.utils import build_vertex, get_vertices
+from all-ai.services.base import Service
+from all-ai.services.cache.base import AsyncBaseCacheService, CacheService
+from all-ai.services.deps import get_chat_service
+from all-ai.services.socket.utils import build_vertex, get_vertices
 
 
 class SocketIOService(Service):

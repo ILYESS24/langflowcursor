@@ -1,7 +1,7 @@
 from typing_extensions import override
 
-from langflow.services.factory import ServiceFactory
-from langflow.services.task.service import TaskService
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.task.service import TaskService
 
 
 class TaskServiceFactory(ServiceFactory):

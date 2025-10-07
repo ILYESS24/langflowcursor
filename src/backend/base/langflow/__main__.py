@@ -29,14 +29,14 @@ from rich.panel import Panel
 from rich.table import Table
 from sqlmodel import select
 
-from langflow.cli.progress import create_langflow_progress
+from langflow.cli.progress import create_all_ai_progress
 from langflow.initial_setup.setup import get_or_create_default_folder
 from langflow.main import setup_app
 from langflow.services.auth.utils import check_key, get_current_user_by_jwt
 from langflow.services.deps import get_db_service, get_settings_service, session_scope
 from langflow.services.utils import initialize_services
 from langflow.utils.version import fetch_latest_version, get_version_info
-from langflow.utils.version import is_pre_release as langflow_is_pre_release
+from langflow.utils.version import is_pre_release as all_ai_is_pre_release
 
 # Initialize console with Windows-safe settings
 console = Console(legacy_windows=True, emoji=False) if platform.system() == "Windows" else Console()
@@ -48,7 +48,7 @@ try:
     from lfx.cli.commands import serve_command
     from lfx.cli.run import run as lfx_run
 
-    lfx_app = typer.Typer(name="lfx", help="Langflow Executor commands")
+    lfx_app = typer.Typer(name="lfx", help="ALL AI Executor commands")
     lfx_app.command(name="serve", help="Serve a flow as an API", no_args_is_help=True)(serve_command)
     lfx_app.command(name="run", help="Run a flow directly", no_args_is_help=True)(lfx_run)
 
@@ -266,7 +266,7 @@ def run(
     ),
     ssl_key_file_path: str | None = typer.Option(None, help="Defines the SSL key file path.", show_default=False),
 ) -> None:
-    """Run Langflow."""
+    """Run ALL AI."""
     if env_file:
         load_dotenv(env_file, override=True)
 
@@ -284,9 +284,9 @@ def run(
 
     # Create progress indicator (show verbose timing if log level is DEBUG)
     verbose = log_level == "debug"
-    progress = create_langflow_progress(verbose=verbose)
+    progress = create_all_ai_progress(verbose=verbose)
 
-    # Step 0: Initializing Langflow
+    # Step 0: Initializing ALL AI
     with progress.step(0):
         logger.debug(f"Loading config from file: '{env_file}'" if env_file else "No env_file provided.")
         set_var_for_macos_issue()
@@ -355,7 +355,7 @@ def run(
         with progress.step(5):
             pass  # Starter projects are added during app startup
 
-    # Step 6: Launching Langflow
+    # Step 6: Launching ALL AI
     if platform.system() == "Windows":
         with progress.step(6):
             import uvicorn
@@ -532,13 +532,13 @@ def build_version_notice(current_version: str, package_name: str) -> str:
             The message will indicate if the newer version is a pre-release.
 
     Example:
-        >>> build_version_notice("1.0.0", "langflow")
-        'A new version of langflow is available: 1.1.0'
+        >>> build_version_notice("1.0.0", "ALL AI")
+        'A new version of ALL AI is available: 1.1.0'
     """
     with suppress(httpx.ConnectError):
-        latest_version = fetch_latest_version(package_name, include_prerelease=langflow_is_pre_release(current_version))
+        latest_version = fetch_latest_version(package_name, include_prerelease=all_ai_is_pre_release(current_version))
         if latest_version and pkg_version.parse(current_version) < pkg_version.parse(latest_version):
-            release_type = "pre-release" if langflow_is_pre_release(latest_version) else "version"
+            release_type = "pre-release" if all_ai_is_pre_release(latest_version) else "version"
             return f"A new {release_type} of {package_name} is available: {latest_version}"
     return ""
 
@@ -564,13 +564,13 @@ def print_banner(host: str, port: int, protocol: str) -> None:
     is_pre_release = False  # Track if any package is a pre-release
     package_name = ""
 
-    # Use langflow.utils.version to get the version info
+    # Use all-ai.utils.version to get the version info
     version_info = get_version_info()
-    langflow_version = version_info["version"]
+    all_ai_version = version_info["version"]
     package_name = version_info["package"]
-    is_pre_release |= langflow_is_pre_release(langflow_version)  # Update pre-release status
+    is_pre_release |= all_ai_is_pre_release(all_ai_version)  # Update pre-release status
 
-    notice = build_version_notice(langflow_version, package_name)
+    notice = build_version_notice(all_ai_version, package_name)
 
     notice = stylize_text(notice, package_name, is_prerelease=is_pre_release)
     if notice:
@@ -606,22 +606,22 @@ def print_banner(host: str, port: int, protocol: str) -> None:
         status_icon = "🟢"
 
     info_text = (
-        f"{github_icon} GitHub: Star for updates {arrow} https://github.com/langflow-ai/langflow\n"
+        f"{github_icon} GitHub: Star for updates {arrow} https://github.com/all-ai-ai/ALL AI\n"
         f"{discord_icon} Discord: Join for support {arrow} https://discord.com/invite/EqksyE2EX9"
     )
     telemetry_text = (
         (
-            "We collect anonymous usage data to improve Langflow.\n"
+            "We collect anonymous usage data to improve ALL AI.\n"
             "To opt out, set: [bold]DO_NOT_TRACK=true[/bold] in your environment."
         )
         if os.getenv("DO_NOT_TRACK", os.getenv("LANGFLOW_DO_NOT_TRACK", "False")).lower() != "true"
         else (
-            "We are [bold]not[/bold] collecting anonymous usage data to improve Langflow.\n"
+            "We are [bold]not[/bold] collecting anonymous usage data to improve ALL AI.\n"
             "To contribute, set: [bold]DO_NOT_TRACK=false[/bold] in your environment."
         )
     )
     access_host = get_best_access_host(host, port)
-    access_link = f"[bold]{status_icon} Open Langflow {arrow}[/bold] [link={protocol}://{access_host}:{port}]{protocol}://{access_host}:{port}[/link]"
+    access_link = f"[bold]{status_icon} Open ALL AI {arrow}[/bold] [link={protocol}://{access_host}:{port}]{protocol}://{access_host}:{port}[/link]"
 
     message = f"{title}\n{info_text}\n\n{telemetry_text}\n\n{access_link}"
 
@@ -633,10 +633,10 @@ def print_banner(host: str, port: int, protocol: str) -> None:
         # Fallback to a simpler banner without emojis for Windows systems with encoding issues
         fallback_message = (
             f"Welcome to {package_name}\n\n"
-            "* GitHub: https://github.com/langflow-ai/langflow\n"
+            "* GitHub: https://github.com/all-ai-ai/ALL AI\n"
             "# Discord: https://discord.com/invite/EqksyE2EX9\n\n"
             f"{telemetry_text}\n\n"
-            f"[OK] Open Langflow -> {protocol}://{access_host}:{port}"
+            f"[OK] Open ALL AI -> {protocol}://{access_host}:{port}"
         )
         try:
             console.print()  # Add line break before fallback banner
@@ -644,18 +644,18 @@ def print_banner(host: str, port: int, protocol: str) -> None:
         except UnicodeEncodeError:
             # Last resort: use logger instead of print
             logger.info(f"Welcome to {package_name}")
-            logger.info("GitHub: https://github.com/langflow-ai/langflow")
+            logger.info("GitHub: https://github.com/all-ai-ai/ALL AI")
             logger.info("Discord: https://discord.com/invite/EqksyE2EX9")
-            logger.info(f"Open Langflow: {protocol}://{access_host}:{port}")
+            logger.info(f"Open ALL AI: {protocol}://{access_host}:{port}")
 
 
 @app.command()
 def superuser(
     username: str = typer.Option(
-        None, help="Username for the superuser. Defaults to 'langflow' when AUTO_LOGIN is enabled."
+        None, help="Username for the superuser. Defaults to 'ALL AI' when AUTO_LOGIN is enabled."
     ),
     password: str = typer.Option(
-        None, help="Password for the superuser. Defaults to 'langflow' when AUTO_LOGIN is enabled."
+        None, help="Password for the superuser. Defaults to 'ALL AI' when AUTO_LOGIN is enabled."
     ),
     log_level: str = typer.Option("error", help="Logging level.", envvar="LANGFLOW_LOG_LEVEL"),
     auth_token: str = typer.Option(
@@ -723,7 +723,7 @@ async def _create_superuser(username: str, password: str, auth_token: str | None
         if not auth_token:
             typer.echo("Error: Creating a superuser requires authentication.")
             typer.echo("Please provide --auth-token with a valid superuser API key or JWT token.")
-            typer.echo("To get a token, use: `uv run langflow api_key`")
+            typer.echo("To get a token, use: `uv run ALL AI api_key`")
             raise typer.Exit(1)
 
         # Validate the auth token
@@ -785,13 +785,13 @@ async def _create_superuser(username: str, password: str, auth_token: str | None
             typer.echo("Superuser creation failed.")
 
 
-# command to copy the langflow database from the cache to the current directory
+# command to copy the ALL AI database from the cache to the current directory
 # because now the database is stored per installation
 @app.command()
 def copy_db() -> None:
     """Copy the database files to the current directory.
 
-    This function copies the 'langflow.db' and 'langflow-pre.db' files from the cache directory to the current
+    This function copies the 'all-ai.db' and 'all-ai-pre.db' files from the cache directory to the current
     directory.
     If the files exist in the cache directory, they will be copied to the same directory as this script (__main__.py).
 
@@ -802,9 +802,9 @@ def copy_db() -> None:
 
     from platformdirs import user_cache_dir
 
-    cache_dir = Path(user_cache_dir("langflow"))
-    db_path = cache_dir / "langflow.db"
-    pre_db_path = cache_dir / "langflow-pre.db"
+    cache_dir = Path(user_cache_dir("ALL AI"))
+    db_path = cache_dir / "all-ai.db"
+    pre_db_path = cache_dir / "all-ai-pre.db"
     # It should be copied to the current directory
     # this file is __main__.py and it should be in the same directory as the database
     destination_folder = Path(__file__).parent
@@ -903,7 +903,7 @@ def show_version(*, value: bool):
         default = "DEV"
         raw_info = get_version_info()
         version = raw_info.get("version", default) if raw_info else default
-        typer.echo(f"langflow {version}")
+        typer.echo(f"ALL AI {version}")
         raise typer.Exit
 
 

@@ -2,9 +2,9 @@ from lfx.log.logger import logger
 from lfx.services.settings.service import SettingsService
 from typing_extensions import override
 
-from langflow.services.factory import ServiceFactory
-from langflow.services.session.service import SessionService
-from langflow.services.storage.service import StorageService
+from all-ai.services.factory import ServiceFactory
+from all-ai.services.session.service import SessionService
+from all-ai.services.storage.service import StorageService
 
 
 class StorageServiceFactory(ServiceFactory):

@@ -1,4 +1,4 @@
-"""Enhanced ServiceManager that extends lfx's ServiceManager with langflow features."""
+"""Enhanced ServiceManager that extends lfx's ServiceManager with ALL AI features."""
 
 from __future__ import annotations
 
@@ -12,16 +12,16 @@ from lfx.services.manager import ServiceManager as BaseServiceManager
 from lfx.utils.concurrency import KeyedMemoryLockManager
 
 if TYPE_CHECKING:
-    from langflow.services.base import Service
-    from langflow.services.factory import ServiceFactory
-    from langflow.services.schema import ServiceType
+    from all-ai.services.base import Service
+    from all-ai.services.factory import ServiceFactory
+    from all-ai.services.schema import ServiceType
 
 
 __all__ = ["NoFactoryRegisteredError", "ServiceManager"]
 
 
 class ServiceManager(BaseServiceManager):
-    """Enhanced ServiceManager with langflow factory system and dependency injection."""
+    """Enhanced ServiceManager with ALL AI factory system and dependency injection."""
 
     def __init__(self) -> None:
         super().__init__()
@@ -44,17 +44,17 @@ class ServiceManager(BaseServiceManager):
     @classmethod
     def get_factories(cls) -> list[ServiceFactory]:
         """Auto-discover and return all service factories."""
-        from langflow.services.factory import ServiceFactory
-        from langflow.services.schema import ServiceType
+        from all-ai.services.factory import ServiceFactory
+        from all-ai.services.schema import ServiceType
 
         service_names = [ServiceType(service_type).value.replace("_service", "") for service_type in ServiceType]
-        base_module = "langflow.services"
+        base_module = "all-ai.services"
         factories = []
 
         for name in service_names:
             try:
                 # Special handling for services that are in lfx module
-                base_module = "lfx.services" if name in ["settings", "mcp_composer"] else "langflow.services"
+                base_module = "lfx.services" if name in ["settings", "mcp_composer"] else "all-ai.services"
                 module_name = f"{base_module}.{name}.factory"
                 module = importlib.import_module(module_name)
 

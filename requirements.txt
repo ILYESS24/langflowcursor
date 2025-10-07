@@ -1,0 +1,35 @@
+# Core dependencies for ALL AI backend
+uvicorn==0.29.0
+fastapi==0.111.0
+fastapi-pagination==0.12.21
+sqlmodel==0.0.18
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+python-multipart==0.0.9
+jinja2==3.1.4
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+alembic==1.13.1
+psycopg2-binary==2.9.9
+redis==5.0.1
+celery==5.3.4
+httpx==0.27.0
+aiofiles==23.2.1
+websockets==12.0
+python-socketio==5.10.0
+eventlet==0.33.3
+typer==0.19.2
+rich==14.1.0
+click==8.3.0
+starlette==0.37.2
+pydantic==2.11.10
+sqlalchemy==2.0.43
+# OpenTelemetry dependencies
+opentelemetry-api==1.24.0
+opentelemetry-sdk==1.24.0
+opentelemetry-instrumentation-fastapi==0.45b0
+opentelemetry-instrumentation-requests==0.45b0
+opentelemetry-instrumentation-sqlalchemy==0.45b0
+opentelemetry-exporter-jaeger==1.20.0
+opentelemetry-exporter-otlp==1.24.0
+# Add other core dependencies as needed, excluding problematic ones

@@ -150,9 +150,9 @@ def get_lifespan(*, fix_migration=False, version=None):
 
         # Startup message
         if version:
-            await logger.adebug(f"Starting Langflow v{version}...")
+            await logger.adebug(f"Starting ALL AI v{version}...")
         else:
-            await logger.adebug("Starting Langflow...")
+            await logger.adebug("Starting ALL AI...")
 
         temp_dirs: list[TemporaryDirectory] = []
         sync_flows_from_fs_task = None
@@ -203,7 +203,7 @@ def get_lifespan(*, fix_migration=False, version=None):
 
             from filelock import FileLock
 
-            lock_file = Path(tempfile.gettempdir()) / "langflow_starter_projects.lock"
+            lock_file = Path(tempfile.gettempdir()) / "all_ai_starter_projects.lock"
             lock = FileLock(lock_file, timeout=1)
             try:
                 with lock:
@@ -273,7 +273,7 @@ def get_lifespan(*, fix_migration=False, version=None):
         except asyncio.CancelledError:
             await logger.adebug("Lifespan received cancellation signal")
         except Exception as exc:
-            if "langflow migration --fix" not in str(exc):
+            if "ALL AI migration --fix" not in str(exc):
                 logger.exception(exc)
 
                 await log_exception_to_telemetry(exc, "lifespan")
@@ -282,11 +282,11 @@ def get_lifespan(*, fix_migration=False, version=None):
             # Clean shutdown with progress indicator
             # Create shutdown progress (show verbose timing if log level is DEBUG)
             from langflow.__main__ import get_number_of_workers
-            from langflow.cli.progress import create_langflow_shutdown_progress
+            from langflow.cli.progress import create_all_ai_shutdown_progress
 
             log_level = os.getenv("LANGFLOW_LOG_LEVEL", "info").lower()
             num_workers = get_number_of_workers(get_settings_service().settings.workers)
-            shutdown_progress = create_langflow_shutdown_progress(
+            shutdown_progress = create_all_ai_shutdown_progress(
                 verbose=log_level == "debug", multiple_workers=num_workers > 1
             )
 
@@ -331,7 +331,7 @@ def get_lifespan(*, fix_migration=False, version=None):
 
                 # Step 4: Finalizing Shutdown
                 with shutdown_progress.step(4):
-                    await logger.adebug("Langflow shutdown complete")
+                    await logger.adebug("ALL AI shutdown complete")
 
                 # Show completion summary and farewell
                 shutdown_progress.print_shutdown_summary()
@@ -357,7 +357,7 @@ def create_app():
     configure()
     lifespan = get_lifespan(version=__version__)
     app = FastAPI(
-        title="Langflow",
+        title="ALL AI",
         version=__version__,
         lifespan=lifespan,
     )
@@ -519,7 +519,7 @@ def setup_static_files(app: FastAPI, static_files_dir: Path) -> None:
 
 
 def get_static_files_dir():
-    """Get the static files directory relative to Langflow's main.py file."""
+    """Get the static files directory relative to ALL AI's main.py file."""
     frontend_path = Path(__file__).parent
     return frontend_path / "frontend"
 

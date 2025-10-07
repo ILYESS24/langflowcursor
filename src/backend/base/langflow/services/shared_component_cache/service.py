@@ -1,4 +1,4 @@
-from langflow.services.cache.service import ThreadingInMemoryCache
+from all-ai.services.cache.service import ThreadingInMemoryCache
 
 
 class SharedComponentCacheService(ThreadingInMemoryCache):

@@ -8,7 +8,7 @@ from sqlalchemy import pool, text
 from sqlalchemy.event import listen
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from langflow.services.database.service import SQLModel
+from all-ai.services.database.service import SQLModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

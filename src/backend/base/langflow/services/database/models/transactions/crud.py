@@ -4,12 +4,12 @@ from lfx.log.logger import logger
 from sqlmodel import col, delete, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from langflow.services.database.models.transactions.model import (
+from all-ai.services.database.models.transactions.model import (
     TransactionBase,
     TransactionReadResponse,
     TransactionTable,
 )
-from langflow.services.deps import get_settings_service
+from all-ai.services.deps import get_settings_service
 
 
 async def get_transactions_by_flow_id(
