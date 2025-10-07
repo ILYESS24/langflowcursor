@@ -15,53 +15,59 @@ sys.path.insert(0, str(backend_base))
 # Importer et démarrer l'application
 if __name__ == "__main__":
     import uvicorn
+    from fastapi import FastAPI
+    from fastapi.middleware.cors import CORSMiddleware
     
-    try:
-        from langflow.main import create_app
-        
-        # Créer l'application
-        app = create_app()
-        
-        # Démarrer le serveur
-        port = int(os.environ.get("PORT", 8000))
-        uvicorn.run(
-            app,
-            host="0.0.0.0",
-            port=port,
-            log_level="info"
-        )
-    except ImportError as e:
-        print(f"❌ Erreur d'import: {e}")
-        print("🔧 Tentative de démarrage avec une application minimale...")
-        
-        # Créer une application FastAPI minimale
-        from fastapi import FastAPI
-        from fastapi.middleware.cors import CORSMiddleware
-        
-        app = FastAPI(title="ALL AI Backend", version="1.0.0")
-        
-        # Configuration CORS
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=["*"],
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
-        
-        @app.get("/")
-        async def root():
-            return {"message": "ALL AI Backend is running!", "status": "minimal"}
-        
-        @app.get("/health")
-        async def health():
-            return {"status": "healthy", "message": "ALL AI Backend minimal mode"}
-        
-        # Démarrer le serveur
-        port = int(os.environ.get("PORT", 8000))
-        uvicorn.run(
-            app,
-            host="0.0.0.0",
-            port=port,
-            log_level="info"
-        )
+    print("🚀 Démarrage de ALL AI Backend...")
+    
+    # Créer une application FastAPI
+    app = FastAPI(
+        title="ALL AI Backend", 
+        version="1.0.0",
+        description="Backend pour l'application ALL AI"
+    )
+    
+    # Configuration CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    
+    @app.get("/")
+    async def root():
+        return {
+            "message": "ALL AI Backend is running!", 
+            "status": "operational",
+            "version": "1.0.0"
+        }
+    
+    @app.get("/health")
+    async def health():
+        return {
+            "status": "healthy", 
+            "message": "ALL AI Backend is operational",
+            "timestamp": "2025-10-07T16:00:00Z"
+        }
+    
+    @app.get("/api/v1/status")
+    async def api_status():
+        return {
+            "api": "ALL AI API",
+            "version": "v1",
+            "status": "active",
+            "endpoints": ["/", "/health", "/api/v1/status"]
+        }
+    
+    # Démarrer le serveur
+    port = int(os.environ.get("PORT", 8000))
+    print(f"🌐 Serveur démarré sur le port {port}")
+    
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=port,
+        log_level="info"
+    )
