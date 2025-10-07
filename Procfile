@@ -1,1 +1,1 @@
-web: python -m langflow run --host 0.0.0.0 --port $PORT
+web: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --worker-class uvicorn.workers.UvicornWorker langflow.main:create_app

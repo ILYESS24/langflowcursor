@@ -1,2 +1,4 @@
 # Core dependencies for Langflow deployment
 -e .
+gunicorn==21.2.0
+uvicorn[standard]==0.29.0

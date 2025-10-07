@@ -2,8 +2,8 @@ services:
   - type: web
     name: langflow-backend
     env: python
-    buildCommand: pip install -e .
-    startCommand: python -m langflow run --host 0.0.0.0 --port $PORT
+    buildCommand: pip install -e . && pip install gunicorn uvicorn[standard]
+    startCommand: python start-render.py
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
@@ -30,12 +30,27 @@ services:
         value: "true"
       - key: LANGFLOW_BACKEND_ONLY
         value: "true"
+      - key: LANGFLOW_DATABASE_URL
+        fromDatabase:
+          name: langflow-database
+          property: connectionString
+      - key: LANGFLOW_CACHE_TYPE
+        value: "InMemoryCache"
+      - key: LANGFLOW_WORKERS
+        value: "1"
+      - key: LANGFLOW_WORKER_TIMEOUT
+        value: "120"
 
   - type: web
     name: langflow-frontend
     env: static
-    buildCommand: cd src/frontend && npm install && npm run build
+    buildCommand: cd src/frontend && npm ci && npm run build
     staticPublishPath: src/frontend/build
+    envVars:
+      - key: VITE_PROXY_TARGET
+        value: https://langflow-backend.onrender.com
+      - key: BACKEND_URL
+        value: https://langflow-backend.onrender.com
     routes:
       - type: rewrite
         source: /api/*
@@ -49,3 +64,4 @@ databases:
     databaseName: langflow
     user: langflow
     plan: free
+    postgresMajorVersion: 15
