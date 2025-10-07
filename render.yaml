@@ -1,8 +1,10 @@
 services:
   - type: web
-    name: all-ai-backend
+    name: all-ai-app
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      cd src/frontend && npm install && npm run build
     startCommand: python start_server.py
     healthCheckPath: /health
     envVars:
@@ -26,19 +28,8 @@ services:
         value: 0.0.0.0
       - key: ALL_AI_PORT
         value: $PORT
-
-  - type: web
-    name: all-ai-frontend
-    env: static
-    buildCommand: cd src/frontend && npm install && npm run build
-    staticPublishPath: src/frontend/build
-    routes:
-      - type: rewrite
-        source: /api/*
-        destination: https://all-ai-backend.onrender.com/api/$1
-      - type: rewrite
-        source: /*
-        destination: /index.html
+      - key: ALL_AI_STATIC_FILES_PATH
+        value: src/frontend/build
 
 databases:
   - name: all-ai-database
