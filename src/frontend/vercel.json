@@ -1,18 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "cd src/frontend && npm ci && npm run build",
-  "outputDirectory": "src/frontend/build",
-  "installCommand": "cd src/frontend && npm ci",
+  "buildCommand": "npm ci && npm run build",
+  "outputDirectory": "build",
+  "installCommand": "npm ci",
   "framework": "vite",
-  "functions": {
-    "src/frontend/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-        "destination": "https://web-production-3b8f.up.railway.app/api/$1"
+      "destination": "https://web-production-3b8f.up.railway.app/api/$1"
     },
     {
       "source": "/(.*)",
