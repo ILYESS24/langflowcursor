@@ -6,7 +6,7 @@ import "./style/classes.css";
 import "./style/index.css";
 // @ts-ignore
 import "./App.css";
-import "./style/applies.css";
+// import "./style/applies.css"; // Disabled for build
 
 // @ts-ignore
 import App from "./customization/custom-App";

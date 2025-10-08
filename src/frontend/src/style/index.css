@@ -1,8 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* TODO: Confirm that all colors here are found in tailwind config */
+@import './simple.css';
 
 @layer base {
   :root {
