@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "cd src/frontend && npm ci && npm run build",
+  "buildCommand": "cd src/frontend && npm run build",
   "outputDirectory": "src/frontend/build",
-  "installCommand": "cd src/frontend && npm ci --legacy-peer-deps",
+  "installCommand": "cd src/frontend && npm install --legacy-peer-deps",
   "framework": "vite",
   "rewrites": [
     {
