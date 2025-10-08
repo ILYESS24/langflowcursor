@@ -41,6 +41,16 @@ export default defineConfig(({ mode }) => {
     base: BASENAME || "",
     build: {
       outDir: "build",
+      sourcemap: false,
+      minify: "esbuild",
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ["react", "react-dom"],
+            ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"]
+          }
+        }
+      }
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(

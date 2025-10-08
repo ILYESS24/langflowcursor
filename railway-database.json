@@ -1,0 +1,41 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": [
+    {
+      "name": "langflow-backend",
+      "source": {
+        "repo": "ILYESS24/langflow2.0"
+      },
+      "build": {
+        "builder": "NIXPACKS",
+        "buildCommand": "pip install -r requirements.txt"
+      },
+      "deploy": {
+        "startCommand": "python start-simple.py",
+        "healthcheckPath": "/health",
+        "healthcheckTimeout": 100
+      },
+      "variables": {
+        "LANGFLOW_SECRET_KEY": "your-secret-key-change-in-production-12345",
+        "LANGFLOW_SUPERUSER": "admin",
+        "LANGFLOW_SUPERUSER_PASSWORD": "admin123",
+        "LANGFLOW_AUTO_LOGIN": "true",
+        "LANGFLOW_BACKEND_ONLY": "true",
+        "LANGFLOW_CORS_ORIGINS": "https://langflow2-0.vercel.app",
+        "LANGFLOW_LOG_LEVEL": "INFO",
+        "LANGFLOW_CACHE_TYPE": "InMemoryCache",
+        "LANGFLOW_WORKERS": "1",
+        "LANGFLOW_WORKER_TIMEOUT": "120"
+      }
+    },
+    {
+      "name": "langflow-database",
+      "image": "postgres:15",
+      "variables": {
+        "POSTGRES_DB": "langflow",
+        "POSTGRES_USER": "langflow",
+        "POSTGRES_PASSWORD": "langflow123"
+      }
+    }
+  ]
+}

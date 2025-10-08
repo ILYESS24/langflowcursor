@@ -33,8 +33,9 @@ Frontend (React) → Vercel → Backend (FastAPI) → Railway
 5. **Configuration automatique** :
    - **Framework Preset** : Vite
    - **Root Directory** : `src/frontend`
-   - **Build Command** : `npm run build`
+   - **Build Command** : `npm run vercel-build`
    - **Output Directory** : `build`
+   - **Install Command** : `npm ci`
 6. **Variables d'environnement** :
    - `VITE_PROXY_TARGET` : `https://langflow-backend.railway.app`
    - `BACKEND_URL` : `https://langflow-backend.railway.app`

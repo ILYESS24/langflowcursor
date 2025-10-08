@@ -1,7 +1,8 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "NIXPACKS",
+    "buildCommand": "pip install -r requirements.txt"
   },
   "deploy": {
     "startCommand": "python start-simple.py",
@@ -9,5 +10,21 @@
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
+  },
+  "environments": {
+    "production": {
+      "variables": {
+        "LANGFLOW_SECRET_KEY": "your-secret-key-change-in-production-12345",
+        "LANGFLOW_SUPERUSER": "admin",
+        "LANGFLOW_SUPERUSER_PASSWORD": "admin123",
+        "LANGFLOW_AUTO_LOGIN": "true",
+        "LANGFLOW_BACKEND_ONLY": "true",
+        "LANGFLOW_CORS_ORIGINS": "https://langflow2-0.vercel.app",
+        "LANGFLOW_LOG_LEVEL": "INFO",
+        "LANGFLOW_CACHE_TYPE": "InMemoryCache",
+        "LANGFLOW_WORKERS": "1",
+        "LANGFLOW_WORKER_TIMEOUT": "120"
+      }
+    }
   }
 }
