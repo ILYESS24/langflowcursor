@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
   const apiRoutes = API_ROUTES || ["^/api/v1/", "^/api/v2/", "/health"];
 
   const target =
-    env.VITE_PROXY_TARGET || PROXY_TARGET || "http://localhost:7860";
+        env.VITE_PROXY_TARGET || PROXY_TARGET || "https://web-production-3b8f.up.railway.app";
 
   const port = Number(env.VITE_PORT) || PORT || 3000;
 
@@ -54,10 +54,10 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
-        envAllAI.BACKEND_URL ?? "https://langflow-backend.railway.app",
+        envAllAI.BACKEND_URL ?? "https://web-production-3b8f.up.railway.app",
       ),
       "process.env.VITE_API_URL": JSON.stringify(
-        envAllAI.VITE_API_URL ?? "https://langflow-backend.railway.app",
+        envAllAI.VITE_API_URL ?? "https://web-production-3b8f.up.railway.app",
       ),
       "process.env.ACCESS_TOKEN_EXPIRE_SECONDS": JSON.stringify(
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,
