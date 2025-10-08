@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
-        envAllAI.BACKEND_URL ?? "https://langflow-backend.onrender.com",
+        envAllAI.BACKEND_URL ?? "https://langflow-backend.railway.app",
       ),
       "process.env.ACCESS_TOKEN_EXPIRE_SECONDS": JSON.stringify(
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,

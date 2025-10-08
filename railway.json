@@ -4,22 +4,10 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "numReplicas": 1,
-    "startCommand": "python start_server.py",
+    "startCommand": "python start-simple.py",
     "healthcheckPath": "/health",
-    "healthcheckTimeout": 300
-  },
-  "environment": {
-    "ALL_AI_DATABASE_URL": "${{Postgres.DATABASE_URL}}",
-    "ALL_AI_REDIS_URL": "${{Redis.REDIS_URL}}",
-    "ALL_AI_HOST": "0.0.0.0",
-    "ALL_AI_PORT": "$PORT",
-    "ALL_AI_LOG_LEVEL": "INFO",
-    "PYTHON_VERSION": "3.11.6",
-    "ALL_AI_SECRET_KEY": "your-secret-key-change-in-production",
-    "ALL_AI_SUPERUSER": "admin",
-    "ALL_AI_SUPERUSER_PASSWORD": "admin123",
-    "ALL_AI_CORS_ORIGINS": "https://68eee78a.all-ai-frontend.pages.dev,https://all-ai-frontend.pages.dev"
-  },
-  "name": "all-ai-backend"
+    "healthcheckTimeout": 100,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
 }
