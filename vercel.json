@@ -4,11 +4,6 @@
   "outputDirectory": "src/frontend/build",
   "installCommand": "cd src/frontend && npm ci",
   "framework": "vite",
-  "functions": {
-    "src/frontend/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
