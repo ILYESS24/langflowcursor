@@ -16,6 +16,7 @@
   ],
   "env": {
     "VITE_PROXY_TARGET": "https://langflow-backend.railway.app",
-    "BACKEND_URL": "https://langflow-backend.railway.app"
+    "BACKEND_URL": "https://langflow-backend.railway.app",
+    "VITE_API_URL": "https://langflow-backend.railway.app"
   }
 }

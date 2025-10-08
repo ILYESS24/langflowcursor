@@ -56,6 +56,9 @@ export default defineConfig(({ mode }) => {
       "process.env.BACKEND_URL": JSON.stringify(
         envAllAI.BACKEND_URL ?? "https://langflow-backend.railway.app",
       ),
+      "process.env.VITE_API_URL": JSON.stringify(
+        envAllAI.VITE_API_URL ?? "https://langflow-backend.railway.app",
+      ),
       "process.env.ACCESS_TOKEN_EXPIRE_SECONDS": JSON.stringify(
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,
       ),

@@ -19,7 +19,7 @@
         "LANGFLOW_SUPERUSER_PASSWORD": "admin123",
         "LANGFLOW_AUTO_LOGIN": "true",
         "LANGFLOW_BACKEND_ONLY": "true",
-        "LANGFLOW_CORS_ORIGINS": "https://langflow2-0.vercel.app",
+        "LANGFLOW_CORS_ORIGINS": "https://langflow2-0.vercel.app,https://langflow2-0-git-main-ilyess24s-projects.vercel.app",
         "LANGFLOW_LOG_LEVEL": "INFO",
         "LANGFLOW_CACHE_TYPE": "InMemoryCache",
         "LANGFLOW_WORKERS": "1",
