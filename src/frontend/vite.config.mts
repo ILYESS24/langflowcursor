@@ -37,21 +37,25 @@ export default defineConfig(({ mode }) => {
     return proxyObj;
   }, {});
 
-  return {
-    base: BASENAME || "",
-    build: {
-      outDir: "build",
-      sourcemap: false,
-      minify: "esbuild",
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ["react", "react-dom"],
-            ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"]
-          }
-        }
-      }
-    },
+      return {
+        base: BASENAME || "",
+        build: {
+          outDir: "build",
+          sourcemap: false,
+          minify: "esbuild",
+          target: "es2020",
+          rollupOptions: {
+            output: {
+              manualChunks: {
+                vendor: ["react", "react-dom"],
+                ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
+                router: ["react-router-dom"],
+                query: ["@tanstack/react-query"]
+              }
+            }
+          },
+          chunkSizeWarningLimit: 1000
+        },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
         envAllAI.BACKEND_URL ?? "https://web-production-3b8f.up.railway.app",
