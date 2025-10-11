@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "cd src/frontend && npm run vercel-build",
-  "outputDirectory": "src/frontend/build",
-  "installCommand": "cd src/frontend && npm install --legacy-peer-deps",
-  "framework": "vite",
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": null,
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -37,6 +37,8 @@
     "VITE_PROXY_TARGET": "https://web-production-3b8f.up.railway.app",
     "BACKEND_URL": "https://web-production-3b8f.up.railway.app",
     "VITE_API_URL": "https://web-production-3b8f.up.railway.app",
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "CI": "false",
+    "VITE_FRONTEND_URL": "https://langflowcursor.vercel.app"
   }
 }
