@@ -1,4 +1,4 @@
-declare module 'ag-grid-community' {
+declare module "ag-grid-community" {
   export interface ColDef {
     field?: string;
     headerName?: string;
@@ -40,9 +40,9 @@ declare module 'ag-grid-community' {
   }
 }
 
-declare module 'ag-grid-react' {
-  import { Component } from 'react';
-  import { ColDef, ColGroupDef } from 'ag-grid-community';
+declare module "ag-grid-react" {
+  import { Component } from "react";
+  import { ColDef, ColGroupDef } from "ag-grid-community";
 
   export interface AgGridReactProps {
     columnDefs: (ColDef | ColGroupDef)[];

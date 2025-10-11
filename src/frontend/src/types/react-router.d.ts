@@ -1,4 +1,4 @@
-declare module 'react-router' {
+declare module "react-router" {
   export interface Location {
     pathname: string;
     search: string;
@@ -8,8 +8,16 @@ declare module 'react-router' {
   }
 
   export interface History {
-    push: (path: string | { pathname: string; search?: string; hash?: string; state?: any }) => void;
-    replace: (path: string | { pathname: string; search?: string; hash?: string; state?: any }) => void;
+    push: (
+      path:
+        | string
+        | { pathname: string; search?: string; hash?: string; state?: any },
+    ) => void;
+    replace: (
+      path:
+        | string
+        | { pathname: string; search?: string; hash?: string; state?: any },
+    ) => void;
     go: (n: number) => void;
     goBack: () => void;
     goForward: () => void;

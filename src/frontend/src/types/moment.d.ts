@@ -1,4 +1,4 @@
-declare module 'moment' {
+declare module "moment" {
   interface Moment {
     format(format?: string): string;
     add(amount: number, unit: string): Moment;

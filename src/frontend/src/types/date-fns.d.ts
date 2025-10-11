@@ -1,6 +1,10 @@
-declare module 'date-fns' {
+declare module "date-fns" {
   export function format(date: Date | number, formatStr: string): string;
-  export function parse(dateString: string, formatStr: string, referenceDate?: Date): Date;
+  export function parse(
+    dateString: string,
+    formatStr: string,
+    referenceDate?: Date,
+  ): Date;
   export function isValid(date: any): boolean;
   export function addDays(date: Date | number, amount: number): Date;
   export function addWeeks(date: Date | number, amount: number): Date;
@@ -18,15 +22,49 @@ declare module 'date-fns' {
   export function endOfMonth(date: Date | number): Date;
   export function startOfYear(date: Date | number): Date;
   export function endOfYear(date: Date | number): Date;
-  export function isBefore(date: Date | number, dateToCompare: Date | number): boolean;
-  export function isAfter(date: Date | number, dateToCompare: Date | number): boolean;
-  export function isEqual(date: Date | number, dateToCompare: Date | number): boolean;
-  export function isSameDay(date: Date | number, dateToCompare: Date | number): boolean;
-  export function isSameWeek(date: Date | number, dateToCompare: Date | number, options?: any): boolean;
-  export function isSameMonth(date: Date | number, dateToCompare: Date | number): boolean;
-  export function isSameYear(date: Date | number, dateToCompare: Date | number): boolean;
-  export function differenceInDays(dateLeft: Date | number, dateRight: Date | number): number;
-  export function differenceInWeeks(dateLeft: Date | number, dateRight: Date | number): number;
-  export function differenceInMonths(dateLeft: Date | number, dateRight: Date | number): number;
-  export function differenceInYears(dateLeft: Date | number, dateRight: Date | number): number;
+  export function isBefore(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function isAfter(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function isEqual(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function isSameDay(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function isSameWeek(
+    date: Date | number,
+    dateToCompare: Date | number,
+    options?: any,
+  ): boolean;
+  export function isSameMonth(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function isSameYear(
+    date: Date | number,
+    dateToCompare: Date | number,
+  ): boolean;
+  export function differenceInDays(
+    dateLeft: Date | number,
+    dateRight: Date | number,
+  ): number;
+  export function differenceInWeeks(
+    dateLeft: Date | number,
+    dateRight: Date | number,
+  ): number;
+  export function differenceInMonths(
+    dateLeft: Date | number,
+    dateRight: Date | number,
+  ): number;
+  export function differenceInYears(
+    dateLeft: Date | number,
+    dateRight: Date | number,
+  ): number;
 }

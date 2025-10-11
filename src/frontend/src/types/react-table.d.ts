@@ -1,5 +1,5 @@
-declare module 'react-table' {
-  import { ComponentType } from 'react';
+declare module "react-table" {
+  import { ComponentType } from "react";
 
   export interface Column {
     Header: string;

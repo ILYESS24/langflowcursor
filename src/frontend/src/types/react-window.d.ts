@@ -1,5 +1,5 @@
-declare module 'react-window' {
-  import { ComponentType } from 'react';
+declare module "react-window" {
+  import { ComponentType } from "react";
 
   export interface FixedSizeListProps {
     height: number;

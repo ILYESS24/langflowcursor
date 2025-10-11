@@ -1,4 +1,4 @@
-declare module 'react-query' {
+declare module "react-query" {
   export interface UseQueryOptions<T> {
     queryKey: string[];
     queryFn: () => Promise<T>;

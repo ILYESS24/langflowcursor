@@ -1,10 +1,10 @@
-declare module 'react-beautiful-dnd' {
-  import { ComponentType } from 'react';
+declare module "react-beautiful-dnd" {
+  import { ComponentType } from "react";
 
   export interface DroppableProps {
     droppableId: string;
     children: (provided: any, snapshot: any) => React.ReactNode;
-    direction?: 'horizontal' | 'vertical';
+    direction?: "horizontal" | "vertical";
     type?: string;
     isDropDisabled?: boolean;
   }

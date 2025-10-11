@@ -1,5 +1,5 @@
-declare module 'react-dnd' {
-  import { ComponentType } from 'react';
+declare module "react-dnd" {
+  import { ComponentType } from "react";
 
   export interface DndProviderProps {
     backend: any;
@@ -22,6 +22,6 @@ declare module 'react-dnd' {
   export function useDrop(spec: any): [any, any];
 }
 
-declare module 'react-dnd-html5-backend' {
+declare module "react-dnd-html5-backend" {
   export const HTML5Backend: any;
 }

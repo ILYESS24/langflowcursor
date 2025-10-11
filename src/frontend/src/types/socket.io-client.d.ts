@@ -1,4 +1,4 @@
-declare module 'socket.io-client' {
+declare module "socket.io-client" {
   export interface Socket {
     connect(): Socket;
     disconnect(): Socket;

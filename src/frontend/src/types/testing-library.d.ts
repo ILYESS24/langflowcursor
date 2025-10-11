@@ -13,18 +13,21 @@ declare module '@testing-library/react' {
   }
 
   export function render(ui: ReactElement): RenderResult;
-  export function fireEvent: {
-    click: (element: HTMLElement) => void;
-    change: (element: HTMLElement, value: string) => void;
-    keyDown: (element: HTMLElement, options: any) => void;
-  };
-  export function screen: {
-    getByText: (text: string) => HTMLElement;
-    getByTestId: (testId: string) => HTMLElement;
-    queryByTestId: (testId: string) => HTMLElement | null;
-    getByRole: (role: string) => HTMLElement;
-    getAllByRole: (role: string) => HTMLElement[];
-  };
+  
+  export namespace fireEvent {
+    function click(element: HTMLElement): void;
+    function change(element: HTMLElement, value: string): void;
+    function keyDown(element: HTMLElement, options: any): void;
+  }
+  
+  export namespace screen {
+    function getByText(text: string): HTMLElement;
+    function getByTestId(testId: string): HTMLElement;
+    function queryByTestId(testId: string): HTMLElement | null;
+    function getByRole(role: string): HTMLElement;
+    function getAllByRole(role: string): HTMLElement[];
+  }
+  
   export function waitFor(fn: () => void): Promise<void>;
 }
 

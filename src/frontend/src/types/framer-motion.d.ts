@@ -1,5 +1,5 @@
-declare module 'framer-motion' {
-  import { ComponentType, ReactNode } from 'react';
+declare module "framer-motion" {
+  import { ComponentType, ReactNode } from "react";
 
   export interface MotionProps {
     children?: ReactNode;
@@ -32,7 +32,7 @@ declare module 'framer-motion' {
 
   export const AnimatePresence: ComponentType<{
     children?: ReactNode;
-    mode?: 'wait' | 'sync' | 'popLayout';
+    mode?: "wait" | "sync" | "popLayout";
     initial?: boolean;
     onExitComplete?: () => void;
   }>;

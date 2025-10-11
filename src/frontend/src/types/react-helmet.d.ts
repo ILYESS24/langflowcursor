@@ -1,5 +1,5 @@
-declare module 'react-helmet' {
-  import { ComponentType } from 'react';
+declare module "react-helmet" {
+  import { ComponentType } from "react";
 
   export interface HelmetProps {
     title?: string;

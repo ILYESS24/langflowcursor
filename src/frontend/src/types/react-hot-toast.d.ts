@@ -16,20 +16,23 @@ declare module 'react-hot-toast' {
   }
 
   export function toast(message: string, options?: ToastOptions): string;
-  export function toast.success(message: string, options?: ToastOptions): string;
-  export function toast.error(message: string, options?: ToastOptions): string;
-  export function toast.loading(message: string, options?: ToastOptions): string;
-  export function toast.promise<T>(
-    promise: Promise<T>,
-    messages: {
-      loading: string;
-      success: string;
-      error: string;
-    },
-    options?: ToastOptions
-  ): Promise<T>;
-  export function toast.dismiss(id?: string): void;
-  export function toast.remove(id?: string): void;
+  
+  export namespace toast {
+    function success(message: string, options?: ToastOptions): string;
+    function error(message: string, options?: ToastOptions): string;
+    function loading(message: string, options?: ToastOptions): string;
+    function promise<T>(
+      promise: Promise<T>,
+      messages: {
+        loading: string;
+        success: string;
+        error: string;
+      },
+      options?: ToastOptions
+    ): Promise<T>;
+    function dismiss(id?: string): void;
+    function remove(id?: string): void;
+  }
 
   export const Toaster: React.ComponentType<{
     position?: ToastOptions['position'];

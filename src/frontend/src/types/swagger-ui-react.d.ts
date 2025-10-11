@@ -1,13 +1,13 @@
-declare module 'swagger-ui-react' {
-  import { ComponentType } from 'react';
+declare module "swagger-ui-react" {
+  import { ComponentType } from "react";
 
   export interface SwaggerUIProps {
     url?: string;
     spec?: any;
-    docExpansion?: 'list' | 'full' | 'none';
+    docExpansion?: "list" | "full" | "none";
     defaultModelsExpandDepth?: number;
     defaultModelExpandDepth?: number;
-    defaultModelRendering?: 'example' | 'model';
+    defaultModelRendering?: "example" | "model";
     displayOperationId?: boolean;
     displayRequestDuration?: boolean;
     filter?: boolean | string;

@@ -1,5 +1,5 @@
-declare module 'react-dropzone' {
-  import { ComponentType } from 'react';
+declare module "react-dropzone" {
+  import { ComponentType } from "react";
 
   export interface DropzoneProps {
     onDrop: (acceptedFiles: File[], rejectedFiles: any[]) => void;

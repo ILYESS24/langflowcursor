@@ -1,5 +1,5 @@
-declare module 'react-router-dom' {
-  import { ComponentType } from 'react';
+declare module "react-router-dom" {
+  import { ComponentType } from "react";
 
   export interface BrowserRouterProps {
     basename?: string;
@@ -34,7 +34,11 @@ declare module 'react-router-dom' {
   export const Link: ComponentType<LinkProps>;
   export const NavLink: ComponentType<NavLinkProps>;
   export const Switch: ComponentType<{ children: React.ReactNode }>;
-  export const Redirect: ComponentType<{ to: string; from?: string; exact?: boolean }>;
+  export const Redirect: ComponentType<{
+    to: string;
+    from?: string;
+    exact?: boolean;
+  }>;
   export const useNavigate: () => (to: string | number, options?: any) => void;
   export const useLocation: () => any;
   export const useParams: () => Record<string, string>;

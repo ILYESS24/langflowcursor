@@ -23,7 +23,9 @@ export default defineConfig(({ mode }) => {
   const apiRoutes = API_ROUTES || ["^/api/v1/", "^/api/v2/", "/health"];
 
   const target =
-        env.VITE_PROXY_TARGET || PROXY_TARGET || "https://web-production-3b8f.up.railway.app";
+    env.VITE_PROXY_TARGET ||
+    PROXY_TARGET ||
+    "https://web-production-3b8f.up.railway.app";
 
   const port = Number(env.VITE_PORT) || PORT || 3000;
 
@@ -37,26 +39,26 @@ export default defineConfig(({ mode }) => {
     return proxyObj;
   }, {});
 
-      return {
-        base: BASENAME || "",
-        build: {
-          outDir: "build",
-          sourcemap: false,
-          minify: "esbuild",
-          target: "es2020",
-          rollupOptions: {
-            output: {
-              manualChunks: {
-                vendor: ["react", "react-dom"],
-                ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
-                router: ["react-router-dom"],
-                query: ["@tanstack/react-query"]
-              }
-            },
-            external: []
+  return {
+    base: BASENAME || "",
+    build: {
+      outDir: "build",
+      sourcemap: false,
+      minify: "esbuild",
+      target: "es2020",
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ["react", "react-dom"],
+            ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
+            router: ["react-router-dom"],
+            query: ["@tanstack/react-query"],
           },
-          chunkSizeWarningLimit: 1000
         },
+        external: [],
+      },
+      chunkSizeWarningLimit: 1000,
+    },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
         envAllAI.BACKEND_URL ?? "https://web-production-3b8f.up.railway.app",
@@ -68,9 +70,9 @@ export default defineConfig(({ mode }) => {
         envAllAI.ACCESS_TOKEN_EXPIRE_SECONDS ?? 60,
       ),
       "process.env.CI": JSON.stringify(envAllAI.CI ?? false),
-            "process.env.ALL_AI_AUTO_LOGIN": JSON.stringify(
-              envAllAI.ALL_AI_AUTO_LOGIN ?? "true",
-            ),
+      "process.env.ALL_AI_AUTO_LOGIN": JSON.stringify(
+        envAllAI.ALL_AI_AUTO_LOGIN ?? "true",
+      ),
       "process.env.ALL_AI_MCP_COMPOSER_ENABLED": JSON.stringify(
         envAllAI.ALL_AI_MCP_COMPOSER_ENABLED ?? "true",
       ),

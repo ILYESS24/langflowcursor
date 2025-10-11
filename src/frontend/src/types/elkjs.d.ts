@@ -1,4 +1,4 @@
-declare module 'elkjs/lib/elk.bundled.js' {
+declare module "elkjs/lib/elk.bundled.js" {
   export interface ElkNode {
     id: string;
     width?: number;

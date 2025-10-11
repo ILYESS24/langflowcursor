@@ -1,5 +1,5 @@
-declare module '../../../components/ui/border-beams' {
-  import { ComponentType } from 'react';
+declare module "../../../components/ui/border-beams" {
+  import { ComponentType } from "react";
 
   export interface BorderBeamProps {
     className?: string;

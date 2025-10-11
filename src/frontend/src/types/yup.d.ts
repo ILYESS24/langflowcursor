@@ -1,4 +1,4 @@
-declare module 'yup' {
+declare module "yup" {
   export interface StringSchema {
     required(message?: string): StringSchema;
     email(message?: string): StringSchema;

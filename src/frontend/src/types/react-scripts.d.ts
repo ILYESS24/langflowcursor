@@ -1,4 +1,4 @@
-declare module 'react-scripts' {
+declare module "react-scripts" {
   export const scripts: {
     build: string;
     start: string;

@@ -1,4 +1,4 @@
-declare module '@playwright/test' {
+declare module "@playwright/test" {
   export interface Page {
     goto(url: string): Promise<void>;
     click(selector: string): Promise<void>;
@@ -18,10 +18,13 @@ declare module '@playwright/test' {
     close(): Promise<void>;
   }
 
-  export function test(name: string, fn: (args: { page: Page }) => Promise<void>): void;
+  export function test(
+    name: string,
+    fn: (args: { page: Page }) => Promise<void>,
+  ): void;
   export function expect(value: any): any;
 }
 
-declare module 'playwright/test' {
-  export * from '@playwright/test';
+declare module "playwright/test" {
+  export * from "@playwright/test";
 }

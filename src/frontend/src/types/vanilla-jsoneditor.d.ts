@@ -1,4 +1,4 @@
-declare module 'vanilla-jsoneditor' {
+declare module "vanilla-jsoneditor" {
   export interface JSONEditorProps {
     content?: any;
     readOnly?: boolean;

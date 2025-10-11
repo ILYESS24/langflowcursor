@@ -1,4 +1,4 @@
-declare module 'web-vitals' {
+declare module "web-vitals" {
   export interface Metric {
     name: string;
     value: number;

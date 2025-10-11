@@ -1,5 +1,5 @@
-declare module 'react-hook-form' {
-  import { ComponentType } from 'react';
+declare module "react-hook-form" {
+  import { ComponentType } from "react";
 
   export interface UseFormReturn<T> {
     register: (name: keyof T, options?: any) => any;

@@ -1,5 +1,5 @@
-declare module 'react-select' {
-  import { ComponentType } from 'react';
+declare module "react-select" {
+  import { ComponentType } from "react";
 
   export interface SelectOption {
     value: string | number;

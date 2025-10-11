@@ -1,5 +1,5 @@
-declare module 'react-intersection-observer' {
-  import { RefObject } from 'react';
+declare module "react-intersection-observer" {
+  import { RefObject } from "react";
 
   export interface UseInViewOptions {
     threshold?: number | number[];
@@ -9,5 +9,7 @@ declare module 'react-intersection-observer' {
     skip?: boolean;
   }
 
-  export function useInView(options?: UseInViewOptions): [RefObject<any>, boolean, any];
+  export function useInView(
+    options?: UseInViewOptions,
+  ): [RefObject<any>, boolean, any];
 }

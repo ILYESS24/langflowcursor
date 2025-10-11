@@ -1,5 +1,5 @@
-declare module 'react-hotkeys-hook' {
-  import { RefObject } from 'react';
+declare module "react-hotkeys-hook" {
+  import { RefObject } from "react";
 
   export interface UseHotkeysOptions {
     enableOnFormTags?: boolean | string[];
@@ -14,14 +14,20 @@ declare module 'react-hotkeys-hook' {
 
   export function useHotkeys(
     keys: string,
-    callback: (event: KeyboardEvent, handler: { keys: string; splitKey: string }) => void,
+    callback: (
+      event: KeyboardEvent,
+      handler: { keys: string; splitKey: string },
+    ) => void,
     options?: UseHotkeysOptions,
-    deps?: any[]
+    deps?: any[],
   ): void;
 
   export function useHotkeys(
     keys: string,
-    callback: (event: KeyboardEvent, handler: { keys: string; splitKey: string }) => void,
-    deps?: any[]
+    callback: (
+      event: KeyboardEvent,
+      handler: { keys: string; splitKey: string },
+    ) => void,
+    deps?: any[],
   ): void;
 }

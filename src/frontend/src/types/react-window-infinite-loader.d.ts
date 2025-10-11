@@ -1,5 +1,5 @@
-declare module 'react-window-infinite-loader' {
-  import { ComponentType } from 'react';
+declare module "react-window-infinite-loader" {
+  import { ComponentType } from "react";
 
   export interface InfiniteLoaderProps {
     isItemLoaded: (index: number) => boolean;
