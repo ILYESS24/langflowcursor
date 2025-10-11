@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-console.log("🚀 Starting Vercel build for Langflow 2.0...");
+// console.log("🚀 Starting Vercel build for Langflow 2.0...");
 
 try {
   // Vérifier que nous sommes dans le bon répertoire
@@ -18,11 +18,11 @@ try {
   }
 
   // Installer les dépendances avec legacy-peer-deps
-  console.log("📦 Installing dependencies...");
+  // console.log("📦 Installing dependencies...");
   execSync("npm install --legacy-peer-deps", { stdio: "inherit" });
 
   // Build de l'application
-  console.log("🔨 Building application...");
+  // console.log("🔨 Building application...");
   execSync("npm run build", { stdio: "inherit" });
 
   // Vérifier que le build a réussi
@@ -31,8 +31,8 @@ try {
     throw new Error("Build directory not found. Build may have failed.");
   }
 
-  console.log("✅ Build completed successfully!");
-  console.log(`📁 Build output: ${buildDir}`);
+  // console.log("✅ Build completed successfully!");
+  // console.log(`📁 Build output: ${buildDir}`);
 } catch (error) {
   console.error("❌ Build failed:", error.message);
   process.exit(1);
