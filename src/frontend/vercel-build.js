@@ -15,9 +15,9 @@ try {
     throw new Error('package.json not found. Make sure you are in the frontend directory.');
   }
 
-  // Installer les dépendances
+  // Installer les dépendances avec legacy-peer-deps
   console.log('📦 Installing dependencies...');
-  execSync('npm ci', { stdio: 'inherit' });
+  execSync('npm install --legacy-peer-deps', { stdio: 'inherit' });
 
   // Build de l'application
   console.log('🔨 Building application...');

@@ -52,7 +52,8 @@ export default defineConfig(({ mode }) => {
                 router: ["react-router-dom"],
                 query: ["@tanstack/react-query"]
               }
-            }
+            },
+            external: []
           },
           chunkSizeWarningLimit: 1000
         },
